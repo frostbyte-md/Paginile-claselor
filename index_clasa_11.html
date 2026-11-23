@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geografie – Clasa a XI-a | Portal de Resurse Didactice</title>
+<style>
+  :root {
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --ink: #0f172a;
+    --muted: #475569;
+    --border: #e2e8f0;
+    --navy: #0f172a;
+    --accent: #0f766e;
+    --pres-color: #d97706;
+    --pres-soft: #fef3c7;
+    --pres-text: #92400e;
+    --man-color: #059669;
+    --man-soft: #d1fae5;
+    --man-text: #065f46;
+    --plan-color: #4f46e5;
+    --plan-soft: #e0e7ff;
+    --plan-text: #3730a3;
+    --extra-color: #0284c7;
+    --extra-soft: #e0f2fe;
+    --extra-text: #075985;
+    --radius: 16px;
+    --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #134e4a 55%, #0f766e 100%);
+    color: #fff;
+    padding: 42px 20px 58px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.24);
+    backdrop-filter: blur(6px);
+    padding: 6px 15px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 4.2vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .hero p {
+    margin: 0 auto 22px;
+    max-width: 700px;
+    font-size: clamp(14.5px, 1.9vw, 17px);
+    color: #ccfbf1;
+  }
+  .hero-stats {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .hero-stat {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 7px 14px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #f8fafc;
+  }
+
+  /* CONTROLS */
+  .controls-wrap {
+    max-width: 1220px;
+    margin: -26px auto 0;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
+  .controls-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.09);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .role-switch {
+    display: inline-flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .role-btn {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 13px;
+    border-radius: 9px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .role-btn:hover { color: var(--ink); }
+  .role-btn.active {
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+  }
+  .search-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 280px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .search-input {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 8px 13px;
+    font-size: 14px;
+    color: var(--ink);
+    min-width: 220px;
+    flex: 1 1 240px;
+    max-width: 340px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+  .mini-btn {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    border-radius: 10px;
+    padding: 8px 11px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .mini-btn:hover {
+    background: #ccfbf1;
+    border-color: #5eead4;
+    color: #0f766e;
+  }
+
+  .unit-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .unit-pill {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12.8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .unit-pill:hover {
+    border-color: #94a3b8;
+    color: var(--ink);
+  }
+  .unit-pill.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 26px 20px 64px;
+  }
+
+  /* GUIDE STRIP */
+  .guide-banner {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-left: 4px solid #0f766e;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .guide-steps {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .step-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+  .step-chip.s1 { background: var(--pres-soft); color: var(--pres-text); }
+  .step-chip.s2 { background: var(--man-soft); color: var(--man-text); }
+  .step-chip.s3 { background: var(--plan-soft); color: var(--plan-text); }
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .progress-track {
+    width: 120px;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #14b8a6, #10b981);
+    transition: width 0.25s ease;
+  }
+
+  /* GENERAL RESOURCES */
+  .section-label {
+    margin: 0 0 12px;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .root-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .root-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .root-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+  }
+  .root-stripe {
+    height: 5px;
+    background: var(--rc, #0f766e);
+  }
+  .root-body {
+    padding: 15px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .root-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .root-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--rs, #ccfbf1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+  }
+  .root-tag {
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--rs, #ccfbf1);
+    color: var(--rc, #0f766e);
+  }
+  .root-card h3 {
+    margin: 0 0 6px;
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--navy);
+  }
+  .root-card p {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1;
+  }
+  .root-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    background: var(--rc, #0f766e);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13.2px;
+    font-weight: 700;
+    transition: filter 0.15s;
+  }
+  .root-cta:hover { filter: brightness(1.08); }
+
+  /* UNITS */
+  .unit-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .unit-section.hidden { display: none; }
+  .unit-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: linear-gradient(90deg, var(--usoft, #f8fafc) 0%, #ffffff 58%);
+    border-left: 6px solid var(--ucol, #0f766e);
+  }
+  .unit-head-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    flex: 1 1 360px;
+  }
+  .unit-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: #ffffff;
+    border: 1px solid rgba(15,23,42,0.08);
+    box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .unit-kicker {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ucol, #0f766e);
+  }
+  .unit-title {
+    margin: 2px 0 3px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .unit-desc {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .unit-head-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .unit-folder-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 13px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.15s;
+  }
+  .unit-folder-btn:hover {
+    border-color: var(--ucol, #0f766e);
+    color: var(--ucol, #0f766e);
+  }
+  .unit-extras-bar {
+    padding: 10px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .unit-extra-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12.8px;
+    transition: all 0.15s;
+  }
+  .unit-extra-link:hover {
+    border-color: var(--ucol, #0f766e);
+    color: var(--ucol, #0f766e);
+  }
+
+  /* TOPIC ACCORDIONS */
+  .topic-list {
+    padding: 12px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .topic-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.16s, box-shadow 0.16s;
+  }
+  .topic-item.hidden { display: none; }
+  .topic-item.open {
+    border-color: var(--ucol, #0f766e);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  }
+  .topic-item.done {
+    background: #f8fffb;
+  }
+  .topic-summary {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .topic-summary:hover {
+    background: #f8fafc;
+  }
+  .topic-left {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    flex: 1;
+  }
+  .check-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .topic-check {
+    width: 18px;
+    height: 18px;
+    accent-color: #10b981;
+    cursor: pointer;
+    margin: 0;
+  }
+  .topic-code {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--usoft, #ccfbf1);
+    color: var(--ucol, #0f766e);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .topic-item.is-eval .topic-code {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+  .topic-item.is-practice .topic-code {
+    background: #fef3c7;
+    color: #b45309;
+  }
+  .topic-title {
+    font-size: 14.8px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .topic-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pill-dot {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill-dot.p1 { background: var(--pres-soft); color: var(--pres-text); }
+  .pill-dot.p2 { background: var(--man-soft); color: var(--man-text); }
+  .pill-dot.p3 { background: var(--plan-soft); color: var(--plan-text); }
+  .pill-dot.p4 { background: var(--extra-soft); color: var(--extra-text); }
+  .chevron {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: transform 0.2s ease, background 0.15s;
+    margin-left: 4px;
+  }
+  .topic-item.open .chevron {
+    transform: rotate(180deg);
+    background: var(--ucol, #0f766e);
+    color: #fff;
+  }
+
+  /* EXPANDED TOPIC BODY */
+  .topic-body {
+    display: none;
+    padding: 14px 16px 16px;
+    border-top: 1px solid #eef2f7;
+    background: #fbfdff;
+  }
+  .topic-item.open .topic-body {
+    display: block;
+  }
+
+  /* ORDERED 3-STEP RESOURCE GRID: 1. Prezentare -> 2. Manual -> 3. Proiectare */
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  body.mode-student .res-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  body.mode-student .teacher-only {
+    display: none !important;
+  }
+
+  .res-col {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .res-col.col-pres { border-top: 4px solid var(--pres-color); }
+  .res-col.col-man  { border-top: 4px solid var(--man-color); }
+  .res-col.col-plan { border-top: 4px solid var(--plan-color); }
+
+  .res-col-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .res-step {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .col-pres .res-step { color: var(--pres-text); }
+  .col-man  .res-step { color: var(--man-text); }
+  .col-plan .res-step { color: var(--plan-text); }
+
+  .res-audience {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  .res-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 11px;
+    border-radius: 9px;
+    text-decoration: none;
+    color: var(--ink);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    font-size: 13.2px;
+    font-weight: 600;
+    transition: all 0.15s ease;
+  }
+  .res-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+  }
+  .col-pres .res-link:hover { background: #fffbeb; border-color: #f59e0b; }
+  .col-man  .res-link:hover { background: #ecfdf5; border-color: #10b981; }
+  .col-plan .res-link:hover { background: #eef2ff; border-color: #6366f1; }
+
+  .res-link-title {
+    line-height: 1.3;
+  }
+  .fmt-badge {
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .col-pres .fmt-badge { background: var(--pres-soft); color: var(--pres-text); }
+  .col-man  .fmt-badge { background: var(--man-soft); color: var(--man-text); }
+  .col-plan .fmt-badge { background: var(--plan-soft); color: var(--plan-text); }
+
+  .res-empty {
+    font-size: 12.5px;
+    color: #94a3b8;
+    font-style: italic;
+    padding: 6px 2px;
+  }
+
+  /* EXTRAS INSIDE TOPIC */
+  .topic-extras {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed #cbd5e1;
+  }
+  .extras-label {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    color: var(--extra-text);
+    margin-bottom: 8px;
+  }
+  .extras-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .extra-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 11px;
+    border-radius: 9px;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    color: #0c4a6e;
+    text-decoration: none;
+    font-size: 12.8px;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .extra-chip:hover {
+    background: #e0f2fe;
+    border-color: #0284c7;
+  }
+  .extra-chip .fmt-badge {
+    background: #ffffff;
+    color: #0369a1;
+  }
+
+  .topic-footer {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .folder-direct {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #0f766e;
+    font-weight: 700;
+  }
+  .folder-direct:hover { text-decoration: underline; }
+
+  .empty-search {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--surface);
+    border: 1px dashed #cbd5e1;
+    border-radius: var(--radius);
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px 20px 36px;
+    color: #64748b;
+    font-size: 13.5px;
+    border-top: 1px solid var(--border);
+    background: #ffffff;
+  }
+  footer strong { color: var(--navy); }
+
+  @media (max-width: 1020px) {
+    .root-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .res-grid, body.mode-student .res-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 680px) {
+    .root-grid { grid-template-columns: 1fr; }
+    .topic-right .pill-dot { display: none; }
+    .hero { padding: 34px 16px 48px; }
+    .unit-header { padding: 14px 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🌐 Portal Didactic • Geografia Umană a Lumii</div>
+    <h1>Geografie – Clasa a XI-a</h1>
+    <p>Toate unitățile de învățare, prezentările, secvențele din manual, lucrările practice și proiectările didactice într-un singur loc, organizate clar atât pentru elevi, cât și pentru profesori.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">📚 6 unități de învățare</div>
+      <div class="hero-stat">🗂️ 58 teme și evaluări</div>
+      <div class="hero-stat">📊 98 prezentări • 📖 52 secvențe manual • 📋 61 proiectări</div>
+    </div>
+  </div>
+</header>
+
+<div class="controls-wrap">
+  <div class="controls-card">
+    <div class="controls-row">
+      <div class="role-switch" role="tablist" aria-label="Mod de vizualizare">
+        <button type="button" class="role-btn active" data-role="all">👥 Elevi + Profesori</button>
+        <button type="button" class="role-btn" data-role="student">🎓 Mod Elevi</button>
+        <button type="button" class="role-btn" data-role="teacher">👩‍🏫 Mod Profesori</button>
+      </div>
+      <div class="search-actions">
+        <input type="search" id="searchInput" class="search-input" placeholder="🔍 Caută tema, țara sau cuvânt-cheie..." aria-label="Caută resurse">
+        <button type="button" class="mini-btn" id="expandAllBtn">▾ Deschide toate</button>
+        <button type="button" class="mini-btn" id="collapseAllBtn">▴ Restrânge</button>
+      </div>
+    </div>
+    <div class="unit-pills" id="unitPills"></div>
+  </div>
+</div>
+
+<main class="container">
+
+  <div class="guide-banner">
+    <div class="guide-steps">
+      <strong>Ordinea resurselor în fiecare temă:</strong>
+      <span class="step-chip s1">1. 📊 Prezentare</span>
+      <span>→</span>
+      <span class="step-chip s2">2. 📖 Secvență din manual</span>
+      <span class="teacher-only">→</span>
+      <span class="step-chip s3 teacher-only">3. 📋 Proiectare didactică</span>
+    </div>
+    <div class="progress-wrap" title="Bifează temele parcurse; progresul se salvează automat în browser">
+      <span id="progressText">Parcurse: 0 / 58</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </div>
+
+  <h2 class="section-label">📌 Resurse Generale – Clasa a XI-a</h2>
+  <section class="root-grid" id="rootGrid"></section>
+
+  <div id="unitsContainer"></div>
+
+  <div class="empty-search" id="emptySearch">
+    🔎 Nu am găsit nicio temă care să corespundă căutării. Încearcă un alt termen (ex.: „populație”, „turism”, „Germania”, „China”).
+  </div>
+
+</main>
+
+<footer>
+  <strong>Geografie – Clasa a XI-a</strong> • Index orientativ pentru elevi și profesori • Toate fișierele se deschid direct din Google Drive
+</footer>
+
+<script>
+const PORTAL_DATA = {"root": [{"role": "both", "tag": "Manual PDF", "icon": "📘", "title": "Manual școlar – Geografie, clasa a XI-a", "desc": "Manualul oficial complet (a. 2025, limba română), format PDF pentru studiu individual și recapitulare.", "url": "https://drive.google.com/file/d/1QBPoo0J7lYOHqN5IiSeIfiODPccYsEwV/view?usp=sharing", "cta": "Deschide manualul", "color": "#059669", "soft": "#d1fae5"}, {"role": "both", "tag": "Evaluări & Exersare", "icon": "📝", "title": "Caiet de evaluări – Geografia umană a lumii", "desc": "Teste, exerciții aplicative și itemi structurați pentru consolidare și pregătirea evaluărilor sumative.", "url": "https://drive.google.com/file/d/1mwUz4lDodXs4OXVMVPBibEClswHHtklk/view?usp=sharing", "cta": "Deschide caietul PDF", "color": "#0284c7", "soft": "#e0f2fe"}, {"role": "teacher", "tag": "Pentru profesori", "icon": "📋", "title": "Proiectare de lungă durată", "desc": "Planificarea calendaristică anuală conform curriculumului la Geografie pentru clasa a XI-a.", "url": "https://drive.google.com/file/d/1-lUiBZ--n7s76TpU0B5L2VGlj_EWX35y/view?usp=sharing", "cta": "Deschide proiectarea", "color": "#6d28d9", "soft": "#ede9fe"}, {"role": "both", "tag": "Arhivă completă", "icon": "📂", "title": "Folder complet Google Drive", "desc": "Acces direct la toate cele 6 unități de învățare, prezentări, secvențe de manual și documente.", "url": "https://drive.google.com/drive/folders/1wuar9sI76fmLiJqMap4dARAim_YKYXgN?usp=sharing", "cta": "Deschide mapa clasa_11", "color": "#334155", "soft": "#e2e8f0"}], "units": [{"id": "u1", "roman": "I", "short": "Harta politică & Resurse", "title": "Harta politică. Condițiile și resursele naturale", "desc": "Evoluția hărții politice, tipologia statelor, conflictele teritoriale și valorificarea resurselor naturale ale Terrei.", "icon": "🗺️", "color": "#2563eb", "soft": "#dbeafe", "folder": "https://drive.google.com/drive/folders/1BlQAh6jdHvi5x-DCFKrGwNysiFJvEyNT?usp=sharing", "unit_extras": [], "topics": [{"code": "Tema 1", "title": "Harta politică a lumii: noțiune, etapele de evoluție și modificările principale", "folder": "https://drive.google.com/drive/folders/19b451JkhkhCFxslXHRBzxR9mhvatQH8_?usp=sharing", "presentations": [{"title": "Harta politică a lumii: noțiune, etapele de evoluție și modificările principale", "url": "https://docs.google.com/presentation/d/1gywf-jABsDT6VdyvVR7Iy7KHa5HPVO3ugUsP3ghxa8w/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 1 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1ffgB3xL49Zvd5s21SShZq4u56lhVGNBCluYF053HbaY/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 1", "url": "https://drive.google.com/file/d/11FPZGszDvKCvUxMvR83Cwu_ec_G-ebcb/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 1: Harta politică a lumii", "url": "https://drive.google.com/file/d/1gbBPtTTpQ_xz6rvoP2rA8JC6HEZUkxpS/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 2", "title": "Schimbările cantitative și calitative ale hărții politice a lumii în perioada contemporană. Evaluare inițială", "folder": "https://drive.google.com/drive/folders/1lxCnpjZkisSItpGtT7672bUoBR5gnOgV?usp=sharing", "presentations": [{"title": "Schimbările cantitative și calitative ale hărții politice", "url": "https://docs.google.com/presentation/d/1s9xjUjV3iC1t8VpPqNbNzi2dOfT-9hizDpd460WDRb8/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 2 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1gt8IH27JorasyIO968_8lHhzMX4IGr-n79_jEQq3aBQ/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 2", "url": "https://drive.google.com/file/d/1wH5fgIIVy2iwg4IHwxgN_blccePaNJP3/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 2: Harta politică a lumii", "url": "https://drive.google.com/file/d/1PVhPSaV1Kxu9whRQTQCnNWNOcychCvax/view?usp=sharing", "fmt": "DOCX"}], "extras": [{"title": "Evaluare inițială Wordwall – Geografie Clasa a XI-a", "url": "https://docs.google.com/document/d/1UH3fwCQV_vWvVWEmUEizbpeSnyC8aXjrKcsXAXBkeqQ/edit?usp=sharing", "fmt": "Google Docs", "role": "both"}]}, {"code": "Tema 3", "title": "Probleme actuale: conflictele teritoriale", "folder": "https://drive.google.com/drive/folders/1gc6uQxLWwk8m5zRDJrIFHh3ZmS9wUHgf?usp=sharing", "presentations": [{"title": "Probleme actuale: conflictele teritoriale", "url": "https://docs.google.com/presentation/d/1vYyAREHevivpeTnNuNKa7wAns7TG8SSdHsdX_fm1LmA/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 3 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1ReHgugHBG55Wd50h8QXIU-Uq5goLxVfPbrw-QgEwwXw/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 3", "url": "https://drive.google.com/file/d/1YPDEOyw1qUshu3qQmcaeW1xBPfVbhE3P/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 3: Conflictele teritoriale", "url": "https://drive.google.com/file/d/1SYpIFAz8cvxC2m-uH2XkLb5_p0YtpYVd/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Temele 4–5", "title": "Tipologia statelor lumii", "folder": "https://drive.google.com/drive/folders/1UAsnDB4nY5Dx8J--3MIrE0coZPtkVd7K?usp=sharing", "presentations": [{"title": "Partea 1 – Tipologia statelor lumii", "url": "https://docs.google.com/presentation/d/1GrFC-kR4l1lJ0-uCXpL_bsMwN30DQmX8CH-VTECq7Cc/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Partea 2 – Tipologia statelor lumii", "url": "https://docs.google.com/presentation/d/1itlk6o-088SxFDQFN7FrdSvgIyLOPE7rRd45vvJLbC0/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 4 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1EzlYlzhBmN-3ddbfJKh8_4_LAImRXQPjZDnve4fJUuA/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 4–5", "url": "https://drive.google.com/file/d/1UNgtSUxGgkVamqH_Qm-RVR9ofpDsMAbu/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 4: Tipologia statelor lumii", "url": "https://drive.google.com/file/d/1asAltwguhbIsOXuIPwW34XOCapbSW8mW/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – Lecția 5: Tipologia statelor lumii", "url": "https://drive.google.com/file/d/15VH5TpOIITspbQKA5gLIiA30tYhRKkGG/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 6", "title": "Condițiile și resursele naturale: noțiuni generale. Clasificarea resurselor naturale", "folder": "https://drive.google.com/drive/folders/1j0gcJ3AIN7e9pZyos195hBg6QdMdy9vl?usp=sharing", "presentations": [{"title": "Condițiile și resursele naturale. Clasificarea resurselor", "url": "https://docs.google.com/presentation/d/1SkpdVwpvoJej6TXRFSTcBC5d-cIcGuzNEdK9RZZjWlA/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 6 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1K-0ZO18Z4uCrHQgCX9HUwQUvoSdP6RAtpj2806hSmmI/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 6", "url": "https://drive.google.com/file/d/14sVt4yew3j-cZB8NOiJE3B23nzkMz1BX/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 6: Condițiile și resursele naturale", "url": "https://drive.google.com/file/d/1yhCd6huUS4_LvjHE_H6x-4E45KrGiGNW/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 7", "title": "Resursele extraatmosferice și ale atmosferei", "folder": "https://drive.google.com/drive/folders/1_NL1ptGDkVUOl-ygAEHdBtNfaZm5k-Hj?usp=sharing", "presentations": [{"title": "Resursele extraatmosferice și ale atmosferei", "url": "https://docs.google.com/presentation/d/1HklvjRrRatdgqRkaO_1BCzcwi_YGVTZHt8JqazQUYCg/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 7 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1mMIGZt73h7BqTu6qBfklR88loutiGRnWHSykq8QzIXs/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 7", "url": "https://drive.google.com/file/d/1ozuA7e2tfnf1C-1abGyNIh6F_X-qtohg/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 7: Resursele atmosferei", "url": "https://drive.google.com/file/d/115_RCejaSAVktCpYeR44Wl8ggbH958u8/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 8", "title": "Resursele hidrosferei", "folder": "https://drive.google.com/drive/folders/1nvSw3cegLYkSx2zY_wVg9obaP4w5v5Qa?usp=sharing", "presentations": [{"title": "Resursele hidrosferei", "url": "https://docs.google.com/presentation/d/1VZkUMPtl7emnzPyqPC0wQ39mP11XtcV4xvdBlAY_Kd0/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 8 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1c1v-jkVuZUvAhNsV4XJuLaZFGq0jzYGXYrFFvcWqjrA/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 8", "url": "https://drive.google.com/file/d/1_J4L-y7Y-6ZuOIOfSKO8eSjPaWOOvDbw/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 8: Resursele hidrosferei", "url": "https://drive.google.com/file/d/1AEqoQUKMpxi9ELutQj5a_iHLldaO-sXt/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 9", "title": "Resursele litosferei", "folder": "https://drive.google.com/drive/folders/1qwrWLoMDghmCJS-wPyJk0rMNWfQ9BLAR?usp=sharing", "presentations": [{"title": "Resursele litosferei", "url": "https://docs.google.com/presentation/d/1k8ENJ5p2bL61bTQG73aWPv9fjmAuvLnw04STKHGD_o8/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 9 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/10Tg-0vi2eqLP9RrmjBJgavarNAymi4seo2ggfXS569w/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 9", "url": "https://drive.google.com/file/d/1VeOD-WTYhqHqgz8gQlNXAVZNTUqP-q9i/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 9: Resursele litosferei", "url": "https://drive.google.com/file/d/1-u8crTxP0DWgMqRMAearDGSnKVAmEvX4/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 10", "title": "Resursele biosferei. Resursele de sol", "folder": "https://drive.google.com/drive/folders/1rMeuWpJiODOnMeE0OrQHRQHKN9r8ip77?usp=sharing", "presentations": [{"title": "Resursele biosferei. Resursele de sol", "url": "https://docs.google.com/presentation/d/1DNdlwMCgde5TWulyIwQzsZIjrnGSqSuYLy_DYohUkNQ/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 10 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1FLCr9pkLxkHx1h2TkMttz2L9UVAP2nceSqhClcSrYqo/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 10", "url": "https://drive.google.com/file/d/10idvYSs5Kkw8rkrVlZeFUOQ4dOvsOuHP/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 10: Resursele biosferei și de sol", "url": "https://drive.google.com/file/d/1LsLU7Q_5LEjt_j8Z6zyR-P8Qg_fh1q36/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 11", "title": "Valorificarea rațională a condițiilor și resurselor naturale ale Terrei. Probleme actuale: epuizarea și degradarea resurselor", "folder": "https://drive.google.com/drive/folders/1lxcex65XhuxzFJWjSQ2Sng4fBT-Zyalo?usp=sharing", "presentations": [{"title": "Valorificarea rațională a condițiilor și resurselor naturale", "url": "https://docs.google.com/presentation/d/1Jgz5golFxML4boyceO8gOfuYEhQT9DAYwBlu99bgK3U/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 11 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/12ugD0icBuRSlBGu36B8x9uTb1xQv2EqrXE0Y_J3ofOU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 11", "url": "https://drive.google.com/file/d/1Uyv0v_8_KC-ZWrDOB4MikC3uLFAay2mA/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 11: Valorificarea rațională", "url": "https://drive.google.com/file/d/15ztwEE4TeNhg6m1rGKn9XzeWE6x1-M6-/view?usp=sharing", "fmt": "DOCX"}], "extras": [{"title": "Studiu de caz – Resursele naturale", "url": "https://docs.google.com/document/d/1zeyq_qpiNb0FbD3iSTpibWZNPQJ07Y-0FjY_EYiDfE8/edit?usp=sharing", "fmt": "Google Docs", "role": "both"}]}, {"code": "Evaluare 12", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Harta politică. Condițiile și resursele naturale”", "folder": "https://drive.google.com/drive/folders/1vhfEinjiBji48O3bqvW3FOOuvP9WATOG?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u2", "roman": "II", "short": "Populația și Așezările", "title": "Populația Terrei și așezările umane", "desc": "Dinamica și mobilitatea populației, structuri demografice, așezările rurale și urbane, urbanizarea și problemele demografice actuale.", "icon": "👥", "color": "#ea580c", "soft": "#ffedd5", "folder": "https://drive.google.com/drive/folders/1-8-2ErTRc2U6cyeLDjdKl5pJ6gXQeW8C?usp=sharing", "unit_extras": [{"title": "📝 Sarcini de lucru – Populația Terrei (clasa a XI-a)", "url": "https://docs.google.com/document/d/1dZ5SiWREGtHeF5BTzM-nJoKLeb78kqkQxif4JJgXiYM/edit?usp=sharing", "fmt": "Google Docs", "role": "both"}], "topics": [{"code": "Temele 13–14", "title": "Dinamica numerică și mișcarea naturală a populației. Politici demografice", "folder": "https://drive.google.com/drive/folders/1Ke3rjjLfG2e2EvJmHpD3XR3VHeWUyrPt?usp=sharing", "presentations": [{"title": "13. Dinamica numerică a populației", "url": "https://docs.google.com/presentation/d/1VlSrnS1C9qTimEMI-U2skmFsYWUIkgqpDwvnWOb45l0/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "14. Mișcarea naturală a populației", "url": "https://docs.google.com/presentation/d/1gcEhJAi1i1MVfN3x-d4pkGFocjPrgzFPt4aPj6amqDc/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Temele 13–14 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1Y_QOttciiG_4FLQCI5JDaF6QIjRekrYg8FwRiX96lZ0/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 13–14", "url": "https://drive.google.com/file/d/1R4fNWDsEBf9wR4KYUu89rI-epDKgatxa/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Dinamica numerică și politici demografice", "url": "https://docs.google.com/document/d/1JlAqtOASbfFZhuWpc7ZjjFdmWx0S1ZZcGQPFABDjeVE/edit?usp=sharing", "fmt": "Google Docs"}, {"title": "Proiect didactic – Mișcarea naturală și tranziția demografică", "url": "https://docs.google.com/document/d/1TUUyWyPYoA0hsgjJpCzAJ2YN_IwZb9QT2wBkv4A35uU/edit?usp=sharing", "fmt": "Google Docs"}], "extras": [{"title": "Studiu de caz – Dinamica populației", "url": "https://docs.google.com/document/d/16UJwrOcNR7j2uXhduJUtwlFOyEOnCk-D2plIgzT8WwQ/edit?usp=sharing", "fmt": "Google Docs", "role": "both"}]}, {"code": "Tema 15", "title": "Mobilitatea teritorială a populației: factori de mobilitate, tipizare, importanță", "folder": "https://drive.google.com/drive/folders/1GU-8TWpi7QRJwZGdFQ-RH1k4m8xYTf30?usp=sharing", "presentations": [{"title": "Mobilitatea teritorială a populației", "url": "https://docs.google.com/presentation/d/1fCVId9ZH2r8G8aao3DMi58u1oNvWlf0KbhqEaDkgOj8/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 15 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1yJ1MCR2zldwjCs_owzu--v6zLjoF2c30cJq_1ual_1Q/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 15", "url": "https://drive.google.com/file/d/1pXn55c5rQgd72P0EADfRCgAaP1rIANaj/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Mobilitatea teritorială a populației", "url": "https://docs.google.com/document/d/1z_uOKR4T5DgwM7G9yHg7AwXAzD-OmUcQIB_Nu2gkjs8/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 16", "title": "Repartiția geografică și densitatea populației", "folder": "https://drive.google.com/drive/folders/1IM9AM388W8arODN1rK3iRamRnn9_uB_b?usp=sharing", "presentations": [{"title": "Repartiția geografică și densitatea populației", "url": "https://docs.google.com/presentation/d/1SZ54KEQ5Uwyz9Pn5G1VjA6qs3CN4y6yoW9hAW78H2zo/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 16 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1oJxQOWy_ThG-GPiJ0bMiOPP2-Eudkdw7YQ5N2zxJtQs/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 16", "url": "https://drive.google.com/file/d/1h3RqfXn9U4vcKGi1Q73M-TAjJjaA_oNB/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Repartiția și densitatea populației", "url": "https://docs.google.com/document/d/1TtcmgwSAxeUFnVTebh5ybMUzFU38DzN9aAFHv2w9myY/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 17", "title": "Structurarea populației după diferite criterii. Structura rasială, etno-lingvistică și confesională", "folder": "https://drive.google.com/drive/folders/1g2u2ryOsVCCwbQp5HQ-Uk_Iuw8GvSUbY?usp=sharing", "presentations": [{"title": "Structura rasială, etnolingvistică și confesională", "url": "https://docs.google.com/presentation/d/1jXQfL44PIq-UwzC_YkRy7x98MrtIrd8asaeyruJQMAo/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 17 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1NVk_xvzP3qWYxYvRsHZNgqpg8o1FYh3l0sHFN8bdVQw/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 17", "url": "https://drive.google.com/file/d/1J1CtjreODiCP3Yw0F8KC7WpZssqx3G8V/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Structura rasială, etno-lingvistică și confesională", "url": "https://docs.google.com/document/d/1uVFp9pVOg6yTJiVbyiJd_52Jb3XiepjDadWaAM6xp1o/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 18", "title": "Structura pe grupe de vârstă și pe genuri a populației. Speranța de viață la naștere", "folder": "https://drive.google.com/drive/folders/1y3SJxag3bUkF5A2mYR1ldZ_pDcsywgTc?usp=sharing", "presentations": [{"title": "Structura pe grupe de vârstă și genuri. Speranța de viață", "url": "https://docs.google.com/presentation/d/1QfE4zTgr4YIG51uef0wOJgGGb7iQCa_kbxbZoNzvgNk/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 18 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1T46Zq_w6TJJR996TDdG_Co7DXdMY662pxH5p2F5dWxk/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 18", "url": "https://drive.google.com/file/d/163eRQgoZHJusXNlEQjax6yAQFpUacnHi/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Structura pe vârste și genuri", "url": "https://docs.google.com/document/d/1Zf67Ps7BlY-UkZWTiPUQF7-wpR9q0VFUktxxZmutVfs/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 19", "title": "Structura socio-economică a populației. Resursele umane", "folder": "https://drive.google.com/drive/folders/1c64s08KIe-H7SVFZTQuORSmMt4ov5oCF?usp=sharing", "presentations": [{"title": "Structura socio-economică a populației. Resursele umane", "url": "https://docs.google.com/presentation/d/1zBLaxvppmvjdTXzPvwMNDvHUiE1PHgJ6anHnImUIqaU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 19", "url": "https://drive.google.com/file/d/1H1CJcgeZmSe21VLvG2uMv82NpVA8zSKJ/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Structura socio-economică și resursele umane", "url": "https://docs.google.com/document/d/1Ev3D2kpo6XhjnTp0KrTiCVW3b6WEHOMsXLzrK8SZQag/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 20", "type": "practice", "title": "Lucrare practică: Dinamica și structura populației a două regiuni, evaluate comparativ", "folder": "https://drive.google.com/drive/folders/13X6Uljt1F_NxlZBisSFlGydtF_I3aCB3?usp=sharing", "presentations": [], "manuals": [{"title": "Secvență manual – Lucrare practică nr. 1: Dinamica și structura populației", "url": "https://drive.google.com/file/d/146ZS6oU_zunY1JJJo5Ko0ayJsrAiCEkO/view?usp=sharing", "fmt": "PDF"}], "plans": [], "extras": [{"title": "Algoritm detaliat pentru Lucrarea Practică (Tema 20)", "url": "https://docs.google.com/document/d/1diJen_rS6EpDxDefMvGRMdSQe-itdalLcF28xvJQNIE/edit?usp=sharing", "fmt": "Google Docs", "role": "both"}]}, {"code": "Tema 21", "title": "Habitatul uman. Așezările rurale și așezările urbane: caracteristici generale, clasificare", "folder": "https://drive.google.com/drive/folders/1ChkK8-m-6T8RZEf5BO9tNCjK9Mo57uln?usp=sharing", "presentations": [{"title": "Habitatul uman. Așezările rurale și urbane", "url": "https://docs.google.com/presentation/d/1ZOplBOWSUnsCrBf_2mZRCvV-inPc4FRBA_HW3sMpQRc/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 21 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1lNlvrHcmQfVBFcGpnEvHl6B27a1aT9DQ7R874Tsh7y4/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 21", "url": "https://drive.google.com/file/d/121xBr40f3qLxkoLqynruyyR6zW8rM6qu/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Habitatul uman, așezările rurale și urbane", "url": "https://docs.google.com/document/d/1Ek4sdDPuGqyA9rSMzonrKrgBsl8NNovRlqNRHckoaHk/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 22", "title": "Urbanizarea. Formele de aglomerare urbană", "folder": "https://drive.google.com/drive/folders/1EwFERYDLqEbocnt2YH2klNGcmscsPWwP?usp=sharing", "presentations": [{"title": "Urbanizarea. Formele de aglomerare urbană", "url": "https://docs.google.com/presentation/d/1MvTY-TVolkY-zKp7MfrrkVdYMK12KrloG_B1QoXqUKI/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 22 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1oJWyGgWX5YKWKvEiNw9_Yxzj3Nk93v_MXMMsEIMdQ0s/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 22", "url": "https://drive.google.com/file/d/1OAyHbvdO10OIsS_Wpn6p1Iy9H-VQ-tK7/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Urbanizarea și aglomerările urbane", "url": "https://docs.google.com/document/d/1175ZMJa8KKreG3ygmnaehYPyJULT-U7c-0ZUq0gzPPY/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 23", "title": "Probleme actuale: îmbătrânirea demografică, capcana demografică, conflicte etno-religioase, urbanizarea falsă, migrația ilegală", "folder": "https://drive.google.com/drive/folders/1gMW_O3bx6S1DSYD3hmAmJ9g9sswcCpcn?usp=sharing", "presentations": [{"title": "Probleme demografice și urbane actuale", "url": "https://docs.google.com/presentation/d/1lEIpf5Akw3KSUo-SKteilN7sJnCgce6Seq_Z1pgJlVo/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 23 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1J1ft8KibVy-82APlA8wWOCi6qEh82Qoan_pG95yQOUE/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 23", "url": "https://drive.google.com/file/d/1f5gEMBycbis9_EInCLI550GdG27LdyYG/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 23", "url": "https://drive.google.com/file/d/1_NHrp4j9VlqQABjcO1N8cBUzn0GOxvCV/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 24", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Populația Terrei și așezările umane”", "folder": "https://drive.google.com/drive/folders/1razOmMqR3pSnH9AgnEMpoz3phtNGfI8F?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": [{"title": "Pregătire pentru evaluare sumativă", "url": "https://docs.google.com/document/d/1j7Q5OvNQcg1y7WJ029pieLbZA_IAANnCNfSkVqlZfYQ/edit?usp=sharing", "fmt": "Google Docs", "role": "both"}]}]}, {"id": "u3", "roman": "III", "short": "Agricultura & Industria", "title": "Economia mondială. Agricultura și industria", "desc": "Diviziunea internațională a muncii, agricultura vegetală și zootehnia, industria energetică, metalurgică, constructoare de mașini, chimică, ușoară și alimentară.", "icon": "🏭", "color": "#059669", "soft": "#d1fae5", "folder": "https://drive.google.com/drive/folders/1xOPZQiMT2BWu4mMNuQjfRPhWSeVArSDT?usp=sharing", "unit_extras": [], "topics": [{"code": "Tema 25", "title": "Structura economiei mondiale. Diviziunea geografică internațională a muncii", "folder": "https://drive.google.com/drive/folders/1T7EjjV3XZcJzOSbIwOSN_iqcFYse4Z2x?usp=sharing", "presentations": [{"title": "Structura economiei mondiale. Diviziunea internațională a muncii", "url": "https://docs.google.com/presentation/d/1W3O6SaAsi_lKdZhSKGVDAbMirade4WPcMtQ3Zt3nssk/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 25 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1_NbhWR_JYtrAC5i9SuFOIlB3c-UtKStbYYLO743WAlg/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 25", "url": "https://drive.google.com/file/d/1G6kW3QKN8mxUs7OCr05wUxUfq7MwBAQj/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Structura economiei mondiale", "url": "https://docs.google.com/document/d/13el1NzHN4i0-5BbXK_puFBvwd3YQtt1eDDUyVRB8UUE/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 26", "title": "Agricultura mondială: factori și tendințe de dezvoltare, structura pe ramuri", "folder": "https://drive.google.com/drive/folders/1AgUfwU4a4p6nMK5I6vbisdBomKPgxKon?usp=sharing", "presentations": [{"title": "Agricultura mondială: factori, tendințe, structură", "url": "https://docs.google.com/presentation/d/10El4kO7gW6gyqB5_uIjC9H8cM4zshqF9qdgQJ9k3O0o/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 26 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1StmFZGdQVO_hE32G9QIfKiZ_sL_SW_Yt8DY59NNa840/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 26", "url": "https://drive.google.com/file/d/1U8uK3-MFXtyZf_ge-LVkhsAzemXJgVmw/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Agricultura mondială", "url": "https://docs.google.com/document/d/1EkAOniz3Tq0eOtZHM-8pnH8m7D0_jvBO1KsAlN7_hW8/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 27", "title": "Cultura plantelor: caracterizarea subramurilor, importanța", "folder": "https://drive.google.com/drive/folders/1br4T6P7KXbYmhWH-NdHtDrLJA44ebVYH?usp=sharing", "presentations": [{"title": "Cultura plantelor: caracterizarea subramurilor, importanța", "url": "https://docs.google.com/presentation/d/1wa3bhb1P3_9sImu9Ah6cuaSvMjJQ5TM-AKPgjNgUKHU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 27", "url": "https://drive.google.com/file/d/1kOfJJyxBB0Qy8fZ6MrfnwBdMeXdoeOMS/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Cultura plantelor", "url": "https://docs.google.com/document/d/1Lc0OhG2sBJUoJ7herK_OsriP4nrMx4_bkF5DXgCHYso/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 28", "title": "Creșterea animalelor: caracterizarea subramurilor, importanța", "folder": "https://drive.google.com/drive/folders/1O197-WLsN9dug_tELzuAYrL8Mkr5vauE?usp=sharing", "presentations": [{"title": "Creșterea animalelor: caracterizarea subramurilor, importanța", "url": "https://docs.google.com/presentation/d/1LfrFjZ4e2X7O-9ZhDQIxYYsvGWF-ciU9PVPgSZdWdao/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 28", "url": "https://drive.google.com/file/d/1-U61aMdqJPoAYdfoW_7AYV5_cM_TzHO0/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Creșterea animalelor", "url": "https://docs.google.com/document/d/1nDqHNXn4SPhQwUtNnWLZUbnqapGk7MkEWEyRzVKUk3A/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 29", "title": "Industria: factori de amplasare și tendințe de dezvoltare, structura pe ramuri", "folder": "https://drive.google.com/drive/folders/11BJkj6ZqFt2hMBuNmHMi7YWCPh_34U18?usp=sharing", "presentations": [{"title": "Industria: factori de amplasare, tendințe și structură", "url": "https://docs.google.com/presentation/d/1ethEUCsA-HdT3sBIoyCVdr8aDHeFfYyJmxdGZBU9-mg/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 29 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1yk2e2aYmsFVS82j6v-ZWTcR8B1-5nUPAKVV6-s2nPSg/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 29", "url": "https://drive.google.com/file/d/1hVIde9HyCe9UqFl9GlxPW-lir_3Zc3ZU/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Industria mondială", "url": "https://docs.google.com/document/d/1TXHAbEQpB0fohHEjrOiV6mA854WNJ4t6qFNpCEAEVdc/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Temele 30–31", "title": "Caracterizarea ramurilor industriei. Industria energetică (combustibili, electroenergetică și surse regenerabile)", "folder": "https://drive.google.com/drive/folders/1JZMj9Uu8riyNVgaPe6N5euE8f3Bahxjp?usp=sharing", "presentations": [{"title": "1. Industria energetică (Industria combustibililor)", "url": "https://docs.google.com/presentation/d/1MlcpFK07tdJu9UgOGraXFEWLp_cI45DUwkvjU2m64o8/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "2. Electroenergetica și sursele regenerabile de energie", "url": "https://docs.google.com/presentation/d/1IX2D94g7MW-2DaSH9RkeATl2QiBHE2PX2cPZHt7Nnwc/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 30–31", "url": "https://drive.google.com/file/d/18UooI3lUZz2KsuMMr9BmSN64GFeghVbT/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Industria combustibililor", "url": "https://docs.google.com/document/d/1AYLoJCl7eAQYNtFRHdTSvm8mpQwHxgmc8I5Iz76Qxrc/edit?usp=sharing", "fmt": "Google Docs"}, {"title": "Proiect didactic – Electroenergetica și sursele regenerabile", "url": "https://docs.google.com/document/d/1Qprubx0EL1GC0Z5fdIOlA7viFV6dVbnlyfhEGKmYgnE/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Temele 32–33", "title": "Industria metalurgică (feroasă și neferoasă)", "folder": "https://drive.google.com/drive/folders/1N7ttmDFlePuDVrhMOQSd30CbK3hjgJGT?usp=sharing", "presentations": [{"title": "1. Metalurgia feroasă (factori, regiuni, importanță)", "url": "https://docs.google.com/presentation/d/1E6Ch3LEw0POzejTzkhLRsk3XDdtCdptrk87kgxsl-M8/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "2. Metalurgia neferoasă și comerțul internațional", "url": "https://docs.google.com/presentation/d/1zVSbifuB04lj76Bxq7vadQgUD8K3ShDq1YMvA4yi1RU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 32–33", "url": "https://drive.google.com/file/d/1S0y7Yc-GarGeeWU1Vir8RWNACVkV5KFL/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Metalurgia feroasă", "url": "https://docs.google.com/document/d/1O46OgwnzkG3Y09Upbg-6NowmCMMnOmzso8tyjvxOMI4/edit?usp=sharing", "fmt": "Google Docs"}, {"title": "Proiect didactic – Metalurgia neferoasă", "url": "https://docs.google.com/document/d/1b8yDlnu6ScZ1CyouRLj5Ld8vXJeZN80EXa2Q7DtYlgI/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 34", "title": "Industria constructoare de mașini și de prelucrare a metalelor", "folder": "https://drive.google.com/drive/folders/1AVs_FOeJrDJFit5pR0zbjnUy_tjhTpFU?usp=sharing", "presentations": [{"title": "Industria constructoare de mașini și de prelucrare a metalelor", "url": "https://docs.google.com/presentation/d/1I5Wq8CYEiDRwhzKs9UVWQu9uY_loSO64iiTAhJ5z0us/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Industria constructoare de mașini (suport PowerPoint)", "url": "https://drive.google.com/file/d/1kcrLzcnF_SE4zMNdWCah05zYiiEzkeCQ/view?usp=sharing", "fmt": "PPT"}], "manuals": [{"title": "Secvență din manual – Tema 34", "url": "https://drive.google.com/file/d/1DmNZS2hPhwT1WYjf5HVO3Xvwtv2yrnvK/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Industria constructoare de mașini", "url": "https://docs.google.com/document/d/1O4CO2PKTyh-rvkGzoHKOj4HP7w4MbC3-O4DlSdn4kGQ/edit?usp=sharing", "fmt": "Google Docs"}], "extras": []}, {"code": "Tema 35", "title": "Industria chimică", "folder": "https://drive.google.com/drive/folders/1OCCIZcNiBHjVLRguVi6ypCDRkl_CpXue?usp=sharing", "presentations": [{"title": "Industria chimică", "url": "https://docs.google.com/presentation/d/1oUzbzvwMw4-J8psbl64ShNn-6m_zB3rBkATqaHIxKi4/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Industria chimică – prezentare suplimentară (PPTX)", "url": "https://drive.google.com/file/d/1kPTIhY54NgrhRqeXGPeJqCLHPdFHrOR3/view?usp=sharing", "fmt": "PPTX"}, {"title": "Industria chimică – prezentare suplimentară (PPT)", "url": "https://drive.google.com/file/d/1UkbRnfVHa18S69dzknLpOJkfrtoTxfPG/view?usp=sharing", "fmt": "PPT"}], "manuals": [{"title": "Secvență din manual – Tema 35", "url": "https://drive.google.com/file/d/1thz71lH4hRdBK9WngQr9S2F1qyRht-fq/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 35: Industria chimică", "url": "https://drive.google.com/file/d/1yuzm-s-hhQhj_sXDBXTvB5fslaUjnMt6/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 36", "title": "Industria ușoară", "folder": "https://drive.google.com/drive/folders/1DtipyjwjF2yLbXMTmGxWX_ByIvyyrfZh?usp=sharing", "presentations": [{"title": "Industria ușoară", "url": "https://docs.google.com/presentation/d/19SQ9VF2NJNIkybKIpxznyvf-jBmTYZzhHaHESJrzjNg/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 36 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1me884h0Rwok0pBxxfnEzFuOL2W5h39d34ntgj5IiG8w/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 36", "url": "https://drive.google.com/file/d/1Fp3vIL6HLIVYEoZ10k_Q5kw725X-Z5G-/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 36: Industria ușoară", "url": "https://drive.google.com/file/d/16WioUsH09v7V02_l2l-qYyB6KESnrcIQ/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 37", "title": "Industria alimentară", "folder": "https://drive.google.com/drive/folders/15VchqI6MwB7tYP4HFNMzxQ7di_68j0ZY?usp=sharing", "presentations": [{"title": "Industria alimentară", "url": "https://docs.google.com/presentation/d/1xEChsmVmJ09uS-ggqVsqp5aLRIdN8bIhxI09bGyGA0s/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 37 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1Wq2uMUeD5TIa2MqHGOYuLbxxWOGaa9H2D8_KDL7VAsc/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 37", "url": "https://drive.google.com/file/d/1eu628pY85HOSdKrgtMpHUo7Ls_LDKvX_/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lecția 37: Industria alimentară", "url": "https://drive.google.com/file/d/11Y7sWOaIHo7dNm6VCSYjqu4qa6ZNdp06/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 38", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Economia mondială. Agricultura și industria”", "folder": "https://drive.google.com/drive/folders/1B9Hl6kQPoDjXd3WJcSEzzFE07PA5xaaw?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u4", "roman": "IV", "short": "Servicii & Relații economice", "title": "Economia mondială. Sectorul serviciilor și relațiile economice", "desc": "Serviciile, transporturile și comunicațiile, turismul internațional, relațiile economice, organizațiile economice și hazardurile tehnologice.", "icon": "✈️", "color": "#0284c7", "soft": "#e0f2fe", "folder": "https://drive.google.com/drive/folders/1__nhLZG9VP23x8rL0_8JK9vmrRN6p5Nv?usp=sharing", "unit_extras": [], "topics": [{"code": "Tema 39", "title": "Sectorul serviciilor: rolul în economie, structura pe ramuri", "folder": "https://drive.google.com/drive/folders/1aFS3135fycGZeJZp896zkeMcX4-figpB?usp=sharing", "presentations": [{"title": "Sectorul serviciilor: rolul în economie, structura pe ramuri", "url": "https://docs.google.com/presentation/d/1mNPkZ9PgC_bKKUVvQbtCiy0V8btnbJHZZeu6MxeUHvo/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 39 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1F8oN4Ci6ha0sdAiPKcMXK9L3PVXRW7DRybkDi2oQhFQ/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 39", "url": "https://drive.google.com/file/d/1XHQ13lICYrZOg6UnWjr6FtAkaj6oHJL4/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Sectorul serviciilor (Lecția 36)", "url": "https://drive.google.com/file/d/1Bdj8uIWMh91UMr27cx3cUD00x1zVEv-X/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Temele 40–41", "title": "Transporturile și comunicațiile", "folder": "https://drive.google.com/drive/folders/1CUzOHScGjCjcr7okBPSoqIHoQDloFQ-u?usp=sharing", "presentations": [{"title": "1. Transporturile și comunicațiile", "url": "https://docs.google.com/presentation/d/1MKNaUXF-pCYSimWpxkoB9JgRhvVHM-25ytQAJHr4bQw/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "2. Tipurile de transporturi", "url": "https://docs.google.com/presentation/d/1SdMVJiCoRx-JSjgWzXtZjSp3jE9LmDbl_i61ba4BDM4/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Temele 40–41 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/14f224MJyFfQg9Zxkrlc-x1ShNucNLccFGU3L_Ml9L9E/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 40–41", "url": "https://drive.google.com/file/d/1awb_w_3qy9CE0sSaVRkjbvheQGn01nBv/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Transporturile și comunicațiile (Lecția 37)", "url": "https://drive.google.com/file/d/1KntWK-IiPIDcjZbjyUHlFuZ63b0HTk4K/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – Tipurile de transporturi (Lecția 38)", "url": "https://drive.google.com/file/d/1Uh6a6NfMDBxHZGoP2dp9RhRSE2FV3eNU/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Temele 42–43", "title": "Turismul: factori de dezvoltare, clasificare. Marile zone turistice ale Globului", "folder": "https://drive.google.com/drive/folders/1AdzwarJ7oX2vcfmOKBVnC9PMs4CERhIW?usp=sharing", "presentations": [{"title": "1. Turismul: factori de dezvoltare, clasificare", "url": "https://docs.google.com/presentation/d/1L5cR7rcu7kjO9B52szo3U4xc9ZiSOgQz2Z545oPKdxI/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "2. Turismul: marile zone turistice ale Globului", "url": "https://docs.google.com/presentation/d/1e2MjYu0ycl4qOFbqlvH8sLBtqBcE4vs9AEf5U9yzotE/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Temele 42–43 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1FpN618Y7z7ejwd1mPN9wSCsW5TAmmSlGaSA0EVmPXiI/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 42–43", "url": "https://drive.google.com/file/d/1XIcJD_pwhMKVavPVMw6FJWyMUdmT14hc/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Turismul (partea 1)", "url": "https://drive.google.com/file/d/1SNj69btj8KwH4BOYRWdsZgjSFcADbDBi/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – Turismul (partea 2)", "url": "https://drive.google.com/file/d/1DIDEtPDXm3BeIoW1EOPgV6DJbXdBNtEq/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 44", "type": "practice", "title": "Lucrare practică: Cartea de vizită a unui obiectiv / unei destinații turistice", "folder": "https://drive.google.com/drive/folders/1t7YUjKPFz9oTwNLxUEc0T2Do57O3hhUl?usp=sharing", "presentations": [], "manuals": [{"title": "Secvență manual – Lucrare practică nr. 2: Cartea de vizită turistică", "url": "https://drive.google.com/file/d/1A75lJGKAaAX_nTY0jxuAz1fhbRpgV2ah/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Lucrare practică nr. 2", "url": "https://drive.google.com/file/d/1xgMUPXju3qV2oLTCGDi6bwaEEeHfoqnO/view?usp=sharing", "fmt": "DOCX"}], "extras": [{"title": "Model / Fișă de lucru – Cartea de vizită a unui obiectiv turistic", "url": "https://docs.google.com/document/d/1f7UKT8NuBYGfbReHtWnlNYth5WBR6JwyXiiIW_CNR4E/edit?usp=sharing", "fmt": "Google Docs", "role": "both"}]}, {"code": "Tema 45", "title": "Relațiile economice internaționale: formele principale, importanța", "folder": "https://drive.google.com/drive/folders/1NbrW1-MlApHdmZb31av_CrHFoPY0K0dL?usp=sharing", "presentations": [{"title": "Relațiile economice internaționale", "url": "https://docs.google.com/presentation/d/1Y0HzX_05jIuhWUcUr0Ywvq4b-6_U6pql4wqTnzbTF0c/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 45 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1NabUgSai4l2HVd_Ya-dRdDK4D7DgIpi0-zqXs9bAdYY/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 45", "url": "https://drive.google.com/file/d/1klLQHZC1InSIiGZW0LPdnM3g3YLUnGYU/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Relațiile economice internaționale", "url": "https://drive.google.com/file/d/1v6zAi_saUQWY0H3xFfZeZCkAKQtbps0r/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 46", "title": "Principalele organizații de integrare economică (UE, NAFTA, ASEAN, OPEC)", "folder": "https://drive.google.com/drive/folders/1imRRqhAd4ZOyKnbgX7fCn1RmhjLlND_U?usp=sharing", "presentations": [{"title": "Principalele organizații de integrare economică", "url": "https://docs.google.com/presentation/d/1ooTw7QdVm-jiSSB6dibYB5o_DC_HvaGf1XPiGDu3TRA/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 46 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1UAuIxPB17L82_P3wS4UUdYkzLMZR_DzRouu2dtOxFAM/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 46", "url": "https://drive.google.com/file/d/1gSVZmuE_N-6ppCb4sI0iO3dhLon4SDj6/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Organizațiile de integrare economică", "url": "https://drive.google.com/file/d/1A_uRd-y0dGOgZLh_YDhXXAR0x6hN9W6x/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 47", "title": "Probleme actuale: agricultura itinerantă, hazarde tehnologice", "folder": "https://drive.google.com/drive/folders/1MV9zF11JpZgmDmqYBhMwFj4C-QjFgdzI?usp=sharing", "presentations": [{"title": "Probleme actuale: agricultura itinerantă, hazarde tehnologice", "url": "https://docs.google.com/presentation/d/1CIkXuSK0vYXVLpoUQAvKXU4E7z4g2T_y1eJUc-eT_DU/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 47 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/10flujYu3lFVI_ZNoESSemwHbGy9TApZJns-e0UBwNP4/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 47", "url": "https://drive.google.com/file/d/1s7JmvHGhyHiWwSjTJg-h-BZEE0yPmgvp/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Agricultura itinerantă și hazarde tehnologice", "url": "https://drive.google.com/file/d/1fkeQ01P-rknAq-1CzC1DUi9f23lRLCki/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 48", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Economia mondială. Sectorul serviciilor și relațiile economice”", "folder": "https://drive.google.com/drive/folders/1Ct__bgSDyIXPF7HCIBvFiOqzZFdd1R6t?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u5", "roman": "V", "short": "Statele Europei", "title": "Caracterizarea economico-geografică a statelor Europei", "desc": "Studiul regional al principalelor state europene: Marea Britanie, Franța, Germania, România, Ucraina și Federația Rusă.", "icon": "🇪🇺", "color": "#4f46e5", "soft": "#e0e7ff", "folder": "https://drive.google.com/drive/folders/1YmGYxZ0gf8E5_HTA9TGj8v-T_BHFyddJ?usp=sharing", "unit_extras": [], "topics": [{"code": "Temele 49–50", "title": "Caracterizarea generală a Europei. Marea Britanie", "folder": "https://drive.google.com/drive/folders/1Pl0Lc_iLf7Vh42QK3XxFYblCeS2jHcfv?usp=sharing", "presentations": [{"title": "Caracterizarea economico-geografică a statelor Europei", "url": "https://docs.google.com/presentation/d/1IRBG_entiwqZRsSrgAoTb84w-1PHB9V6I2JSZ9dd4oc/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Marea Britanie", "url": "https://docs.google.com/presentation/d/1dAjNe0K_MLkKjTtD9iAP4GjfaLt6TYQQ-XoHWCJdHkg/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Temele 49–50 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1QAJiT0Qp5uQtZV3YZSQ4-FnMxQujy7tjYDKHByetyMY/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 49–50: Marea Britanie", "url": "https://drive.google.com/file/d/14b7h5S-0k3b9a2vpzAME7N0ozYxeOdQi/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Caracterizarea statelor Europei", "url": "https://drive.google.com/file/d/1mRqOEwPNN27-hQHY2uVxsqYICBg-GqGD/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – Marea Britanie", "url": "https://drive.google.com/file/d/1BkuaSk0geLpZccCDUuCc7q4EVmv42A7G/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 51", "title": "Franța", "folder": "https://drive.google.com/drive/folders/1BBLFcovBlUU6_vpfP-4t34zfJqKuIEe9?usp=sharing", "presentations": [{"title": "Franța", "url": "https://docs.google.com/presentation/d/1JIwhAPjRCAqJgrNuxayN7bnt8z48BAKA1VdOt9nftis/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 51 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1ZxgaS4yx8NWesF4OQZ3aHLoBj7SuIHUZ6Z3Q7_NvdCk/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 51: Franța", "url": "https://drive.google.com/file/d/1ZEkTYLRqHXYNfVHUfjqjHsyHFKQ8M01d/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Franța", "url": "https://drive.google.com/file/d/1-71CTcRGZOvUuqIbHbMc_xzeDJ46kpje/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 52", "title": "Germania", "folder": "https://drive.google.com/drive/folders/1xDsaqj0H9AVpl0Bk1q5BS-IK8_myKwrt?usp=sharing", "presentations": [{"title": "Germania", "url": "https://docs.google.com/presentation/d/12vye74UEWq2jrRlWGKqzqB8lY5B2cZzlTbViH1ufPMI/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 52 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1BvX5Q_u4vvgt8iE3cDqQDbegi2eN1xKR3frtFbIQCRs/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 52: Germania", "url": "https://drive.google.com/file/d/19O5ZcrqrbGxCD11YgOE45CcJCtRupS5p/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Germania", "url": "https://drive.google.com/file/d/1z4fb1j6j3VjRuon0iDotQalorj1rquq6/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 53", "title": "România", "folder": "https://drive.google.com/drive/folders/1jW5MLxati6d0bF62a7KAEwdMMclDPEHj?usp=sharing", "presentations": [{"title": "România", "url": "https://docs.google.com/presentation/d/1UEUZ8wQVrf2c5MVK-Gxg5YgTwXH5H0A9h-rgB1L0ZiU/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 53 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1_UJOkB7eWlOx4OT1m0ewq_QXtjmeYa49wGI43UEF2hY/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 53: România", "url": "https://drive.google.com/file/d/1LGmpR-_f3g7q487KYGEkzIcJDR08Fh_E/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – România", "url": "https://drive.google.com/file/d/1E-3OuHa2n4kroTndDKlKFsQokcO9t6Nu/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 54", "title": "Ucraina", "folder": "https://drive.google.com/drive/folders/11VI5l9Kd9ZSdbxCjFQ2vCCFMH4mfr9dt?usp=sharing", "presentations": [{"title": "Ucraina", "url": "https://docs.google.com/presentation/d/1Z4-Lp2u6XlJOkNKicdMLzxvv5VJMP-m8tOM2f0yNN7M/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 54 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1sPEZ9YHG25FkTs5Hgwf4YJVLup3VY6wUixGyrgwEMdk/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 54: Ucraina", "url": "https://drive.google.com/file/d/1WZO10iVLLvChEMjbkH15mJotBw3EY_sY/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Ucraina", "url": "https://drive.google.com/file/d/1wy8VG7-lQkRcPZ7JWgTjCepUeVuxZyqE/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 55", "title": "Rusia (Federația Rusă)", "folder": "https://drive.google.com/drive/folders/1pfEDLux2EpcP0SkhSujn3gJ7CM2U47Do?usp=sharing", "presentations": [{"title": "Federația Rusă", "url": "https://docs.google.com/presentation/d/1d9K1Sb-FULMvQyUKS5OCkljC37oaUdsAUGT0DqphEpY/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Tema 55 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1Q3iNM6OEJZuCx5YAHtf1sOzpiCHPEB3GcnOIXRn-RIA/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 55: Rusia", "url": "https://drive.google.com/file/d/1FzDG-55wnIQIlmgM-H81HaMxAi5OxDs6/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Federația Rusă", "url": "https://drive.google.com/file/d/1Dhzvpunyu2S_ojUgM2ZpSOHoGYsK3x1T/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 56", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Caracterizarea economico-geografică a statelor Europei”", "folder": "https://drive.google.com/drive/folders/1azfkxmiEX3YtSnJFeVYiogfYrcsGxXtL?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u6", "roman": "VI", "short": "Statele extraeuropene", "title": "Caracterizarea economico-geografică a statelor extraeuropene", "desc": "Marile puteri și economii regionale din afara Europei: China, Japonia, India, SUA, Brazilia, Egipt, Africa de Sud și Australia.", "icon": "🌏", "color": "#9333ea", "soft": "#f3e8ff", "folder": "https://drive.google.com/drive/folders/1iwyoy_JVBA2zbjsU_lLijJoPw0AatPUO?usp=sharing", "unit_extras": [], "topics": [{"code": "Temele 57–58", "title": "Asia: caracterizare generală. China", "folder": "https://drive.google.com/drive/folders/1KSlhSo7iUr7b8IOuzOB-lhEJS6bSihWq?usp=sharing", "presentations": [{"title": "Asia – caracterizare economico-geografică generală", "url": "https://docs.google.com/presentation/d/1EjH-GT16QHPBrop_STflbXQjIVnF1OoqTYlCj4GfpW0/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "China", "url": "https://docs.google.com/presentation/d/1xwBJA5FO0rFwEzSb_FGIc8SdcQIfLXp0E9-7MlIjnzo/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 57–58: Asia – China", "url": "https://drive.google.com/file/d/1jn9IQmA5ubm1ZcDCGx3Sp6cZQtemd10w/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Asia", "url": "https://drive.google.com/file/d/1R-j7F1u2wkhoxNnsGuPgX_yX8VkFFJI4/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – China", "url": "https://drive.google.com/file/d/18OqxPDgwbrqxK7KIh_ObOiC9n212cPpJ/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 59", "title": "Japonia", "folder": "https://drive.google.com/drive/folders/1LJxBPMIFYTw7q7LRcC2xxacnPOreCgWV?usp=sharing", "presentations": [{"title": "Japonia", "url": "https://docs.google.com/presentation/d/1TnIGGHXNXu-klvzMszkYLySdR5cAmC7BbHsn-bymYc8/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 59: Japonia", "url": "https://drive.google.com/file/d/1sSbAOlukxCqYdLB0gYKrJQlWL22lopqa/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Japonia", "url": "https://drive.google.com/file/d/1xZgRSLmvY3_qWyna0MX0f8fjkdpQjIzk/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 60", "title": "India", "folder": "https://drive.google.com/drive/folders/1bZmfXDmQP0VPp46K5FQDw_5Mdcx3OceR?usp=sharing", "presentations": [{"title": "India", "url": "https://docs.google.com/presentation/d/1Am7So90IcQ-PrdyrCjgiFRSIrEvbrsTMZ189X7r_9_U/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 60: India", "url": "https://drive.google.com/file/d/15B57w4S9uEiEKFuP4aqZCDfpBe02VWE3/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – India", "url": "https://drive.google.com/file/d/1z9lIosc0fU5zalixXwVSvEeFFe0QHRaK/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Temele 61–62", "title": "America de Nord: caracterizare generală. Statele Unite ale Americii (SUA)", "folder": "https://drive.google.com/drive/folders/1WURxWmwedSWpRO2pcsOzZVMUiPH0DBQX?usp=sharing", "presentations": [{"title": "America de Nord", "url": "https://docs.google.com/presentation/d/1Dd8jbUt-O6yJNOaYyo_Nc-u0riiM_wOGwGo4E2JVMkE/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Statele Unite ale Americii (SUA)", "url": "https://docs.google.com/presentation/d/1_BXxo0RzFALbFJGWRn4r_1aBQm5-8UmdNtUG8SZ-Ou4/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 61–62: America de Nord – SUA", "url": "https://drive.google.com/file/d/1icvNjx1GJUfPNAWy5KJqV7anSeqTrTRI/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – America de Nord", "url": "https://drive.google.com/file/d/1I-6jl1zaD2-5ACBgmrOS1R87JZ8kqN4D/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – SUA", "url": "https://drive.google.com/file/d/1npzrdJVXVWbol5TpScVQDvV6oCvz4-pM/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 63", "title": "America de Sud: Brazilia", "folder": "https://drive.google.com/drive/folders/1L2xNamA53mcsgbw72GZHziwHCZMqoWtf?usp=sharing", "presentations": [{"title": "Brazilia", "url": "https://docs.google.com/presentation/d/1KaRYIzW78gwJdogqenupg-SuztWmasPlJwt-DXPZfXA/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 63: America de Sud – Brazilia", "url": "https://drive.google.com/file/d/1cWlcd_fEyVxvsWId8yoxZ3nIkG7hfkXF/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Brazilia", "url": "https://drive.google.com/file/d/1hImZd70qY9_3leN49PL3tAU3UdBIyU-C/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Temele 64–65", "title": "Africa: caracterizare generală. Egipt", "folder": "https://drive.google.com/drive/folders/1ew5qT38viYV0pnNjcZek_I2G3L9Z_SPu?usp=sharing", "presentations": [{"title": "Africa", "url": "https://docs.google.com/presentation/d/11EKG-WJU-Rv6yf15UD_JPMlElX4yruTmBKWYB-Z4oN0/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Egipt", "url": "https://docs.google.com/presentation/d/1DAIPhCHzHiJ9e--iJr7h2qQUm1fWmtG-DwBOSPFZDig/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Temele 64–65: Africa – Egipt", "url": "https://drive.google.com/file/d/1rZb7QnhLF4-0_6zEUsRRr3-gj8SAfLkL/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Africa", "url": "https://drive.google.com/file/d/1OdH2gWJaaMTy_uAGUyopwHW322_rVNmw/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – Egipt", "url": "https://drive.google.com/file/d/1LL2FwyoXb76DjFrpSdy3cJgCcORQtqmu/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 67", "title": "Republica Africa de Sud", "folder": "https://drive.google.com/drive/folders/1DH6-pEGJTYR9zqhYPDfaN8Vw61w38BcZ?usp=sharing", "presentations": [{"title": "Republica Africa de Sud", "url": "https://docs.google.com/presentation/d/13yJt-dyYWIdpb8C8Pm1aQrhDbKnezMkcn4BOmG88-GU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 67: Republica Africa de Sud", "url": "https://drive.google.com/file/d/1110AtMF0PfFbHs2QDqQit_TdtA0AGRXM/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Republica Africa de Sud", "url": "https://drive.google.com/file/d/1Fq_06ebvY0PtzHRugUfrskFRAk-jET-N/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 68", "title": "Australia și Oceania: Uniunea Australiană", "folder": "https://drive.google.com/drive/folders/1fYyhUoUCnFCEuXuS2k2RhDQ_NSRvPDEB?usp=sharing", "presentations": [{"title": "Australia și Oceania: Uniunea Australiană", "url": "https://docs.google.com/presentation/d/1Yg-ERO2oBecCeuhD06MmXusF0bxgXYJe54MxRdGzRCw/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 68: Australia și Oceania", "url": "https://drive.google.com/file/d/1OCYiYv4HI8PgLjb8T3H5KhFqSPcGfZpR/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Australia", "url": "https://drive.google.com/file/d/134_zCD4LkEI-af24gJUt2e9Gzv5BxqvC/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 66", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Caracterizarea economico-geografică a statelor extraeuropene”", "folder": "https://drive.google.com/drive/folders/1IIPF9UB0L6_g6wZ2ln9mXI8FCMAtYGN1?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}]};
+const STORAGE_KEY = 'geo_clasa11_done_v1';
+
+let activeRole = 'all';
+let activeUnit = 'all';
+let doneSet = new Set();
+
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (Array.isArray(saved)) doneSet = new Set(saved);
+} catch (e) {}
+
+function saveDone() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...doneSet]));
+  } catch (e) {}
+  updateProgress();
+}
+
+function normalize(str) {
+  return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function renderRoot() {
+  const grid = document.getElementById('rootGrid');
+  grid.innerHTML = PORTAL_DATA.root.map(r => {
+    const cls = r.role === 'teacher' ? 'root-card teacher-only' : 'root-card';
+    return `
+      <article class="${cls}" style="--rc:${r.color}; --rs:${r.soft};">
+        <div class="root-stripe"></div>
+        <div class="root-body">
+          <div class="root-top">
+            <div class="root-icon">${r.icon}</div>
+            <span class="root-tag">${escapeHtml(r.tag)}</span>
+          </div>
+          <h3>${escapeHtml(r.title)}</h3>
+          <p>${escapeHtml(r.desc)}</p>
+          <a class="root-cta" href="${r.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.cta)} →</a>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function renderUnitPills() {
+  const bar = document.getElementById('unitPills');
+  const btns = [`<button type="button" class="unit-pill active" data-unit="all">Toate unitățile (6)</button>`];
+  PORTAL_DATA.units.forEach(u => {
+    btns.push(`<button type="button" class="unit-pill" data-unit="${u.id}">${u.roman}. ${escapeHtml(u.short)} (${u.topics.length})</button>`);
+  });
+  bar.innerHTML = btns.join('');
+  bar.querySelectorAll('.unit-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.unit-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeUnit = btn.dataset.unit;
+      applyFilters();
+    });
+  });
+}
+
+function renderLinks(list, emptyMsg) {
+  if (!list || list.length === 0) {
+    return `<div class="res-empty">${escapeHtml(emptyMsg)}</div>`;
+  }
+  return list.map(item => `
+    <a class="res-link" href="${item.url}" target="_blank" rel="noopener noreferrer">
+      <span class="res-link-title">${escapeHtml(item.title)}</span>
+      <span class="fmt-badge">${escapeHtml(item.fmt)}</span>
+    </a>
+  `).join('');
+}
+
+function renderUnits() {
+  const wrap = document.getElementById('unitsContainer');
+  wrap.innerHTML = PORTAL_DATA.units.map((u, uIdx) => {
+    const unitExtrasHtml = (u.unit_extras || []).length
+      ? `<div class="unit-extras-bar">
+          <strong>Resurse utile pentru întreaga unitate:</strong>
+          ${u.unit_extras.map(ex => `<a class="unit-extra-link" href="${ex.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(ex.title)}</a>`).join('')}
+        </div>`
+      : '';
+
+    const topicsHtml = u.topics.map((t, tIdx) => {
+      const key = `${u.id}_${tIdx}`;
+      const isDone = doneSet.has(key);
+      const isOpen = (uIdx === 0 && tIdx === 0);
+      const typeCls = t.type === 'eval' ? 'is-eval' : (t.type === 'practice' ? 'is-practice' : '');
+      const pills = [];
+      if (t.presentations.length) pills.push(`<span class="pill-dot p1">📊 Prezentare${t.presentations.length > 1 ? ' (' + t.presentations.length + ')' : ''}</span>`);
+      if (t.manuals.length) pills.push(`<span class="pill-dot p2">📖 Manual${t.manuals.length > 1 ? ' (' + t.manuals.length + ')' : ''}</span>`);
+      if (t.plans.length) pills.push(`<span class="pill-dot p3 teacher-only">📋 Proiectare${t.plans.length > 1 ? ' (' + t.plans.length + ')' : ''}</span>`);
+      if (t.extras.length) pills.push(`<span class="pill-dot p4">📎 Extra (${t.extras.length})</span>`);
+
+      const extrasHtml = t.extras.length
+        ? `<div class="topic-extras">
+            <div class="extras-label">📎 Materiale suplimentare / Fișe și aplicații</div>
+            <div class="extras-wrap">
+              ${t.extras.map(ex => `
+                <a class="extra-chip ${ex.role === 'teacher' ? 'teacher-only' : ''}" href="${ex.url}" target="_blank" rel="noopener noreferrer">
+                  <span>${escapeHtml(ex.title)}</span>
+                  <span class="fmt-badge">${escapeHtml(ex.fmt)}</span>
+                </a>
+              `).join('')}
+            </div>
+          </div>`
+        : '';
+
+      const emptyHint = (t.type === 'eval' && !t.presentations.length && !t.manuals.length && !t.plans.length)
+        ? `<div class="res-empty" style="margin-bottom:8px;">Această mapă este rezervată pentru evaluarea sumativă la unitatea de învățare. Accesează mapa Google Drive sau caietul de evaluări din resursele generale.</div>`
+        : `<div class="res-grid">
+            <div class="res-col col-pres">
+              <div class="res-col-head">
+                <span class="res-step">1. 📊 Prezentarea lecției</span>
+                <span class="res-audience">Elevi & Prof.</span>
+              </div>
+              ${renderLinks(t.presentations, 'Fără prezentare în această mapă')}
+            </div>
+            <div class="res-col col-man">
+              <div class="res-col-head">
+                <span class="res-step">2. 📖 Secvența din manual</span>
+                <span class="res-audience">Elevi & Prof.</span>
+              </div>
+              ${renderLinks(t.manuals, 'Vezi manualul complet (PDF)')}
+            </div>
+            <div class="res-col col-plan teacher-only">
+              <div class="res-col-head">
+                <span class="res-step">3. 📋 Proiectarea didactică</span>
+                <span class="res-audience">Profesori</span>
+              </div>
+              ${renderLinks(t.plans, 'Fără proiect didactic separat')}
+            </div>
+          </div>`;
+
+      const searchBlob = normalize([
+        u.roman, u.title, t.code, t.title,
+        ...t.presentations.map(x => x.title),
+        ...t.manuals.map(x => x.title),
+        ...t.plans.map(x => x.title),
+        ...t.extras.map(x => x.title)
+      ].join(' '));
+
+      return `
+        <div class="topic-item ${typeCls} ${isOpen ? 'open' : ''} ${isDone ? 'done' : ''}" data-key="${key}" data-search="${escapeHtml(searchBlob)}">
+          <div class="topic-summary" role="button" tabindex="0" aria-expanded="${isOpen}">
+            <div class="topic-left">
+              <span class="check-wrap" title="Marchează tema ca parcursă">
+                <input type="checkbox" class="topic-check" data-key="${key}" ${isDone ? 'checked' : ''}>
+              </span>
+              <span class="topic-code">${escapeHtml(t.code)}</span>
+              <span class="topic-title">${escapeHtml(t.title)}</span>
+            </div>
+            <div class="topic-right">
+              ${pills.join('')}
+              <span class="chevron">▼</span>
+            </div>
+          </div>
+          <div class="topic-body">
+            ${emptyHint}
+            ${extrasHtml}
+            <div class="topic-footer">
+              <span>💡 Sugestie: parcurge mai întâi prezentarea, apoi consolidează noțiunile din secvența de manual.</span>
+              <a class="folder-direct" href="${t.folder}" target="_blank" rel="noopener noreferrer">📁 Deschide mapa temei în Drive ↗</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section class="unit-section" data-unit="${u.id}" style="--ucol:${u.color}; --usoft:${u.soft};">
+        <div class="unit-header">
+          <div class="unit-head-left">
+            <div class="unit-icon">${u.icon}</div>
+            <div>
+              <div class="unit-kicker">Unitatea de învățare ${u.roman} • ${u.topics.length} teme</div>
+              <h2 class="unit-title">${escapeHtml(u.title)}</h2>
+              <p class="unit-desc">${escapeHtml(u.desc)}</p>
+            </div>
+          </div>
+          <div class="unit-head-right">
+            <a class="unit-folder-btn" href="${u.folder}" target="_blank" rel="noopener noreferrer">📂 Mapa unității în Drive ↗</a>
+          </div>
+        </div>
+        ${unitExtrasHtml}
+        <div class="topic-list">${topicsHtml}</div>
+      </section>
+    `;
+  }).join('');
+
+  wrap.querySelectorAll('.topic-summary').forEach(sum => {
+    sum.addEventListener('click', (e) => {
+      if (e.target.closest('.check-wrap')) return;
+      const item = sum.closest('.topic-item');
+      const nowOpen = item.classList.toggle('open');
+      sum.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+    });
+    sum.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (e.target.classList.contains('topic-check')) return;
+        e.preventDefault();
+        sum.click();
+      }
+    });
+  });
+
+  wrap.querySelectorAll('.topic-check').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const k = cb.dataset.key;
+      const item = cb.closest('.topic-item');
+      if (cb.checked) {
+        doneSet.add(k);
+        item.classList.add('done');
+      } else {
+        doneSet.delete(k);
+        item.classList.remove('done');
+      }
+      saveDone();
+    });
+  });
+}
+
+function updateProgress() {
+  const total = 58;
+  const done = doneSet.size;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progressText').textContent = `Parcurse: ${done} / ${total} (${pct}%)`;
+  document.getElementById('progressFill').style.width = `${pct}%`;
+}
+
+function applyFilters() {
+  const q = normalize(document.getElementById('searchInput').value.trim());
+  let visibleTopics = 0;
+
+  document.querySelectorAll('.unit-section').forEach(sec => {
+    const matchUnit = activeUnit === 'all' || sec.dataset.unit === activeUnit;
+    let secVisible = 0;
+
+    sec.querySelectorAll('.topic-item').forEach(item => {
+      const matchQuery = !q || item.dataset.search.includes(q);
+      const show = matchUnit && matchQuery;
+      item.classList.toggle('hidden', !show);
+      if (show) {
+        secVisible++;
+        visibleTopics++;
+        if (q) {
+          item.classList.add('open');
+          item.querySelector('.topic-summary').setAttribute('aria-expanded', 'true');
+        }
+      }
+    });
+
+    sec.classList.toggle('hidden', secVisible === 0);
+  });
+
+  document.getElementById('emptySearch').style.display = visibleTopics === 0 ? 'block' : 'none';
+}
+
+document.querySelectorAll('.role-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeRole = btn.dataset.role;
+    document.body.classList.toggle('mode-student', activeRole === 'student');
+    document.body.classList.toggle('mode-teacher', activeRole === 'teacher');
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+document.getElementById('expandAllBtn').addEventListener('click', () => {
+  document.querySelectorAll('.topic-item:not(.hidden)').forEach(item => {
+    item.classList.add('open');
+    item.querySelector('.topic-summary').setAttribute('aria-expanded', 'true');
+  });
+});
+
+document.getElementById('collapseAllBtn').addEventListener('click', () => {
+  document.querySelectorAll('.topic-item').forEach(item => {
+    item.classList.remove('open');
+    item.querySelector('.topic-summary').setAttribute('aria-expanded', 'false');
+  });
+});
+
+renderRoot();
+renderUnitPills();
+renderUnits();
+updateProgress();
+</script>
+
+</body>
+</html>
