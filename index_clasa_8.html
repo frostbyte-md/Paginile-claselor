@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geografie – Clasa a VIII-a | Portal de Resurse Didactice</title>
+<style>
+  :root {
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --ink: #0f172a;
+    --muted: #475569;
+    --border: #e2e8f0;
+    --navy: #0f172a;
+    --accent: #15803d;
+    --pres-color: #d97706;
+    --pres-soft: #fef3c7;
+    --pres-text: #92400e;
+    --man-color: #059669;
+    --man-soft: #d1fae5;
+    --man-text: #065f46;
+    --plan-color: #4f46e5;
+    --plan-soft: #e0e7ff;
+    --plan-text: #3730a3;
+    --extra-color: #0284c7;
+    --extra-soft: #e0f2fe;
+    --extra-text: #075985;
+    --radius: 16px;
+    --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #14532d 55%, #15803d 100%);
+    color: #fff;
+    padding: 42px 20px 58px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.24);
+    backdrop-filter: blur(6px);
+    padding: 6px 15px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 4.2vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .hero p {
+    margin: 0 auto 22px;
+    max-width: 700px;
+    font-size: clamp(14.5px, 1.9vw, 17px);
+    color: #dcfce7;
+  }
+  .hero-stats {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .hero-stat {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 7px 14px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #f8fafc;
+  }
+
+  /* CONTROLS */
+  .controls-wrap {
+    max-width: 1220px;
+    margin: -26px auto 0;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
+  .controls-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.09);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .role-switch {
+    display: inline-flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .role-btn {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 13px;
+    border-radius: 9px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .role-btn:hover { color: var(--ink); }
+  .role-btn.active {
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+  }
+  .search-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 280px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .search-input {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 8px 13px;
+    font-size: 14px;
+    color: var(--ink);
+    min-width: 220px;
+    flex: 1 1 240px;
+    max-width: 340px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+  .mini-btn {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    border-radius: 10px;
+    padding: 8px 11px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .mini-btn:hover {
+    background: #dcfce7;
+    border-color: #86efac;
+    color: #166534;
+  }
+
+  .unit-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .unit-pill {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12.8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .unit-pill:hover {
+    border-color: #94a3b8;
+    color: var(--ink);
+  }
+  .unit-pill.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 26px 20px 64px;
+  }
+
+  /* GUIDE STRIP */
+  .guide-banner {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-left: 4px solid #15803d;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .guide-steps {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .step-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+  .step-chip.s1 { background: var(--pres-soft); color: var(--pres-text); }
+  .step-chip.s2 { background: var(--man-soft); color: var(--man-text); }
+  .step-chip.s3 { background: var(--plan-soft); color: var(--plan-text); }
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .progress-track {
+    width: 120px;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #16a34a, #0ea5e9);
+    transition: width 0.25s ease;
+  }
+
+  /* GENERAL RESOURCES */
+  .section-label {
+    margin: 0 0 12px;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .root-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  body.mode-student .root-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .root-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .root-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+  }
+  .root-stripe {
+    height: 5px;
+    background: var(--rc, #15803d);
+  }
+  .root-body {
+    padding: 15px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .root-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .root-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--rs, #dcfce7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+  }
+  .root-tag {
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--rs, #dcfce7);
+    color: var(--rc, #15803d);
+  }
+  .root-card h3 {
+    margin: 0 0 6px;
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--navy);
+  }
+  .root-card p {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1;
+  }
+  .root-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    background: var(--rc, #15803d);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13.2px;
+    font-weight: 700;
+    transition: filter 0.15s;
+  }
+  .root-cta:hover { filter: brightness(1.08); }
+
+  /* UNITS */
+  .unit-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .unit-section.hidden { display: none; }
+  .unit-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: linear-gradient(90deg, var(--usoft, #f8fafc) 0%, #ffffff 58%);
+    border-left: 6px solid var(--ucol, #15803d);
+  }
+  .unit-head-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    flex: 1 1 360px;
+  }
+  .unit-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: #ffffff;
+    border: 1px solid rgba(15,23,42,0.08);
+    box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .unit-kicker {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ucol, #15803d);
+  }
+  .unit-title {
+    margin: 2px 0 3px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .unit-desc {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .unit-head-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .unit-folder-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 13px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.15s;
+  }
+  .unit-folder-btn:hover {
+    border-color: var(--ucol, #15803d);
+    color: var(--ucol, #15803d);
+  }
+  .unit-extras-bar {
+    padding: 10px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .unit-extra-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12.8px;
+    transition: all 0.15s;
+  }
+  .unit-extra-link:hover {
+    border-color: var(--ucol, #15803d);
+    color: var(--ucol, #15803d);
+  }
+
+  /* TOPIC ACCORDIONS */
+  .topic-list {
+    padding: 12px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .topic-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.16s, box-shadow 0.16s;
+  }
+  .topic-item.hidden { display: none; }
+  .topic-item.open {
+    border-color: var(--ucol, #15803d);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  }
+  .topic-item.done {
+    background: #f8fffb;
+  }
+  .topic-summary {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .topic-summary:hover {
+    background: #f8fafc;
+  }
+  .topic-left {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    flex: 1;
+  }
+  .check-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .topic-check {
+    width: 18px;
+    height: 18px;
+    accent-color: #10b981;
+    cursor: pointer;
+    margin: 0;
+  }
+  .topic-code {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--usoft, #dcfce7);
+    color: var(--ucol, #15803d);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .topic-item.is-eval .topic-code {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+  .topic-item.is-practice .topic-code {
+    background: #fef3c7;
+    color: #b45309;
+  }
+  .topic-title {
+    font-size: 14.8px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .topic-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pill-dot {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill-dot.p1 { background: var(--pres-soft); color: var(--pres-text); }
+  .pill-dot.p2 { background: var(--man-soft); color: var(--man-text); }
+  .pill-dot.p3 { background: var(--plan-soft); color: var(--plan-text); }
+  .pill-dot.p4 { background: var(--extra-soft); color: var(--extra-text); }
+  .chevron {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: transform 0.2s ease, background 0.15s;
+    margin-left: 4px;
+  }
+  .topic-item.open .chevron {
+    transform: rotate(180deg);
+    background: var(--ucol, #15803d);
+    color: #fff;
+  }
+
+  /* EXPANDED TOPIC BODY */
+  .topic-body {
+    display: none;
+    padding: 14px 16px 16px;
+    border-top: 1px solid #eef2f7;
+    background: #fbfdff;
+  }
+  .topic-item.open .topic-body {
+    display: block;
+  }
+
+  /* ORDERED 3-STEP RESOURCE GRID: 1. Prezentare -> 2. Manual -> 3. Proiectare */
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  body.mode-student .res-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  body.mode-student .teacher-only {
+    display: none !important;
+  }
+
+  .res-col {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .res-col.col-pres { border-top: 4px solid var(--pres-color); }
+  .res-col.col-man  { border-top: 4px solid var(--man-color); }
+  .res-col.col-plan { border-top: 4px solid var(--plan-color); }
+
+  .res-col-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .res-step {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .col-pres .res-step { color: var(--pres-text); }
+  .col-man  .res-step { color: var(--man-text); }
+  .col-plan .res-step { color: var(--plan-text); }
+
+  .res-audience {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  .res-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 11px;
+    border-radius: 9px;
+    text-decoration: none;
+    color: var(--ink);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    font-size: 13.2px;
+    font-weight: 600;
+    transition: all 0.15s ease;
+  }
+  .res-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+  }
+  .col-pres .res-link:hover { background: #fffbeb; border-color: #f59e0b; }
+  .col-man  .res-link:hover { background: #ecfdf5; border-color: #10b981; }
+  .col-plan .res-link:hover { background: #eef2ff; border-color: #6366f1; }
+
+  .res-link-title {
+    line-height: 1.3;
+  }
+  .fmt-badge {
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .col-pres .fmt-badge { background: var(--pres-soft); color: var(--pres-text); }
+  .col-man  .fmt-badge { background: var(--man-soft); color: var(--man-text); }
+  .col-plan .fmt-badge { background: var(--plan-soft); color: var(--plan-text); }
+
+  .res-empty {
+    font-size: 12.5px;
+    color: #94a3b8;
+    font-style: italic;
+    padding: 6px 2px;
+  }
+
+  .topic-footer {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .folder-direct {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #15803d;
+    font-weight: 700;
+  }
+  .folder-direct:hover { text-decoration: underline; }
+
+  .empty-search {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--surface);
+    border: 1px dashed #cbd5e1;
+    border-radius: var(--radius);
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px 20px 36px;
+    color: #64748b;
+    font-size: 13.5px;
+    border-top: 1px solid var(--border);
+    background: #ffffff;
+  }
+  footer strong { color: var(--navy); }
+
+  @media (max-width: 1020px) {
+    .root-grid, body.mode-student .root-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .res-grid, body.mode-student .res-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 680px) {
+    .root-grid, body.mode-student .root-grid { grid-template-columns: 1fr; }
+    .topic-right .pill-dot { display: none; }
+    .hero { padding: 34px 16px 48px; }
+    .unit-header { padding: 14px 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🌿 Portal Didactic • Geografia Fizică a Republicii Moldova</div>
+    <h1>Geografie – Clasa a VIII-a</h1>
+    <p>Toate unitățile de învățare, prezentările, secvențele din manual, lucrările practice și proiectările didactice într-un singur loc, organizate clar atât pentru elevi, cât și pentru profesori.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">📚 4 unități de învățare</div>
+      <div class="hero-stat">🗂️ 33 teme și evaluări</div>
+      <div class="hero-stat">📊 28 prezentări • 📖 29 secvențe manual • 📋 27 proiectări</div>
+    </div>
+  </div>
+</header>
+
+<div class="controls-wrap">
+  <div class="controls-card">
+    <div class="controls-row">
+      <div class="role-switch" role="tablist" aria-label="Mod de vizualizare">
+        <button type="button" class="role-btn active" data-role="all">👥 Elevi + Profesori</button>
+        <button type="button" class="role-btn" data-role="student">🎓 Mod Elevi</button>
+        <button type="button" class="role-btn" data-role="teacher">👩‍🏫 Mod Profesori</button>
+      </div>
+      <div class="search-actions">
+        <input type="search" id="searchInput" class="search-input" placeholder="🔍 Caută tema, nr. lecției sau cuvânt-cheie..." aria-label="Caută resurse">
+        <button type="button" class="mini-btn" id="expandAllBtn">▾ Deschide toate</button>
+        <button type="button" class="mini-btn" id="collapseAllBtn">▴ Restrânge</button>
+      </div>
+    </div>
+    <div class="unit-pills" id="unitPills"></div>
+  </div>
+</div>
+
+<main class="container">
+
+  <div class="guide-banner">
+    <div class="guide-steps">
+      <strong>Ordinea resurselor în fiecare temă:</strong>
+      <span class="step-chip s1">1. 📊 Prezentare</span>
+      <span>→</span>
+      <span class="step-chip s2">2. 📖 Secvență din manual</span>
+      <span class="teacher-only">→</span>
+      <span class="step-chip s3 teacher-only">3. 📋 Proiectare didactică</span>
+    </div>
+    <div class="progress-wrap" title="Bifează temele parcurse; progresul se salvează automat în browser">
+      <span id="progressText">Parcurse: 0 / 33</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </div>
+
+  <h2 class="section-label">📌 Resurse Generale – Clasa a VIII-a</h2>
+  <section class="root-grid" id="rootGrid"></section>
+
+  <div id="unitsContainer"></div>
+
+  <div class="empty-search" id="emptySearch">
+    🔎 Nu am găsit nicio temă care să corespundă căutării. Încearcă un alt termen (ex.: „relief”, „râuri”, „sol”, „rezervații”).
+  </div>
+
+</main>
+
+<footer>
+  <strong>Geografie – Clasa a VIII-a</strong> • Index orientativ pentru elevi și profesori • Toate fișierele se deschid direct din Google Drive
+</footer>
+
+<script>
+const PORTAL_DATA = {"root": [{"role": "both", "tag": "Manual PDF", "icon": "📘", "title": "Manual școlar – Geografie, clasa a VIII-a", "desc": "Manualul oficial complet (a. 2024), format PDF pentru studiu individual, teme și recapitulare.", "url": "https://drive.google.com/file/d/1kmuH1rxkVZ0qQpz2bd0FPBOaFx2HlDfb/view?usp=sharing", "cta": "Deschide manualul", "color": "#15803d", "soft": "#dcfce7"}, {"role": "both", "tag": "Resursă interactivă", "icon": "💻", "title": "Manual Digital Interactiv – Clasa a VIII-a", "desc": "Ghid și legături către resursele digitale interactive dedicate studierii Geografiei fizice a Republicii Moldova.", "url": "https://docs.google.com/document/d/1blJyIKEHBPIWzwbYlF2mUDGHgML6ADYLknSuvdmhhaE/edit?usp=sharing", "cta": "Deschide documentul", "color": "#0284c7", "soft": "#e0f2fe"}, {"role": "teacher", "tag": "Pentru profesori", "icon": "📋", "title": "Proiectare de lungă durată", "desc": "Planificarea calendaristică anuală conform curriculumului la Geografie pentru clasa a VIII-a.", "url": "https://drive.google.com/file/d/1DOPqkx1_gI7be0I1hmn-Gwv5G0ByUndt/view?usp=sharing", "cta": "Deschide proiectarea", "color": "#6d28d9", "soft": "#ede9fe"}, {"role": "both", "tag": "Arhivă completă", "icon": "📂", "title": "Folder complet Google Drive", "desc": "Acces direct la toate cele 4 unități de învățare, prezentări, secvențe de manual și documente.", "url": "https://drive.google.com/drive/folders/1Zjv8kOOhZdtMbTkNGcIrAVU2mjp0a1OQ?usp=sharing", "cta": "Deschide mapa clasa_8", "color": "#334155", "soft": "#e2e8f0"}], "units": [{"id": "u1", "roman": "I", "short": "Poziția & Relieful", "title": "Poziția fizico-geografică și relieful", "desc": "Teritoriul și poziția fizico-geografică, structura geologică, substanțele minerale utile, procesele endogene/exogene și unitățile de relief.", "icon": "⛰️", "color": "#b45309", "soft": "#fef3c7", "folder": "https://drive.google.com/drive/folders/1Oa2dsrZ3Z6nQVim5sLG69AXO0q4ORVeC?usp=sharing", "unit_extras": [], "topics": [{"code": "Tema 1", "title": "Introducerea în studiul disciplinei. Teritoriul și poziția fizico-geografică a țării", "folder": "https://drive.google.com/drive/folders/1s4uBupbuLJRoHu4-ClzDYZNvP3AoWqf_?usp=sharing", "presentations": [{"title": "Teritoriul și poziția fizico-geografică a Republicii Moldova", "url": "https://docs.google.com/presentation/d/1vhq7w5byO3ywseVUbMplLiZ5pcsZQcCECqnWOSxo3kw/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 1", "url": "https://drive.google.com/file/d/1n-rFLpExPiwxtFwObXkpi6IvDopynkt9/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 1 (PDL 1.1)", "url": "https://drive.google.com/file/d/17xKMDatwUJNqS5Q2AvtkkooTigoMnr5R/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 2", "title": "Unitățile structurale ale teritoriului și substanțele minerale utile", "folder": "https://drive.google.com/drive/folders/1NR4q8pXScGAzv_QCZ0XJf5U8RhFheidF?usp=sharing", "presentations": [{"title": "Unitățile structurale ale teritoriului și substanțele minerale utile", "url": "https://docs.google.com/presentation/d/1QNurNhm-HfuD4d5D_OBKKO0ic3cmAsHSGHP4GTvzb9s/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 2", "url": "https://drive.google.com/file/d/1f5hUnsGHewsQKzfamBjme88-gyJ4FbMH/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 2 (PDL 1.2)", "url": "https://drive.google.com/file/d/1BEe9kS-b1iszi4QLROaWJ-NQkcgoS1ue/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 3", "title": "Relieful: caracteristici generale", "folder": "https://drive.google.com/drive/folders/1QrdE_icJ97dk5ZCBZ6wz-VJXDc5teh_o?usp=sharing", "presentations": [{"title": "Relieful: caracteristici generale", "url": "https://docs.google.com/presentation/d/1M80mF1cqXUT3TsjMsScJ1D69pwKDPjgrZnLgA7voy4g/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 3", "url": "https://drive.google.com/file/d/1Py4qa1ANVtompZh26--ooz2bK-fsGL-X/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 3 (PDL 1.3)", "url": "https://drive.google.com/file/d/1dYMK4OeKHzXWYxwfmsx7b6VmYBJTRz7W/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 4", "title": "Procesele de modelare a reliefului: caracteristici generale și clasificare. Procesele endogene și formele de relief create", "folder": "https://drive.google.com/drive/folders/1FuIAIyz1d2VJ803x8R6RQo3wWacSRWhm?usp=sharing", "presentations": [{"title": "Procesele de modelare a reliefului. Procesele endogene", "url": "https://docs.google.com/presentation/d/1uCTY5VXX73JmtahCxzZ8ElWIp97-GFdx1bJDeunLv2M/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 4", "url": "https://drive.google.com/file/d/16L-FnBH0C44bS7qVC7Qm1yH9p1uzy_B-/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 4 (PDL 1.4)", "url": "https://drive.google.com/file/d/1BX8b7ZzHAUsNYB8l8x2K-SYkG_l_nBIK/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 5", "title": "Procesele exogene și formele de relief create", "folder": "https://drive.google.com/drive/folders/1351FeCpVpQgigB91ZFlm2q9HnAwPt_A5?usp=sharing", "presentations": [{"title": "Procesele exogene și formele de relief create", "url": "https://docs.google.com/presentation/d/1TeBo5Db-GHVaH0B31DHcR7iP_28pn0mfuHx0CCwxvT4/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 5", "url": "https://drive.google.com/file/d/1nQMsz_vvJFpLVJ3Bqd01W3mM_xyl_llU/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 5 (PDL 1.5)", "url": "https://drive.google.com/file/d/1Fru3CkUkq0vhyzz2XO2TM-vHMd4tChGk/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 6", "title": "Unitățile de relief: caracteristici generale", "folder": "https://drive.google.com/drive/folders/1FapHwWE9knWGCGQ1AHjwu6BFI89nuzwV?usp=sharing", "presentations": [{"title": "Unitățile de relief: caracteristici generale", "url": "https://docs.google.com/presentation/d/1076bXfC7mtXvujtRHuI3WOXS_XOaTbbO9dKprzcH8Ts/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tema 6", "url": "https://drive.google.com/file/d/1H-HX_F7ZWhY_O7cTtA97QE6kq4Xn5CGV/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 6 (PDL 1.6)", "url": "https://drive.google.com/file/d/1c16Lj3z0UgXYYQYebdoqbEzFu1ZqBoWv/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 7", "title": "Procesele și fenomenele geografice de risc: cutremure, eroziune, alunecări de teren. Rolul reliefului", "folder": "https://drive.google.com/drive/folders/1idJ9ptVcYf0FPRQJCDUVZjvlfvQ4oo8h?usp=sharing", "presentations": [{"title": "Procesele geografice de risc și rolul reliefului", "url": "https://docs.google.com/presentation/d/1UNpyqDTxzXvNY1l0uIe2UG-Kh8yrtqiEtttufWedLI0/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [], "plans": [{"title": "Proiect didactic – Tema 7 (PDL 1.7)", "url": "https://drive.google.com/file/d/1rYPydulChNjcTaYV7F-ItfS0JBplQk4L/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 8", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Poziția fizico-geografică și relieful”", "folder": "https://drive.google.com/drive/folders/1NVmZeVyoSzYu_UR6lZphI8ulnHRpoScD?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u2", "roman": "II", "short": "Clima și Apele", "title": "Clima și apele", "desc": "Factorii de formare a climei, elementele climatice, anotimpurile, râurile, apele stătătoare și subterane, fenomenele climatice și hidrologice de risc.", "icon": "💧", "color": "#0284c7", "soft": "#e0f2fe", "folder": "https://drive.google.com/drive/folders/1UqPiBYEgfgq6uPjUN-2rORrsSKReqDDe?usp=sharing", "unit_extras": [{"title": "📝 Sarcini de lucru – Clima și apele (clasa a VIII-a)", "url": "https://docs.google.com/document/d/10TJe2iNPt6nvxXiecksntCkT2ZOewVzfwCrRBFaHUec/edit?usp=sharing", "fmt": "Google Docs", "role": "both"}], "topics": [{"code": "Tema 9", "title": "Clima. Factorii de formare a climei", "folder": "https://drive.google.com/drive/folders/1mNBWU_n5NglyPJjfCUdLrI0QVV2hW3uT?usp=sharing", "presentations": [{"title": "Clima. Factorii de formare a climei", "url": "https://docs.google.com/presentation/d/1DpN0HEaxLFNd8F4a67xYGqbE5JR8dRiEClQS640FX7M/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Factorii de formare a climei", "url": "https://drive.google.com/file/d/1Hhm50uh97tbeQFjhHrSVQB-jFGhash5M/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 9 (PDL 2.9)", "url": "https://drive.google.com/file/d/1ubjtJKJ_jjuAobNrbWEkaVVwMqtYsieN/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 10", "title": "Elementele climatice. Anotimpurile. Schimbările climatice", "folder": "https://drive.google.com/drive/folders/1R7NprwuMRTnTfy0lqAKlAM8Us-kEJJXp?usp=sharing", "presentations": [{"title": "1. Elementele climatice", "url": "https://docs.google.com/presentation/d/13_vQOkuIoT4ZjHb8cYWBI1_Mr-sHOtN6sJjQUjCiYL0/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "2. Anotimpurile. Schimbările climatice", "url": "https://docs.google.com/presentation/d/1de9WW2jldpnnTQyU2YygyW0_aw-2mzmH0iM0ntbYrhA/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență manual – Elementele climatice (partea 1)", "url": "https://drive.google.com/file/d/1MyroBCeDaPlMdHdxleIE2rT8Uj73rrdL/view?usp=sharing", "fmt": "PDF"}, {"title": "Secvență manual – Elementele climatice (continuare)", "url": "https://drive.google.com/file/d/1d1XF5zregEq-HvLv5omFZrCKldsGjeZT/view?usp=sharing", "fmt": "PDF"}, {"title": "Secvență manual – Anotimpurile", "url": "https://drive.google.com/file/d/1c1NrkbW18VKZrNEY0cAM1rphcHW7WR5m/view?usp=sharing", "fmt": "PDF"}, {"title": "Secvență manual – Schimbările climatice", "url": "https://drive.google.com/file/d/1vQLY3s4k369PUUB_-iebXUEjnrNSvsEO/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Elementele climatice (PDL 2.10)", "url": "https://drive.google.com/file/d/1M2CcHSxA5tPEXI4Qn5JDdT-9hoyBQF0b/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – Anotimpurile și schimbările climatice (PDL 2.11)", "url": "https://drive.google.com/file/d/1wYOyZDdujhAQIkhP_zC1gUV8qzM6ahS2/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 11", "title": "Apele de suprafață: particularități generale. Râurile: rețeaua fluvială, caracterizarea râurilor principale, importanța", "folder": "https://drive.google.com/drive/folders/1oOkntF-lRl9dCLkTie2dFfzYdPDs2nON?usp=sharing", "presentations": [{"title": "Apele de suprafață. Râurile Republicii Moldova", "url": "https://docs.google.com/presentation/d/1ZugMYcbBsYsXVJoqnvd9REpFuyXqe7PjkBIsJfDZG70/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Apele de suprafață. Râurile", "url": "https://drive.google.com/file/d/1A-yXUhntSB3H6PaBti479Hr1vm2-3Bli/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Apele de suprafață (PDL 2.12)", "url": "https://drive.google.com/file/d/1yHtIVQXxwHlolWrxgS8XSwXZmz28lk7U/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 12", "title": "Apele stătătoare: clasificare, caracterizare, importanța", "folder": "https://drive.google.com/drive/folders/1gYbLv4yUp7X5OQbptzusyMkN_uLAgR8Y?usp=sharing", "presentations": [{"title": "Apele stătătoare: clasificare, caracterizare, importanța", "url": "https://docs.google.com/presentation/d/1M5ywdMnthTfkDv_MfFvjFtzHwbxb9IxbxRGmmUEhazs/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Apele stătătoare", "url": "https://drive.google.com/file/d/1LKwVn2-VkDM67G5QVElzfgVilDCaSZZx/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Apele stătătoare (PDL 2.13)", "url": "https://drive.google.com/file/d/1oCJyWscFknI8JUJBna2G24dWWE5-bc5l/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 13", "title": "Apele subterane: particularități generale și importanța", "folder": "https://drive.google.com/drive/folders/1UfyP2DwpAIlV1xnVuocs-D8VYw4mNw9p?usp=sharing", "presentations": [{"title": "Apele subterane: particularități generale și importanța", "url": "https://docs.google.com/presentation/d/1qmdzjbzNt0ozjQz0dM94btWNpVmUXxO75QG8_mhSdwI/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Apele subterane", "url": "https://drive.google.com/file/d/1P981CNNPQVVquI5TFlTNp_ZMnDQ9ZXnp/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Apele subterane (PDL 2.14)", "url": "https://drive.google.com/file/d/1E5Tsxul3by60ykPM-WqUmrlHjKoIJSA7/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 14", "type": "practice", "title": "Lucrare practică: Descrierea unui obiectiv hidrografic (râu, lac sau izvor) în baza algoritmului", "folder": "https://drive.google.com/drive/folders/1JagT1BlpWdUJXZXrV7q7lcy1gyfTjNVD?usp=sharing", "presentations": [], "manuals": [{"title": "Cerințe / Algoritm – Lucrare practică nr. 1 (PPT, poster sau cărțulie)", "url": "https://drive.google.com/file/d/1SZasMTEeFyMeByHfNbqLTPwnkj8c9IRV/view?usp=sharing", "fmt": "PDF"}], "plans": [], "extras": []}, {"code": "Tema 16", "title": "Procesele și fenomenele geografice de risc: secetă, temperaturi extreme, grindină, polei, chiciură, inundații. Protecția aerului și a apelor", "folder": "https://drive.google.com/drive/folders/1EUGVP5dl5T2fjJvpSThIHmQ3fFJePy_2?usp=sharing", "presentations": [{"title": "Fenomene climatice/hidrologice de risc și protecția aerului și apelor", "url": "https://docs.google.com/presentation/d/1LWtPrZl-cOjYUvrtkGOMiTZPTGpcpjrOyKbsepbcoOI/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [], "plans": [{"title": "Proiect didactic – Tema 16 (PDL 2.16)", "url": "https://drive.google.com/file/d/1odpPj8zQ_4EMpdeM14aFtpOo_WMKabDv/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 15", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Clima și apele”", "folder": "https://drive.google.com/drive/folders/1v38oRTZG8gmmLS6RdBahhhHn9TpJ76Z9?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u3", "roman": "III", "short": "Vegetația, Fauna & Solul", "title": "Vegetația, lumea animală și solul", "desc": "Particularitățile vegetației și faunei, complexele faunistice, factorii de formare și tipurile de sol, riscurile ecologice și protecția lor.", "icon": "🌳", "color": "#15803d", "soft": "#dcfce7", "folder": "https://drive.google.com/drive/folders/1-kumZTHgTwtZ2O9NskSKtkYaKhAGiSGj?usp=sharing", "unit_extras": [], "topics": [{"code": "Tema 17", "title": "Vegetația și lumea animală: particularități generale", "folder": "https://drive.google.com/drive/folders/1beDC_rdzbs7nATh0KjZ3F6wS4hrq7ah4?usp=sharing", "presentations": [{"title": "Vegetația și lumea animală: particularități generale", "url": "https://docs.google.com/presentation/d/1ot6DxtOHZ1hUuxfp0Nuf8zqBfNTTXfIaBAt9dZkfQLc/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Vegetația și lumea animală", "url": "https://drive.google.com/file/d/1yN8aESS8DtdRxNRjaG5Xs7AvRRpT4onr/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 17 (PDL 3.17)", "url": "https://drive.google.com/file/d/1UckVrBllT0TQJeeX6sx2kOMjPWPbW5uC/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 18", "title": "Tipurile de vegetație: clasificare, caracterizarea tipurilor principale, importanța", "folder": "https://drive.google.com/drive/folders/1sFwlYouH8vEzGvUT0vWL0L0__UX-Go7A?usp=sharing", "presentations": [{"title": "Tipurile de vegetație: clasificare, caracterizare, importanța", "url": "https://docs.google.com/presentation/d/1AqgQei5ckpJzKmAovkh65KpPnIEOu35tm6t0H85rLo0/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tipurile de vegetație", "url": "https://drive.google.com/file/d/1JQ_yI14is6OPsHizF1lJS614h9xIqeXy/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 18 (PDL 3.18)", "url": "https://drive.google.com/file/d/1VvchJMXk8jjM1z5hTh4Jqr4f9aRD3QvY/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 19", "title": "Complexele faunistice: clasificare, caracterizarea tipurilor principale, importanța", "folder": "https://drive.google.com/drive/folders/1EhR_K7HAM9XrfZ0AG6csYJQSlymXo5cB?usp=sharing", "presentations": [{"title": "Complexele faunistice: clasificare, caracterizare, importanța", "url": "https://docs.google.com/presentation/d/1U_GKPXlFVz24VAGyepx2p3PQIT0COXwY7sXe33S_6cY/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Complexele faunistice", "url": "https://drive.google.com/file/d/1qO7sZwmWhrz5XO5DNs7eka2kTxImo3ql/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 19 (PDL 3.19)", "url": "https://drive.google.com/file/d/1OvJxl04FR2Iveh18N2A7LIGclTJbtTn0/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 20", "title": "Solul: factorii de formare", "folder": "https://drive.google.com/drive/folders/15SsBiEP_Ehg6Pv3kYROb5ov0PVr5D1Ve?usp=sharing", "presentations": [{"title": "Solul: factorii de formare", "url": "https://docs.google.com/presentation/d/1VD15oC6oj6J8wWUp2U0t3cjeCNu1Q6U3vT_GILBx9ng/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Solul: factorii de formare", "url": "https://drive.google.com/file/d/1CoCzmTJXZHzMwFdq1zHlUTh9uIf94nc1/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 20 (PDL 3.20)", "url": "https://drive.google.com/file/d/1MAGNuklOs-eVzVv20ODVIPpcxjkMO97W/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 21", "title": "Tipurile de sol: clasificare, caracterizarea tipurilor principale, importanța", "folder": "https://drive.google.com/drive/folders/1HJOwfSJV4yjvVgutsmPj7_sCytYRt_N7?usp=sharing", "presentations": [{"title": "Tipurile de sol: clasificare, caracterizare, importanța", "url": "https://docs.google.com/presentation/d/1TEV5B-XliX3Ve7Wc1myRVqFzjSrzLabQ_ou5r2zQDa8/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Tipurile de sol", "url": "https://drive.google.com/file/d/1Sd8_i7WdAk5MVbYmmDqDSOOdpXPmsjTY/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 21 (PDL 3.21)", "url": "https://drive.google.com/file/d/18_DAPXp5gd_GcOL_b8lz2o52iyJoWPfP/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 22", "title": "Procesele și fenomenele geografice de risc: dispariția unor specii de plante și animale, despădurirea, eroziunea solului", "folder": "https://drive.google.com/drive/folders/1mDmlBmxv7nlgXYT2w1RDsPzxcS-7hQ3I?usp=sharing", "presentations": [{"title": "Fenomene de risc: dispariția speciilor, despădurirea, eroziunea solului", "url": "https://docs.google.com/presentation/d/19lI_o3qpsIBgLP_OTbym4WbkqsufQuaDXhVJALSmbmw/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [], "plans": [{"title": "Proiect didactic – Tema 22 (PDL 3.22)", "url": "https://drive.google.com/file/d/15_OKfsqnakRQdLf40T94NuErL_xYqFvR/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 23", "title": "Protecția vegetației, lumii animale și a solurilor", "folder": "https://drive.google.com/drive/folders/1e9w3vG9JV1RMIjgOK2KzLYwMrVNgwxBH?usp=sharing", "presentations": [{"title": "Protecția vegetației, lumii animale și a solurilor", "url": "https://docs.google.com/presentation/d/1jAAtvSYPM5ecabrmfs5Zqd87_kM75s9IgR9NRcDgBR8/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Protecția vegetației, faunei și solului", "url": "https://drive.google.com/file/d/1eLg3qJzfYcjUzmVgf1tQzGACop3WtLLy/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 23 (PDL 3.23)", "url": "https://drive.google.com/file/d/1dZTStyNRoR9xLzGTvbSjHg23Mq98lytB/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 24", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Vegetația, lumea animală și solul”", "folder": "https://drive.google.com/drive/folders/1JwbG-JvqgsIbF_iQOvxapSkFt0YvKC-2?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u4", "roman": "IV", "short": "Zone naturale & Arii protejate", "title": "Zonele naturale și ariile naturale protejate", "desc": "Zona de stepă și zona de silvostepă, parcurile naționale, rezervațiile științifice, naturale și peisajere, monumentele naturii și dezvoltarea sustenabilă.", "icon": "🦋", "color": "#7c3aed", "soft": "#ede9fe", "folder": "https://drive.google.com/drive/folders/1zuYaobZrv3fLG5HqAjMSWLZfoqrOQ2tv?usp=sharing", "unit_extras": [], "topics": [{"code": "Tema 25", "title": "Zonele naturale: caracteristici generale", "folder": "https://drive.google.com/drive/folders/1dWjRk3O091079zEt1xMdKhySvFKq847g?usp=sharing", "presentations": [{"title": "Zonele naturale: caracteristici generale", "url": "https://docs.google.com/presentation/d/1t_yvd8oKPQJeYE1lP1daWc6ElfjL2x7iIER6NXyglC4/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Zonele naturale: caracteristici generale", "url": "https://drive.google.com/file/d/1KvREemY9loiwOBEJImdgIeoLGDH-3K_y/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 25 (PDL 4.25)", "url": "https://drive.google.com/file/d/1LxmPwgyrT8gJaVfd0uIIHmjYXVNZ4fq1/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 26", "title": "Zona de stepă", "folder": "https://drive.google.com/drive/folders/1L9-AhU0QTsHsOLT1p7wVTjBoS9bqViE6?usp=sharing", "presentations": [{"title": "Zona de stepă", "url": "https://docs.google.com/presentation/d/1wggwx2cn1vZDGUQvBSyJLLl94vjW7vzWjr07e1XJTWM/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Zona de stepă", "url": "https://drive.google.com/file/d/1i2zabjIwfpwERikf2Cw1khIRtfgcX7tq/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 26 (PDL 4.26)", "url": "https://drive.google.com/file/d/1JLZ93-GElliE4mVoeNn3J0nIy6nZ3jpa/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 27", "title": "Zona de silvostepă", "folder": "https://drive.google.com/drive/folders/1buR2-cwE8pOEFJm8ltozJOoRcrIVkNAk?usp=sharing", "presentations": [{"title": "Zona de silvostepă", "url": "https://docs.google.com/presentation/d/1yY0TzYD67FjmyxWNQizKUc25Na-sl2wTL1NmtAQ_LnY/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Zona de silvostepă", "url": "https://drive.google.com/file/d/1t2ZEEV1u4FUY1JztQTMQg7pMSTd2SUkl/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 27 (PDL 4.27)", "url": "https://drive.google.com/file/d/16_Im3qvViY_JjFD6GBITGsMO5Ex4pL-w/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 28", "title": "Ariile naturale protejate. Parcurile naționale", "folder": "https://drive.google.com/drive/folders/1DHtwgSnHHSVjSfdBpAD8hYfTz6nKJwxH?usp=sharing", "presentations": [{"title": "Ariile naturale protejate. Parcurile naționale", "url": "https://docs.google.com/presentation/d/1x2a72xsOi-nzIjlfgjIQHKQ29oo_fGrl__cWwkB8fHU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Ariile naturale protejate. Parcurile naționale", "url": "https://drive.google.com/file/d/1LAajR5IFOHulUFUZAhCJFjoc7Jhh8FtA/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 28 (PDL 4.28)", "url": "https://drive.google.com/file/d/1uKqT3QCgaKGuYWTwHzs-eI7q9hehfr6p/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 29", "title": "Rezervațiile științifice, naturale și peisajere", "folder": "https://drive.google.com/drive/folders/1Rc7as8rrwBfrLl3V7fpRNuMUt-PFbKiy?usp=sharing", "presentations": [{"title": "Rezervațiile științifice, naturale și peisajere", "url": "https://docs.google.com/presentation/d/1luFUsNPj9oiEA12Tk4Gtnpr8Xt-QjpPBNRLkGy6dqio/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Rezervațiile științifice, naturale și peisajere", "url": "https://drive.google.com/file/d/13_Godj-MLSc6zcdzqeVW48gzxb4Q3XgI/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 29 (PDL 4.29)", "url": "https://drive.google.com/file/d/1PFW32oJT0poIazgbcwz9wC4MQ9K7AsRK/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Tema 30", "title": "Monumentele naturii", "folder": "https://drive.google.com/drive/folders/1nxRrtWe90f58oLm4S1b6q5g7eUVckTQy?usp=sharing", "presentations": [{"title": "Monumentele naturii", "url": "https://docs.google.com/presentation/d/1mdPg02XyC1WCf9CYrcyyvzYSzDT8IpjUxGZCuQaKMeU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Monumentele naturii și alte arii protejate", "url": "https://drive.google.com/file/d/1PCORjy6FJ1-8-6dZUV3HPgqf1wYSe048/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 30 (PDL 4.30)", "url": "https://drive.google.com/file/d/16_WdVhM90QnPUrRk1Y5yxvW09I03AA9W/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Temele 31–32", "type": "practice", "title": "Lucrare practică: Arii naturale protejate, caracterizate în baza observațiilor directe și indirecte, aplicând algoritmul", "folder": "https://drive.google.com/drive/folders/1pex83ct6xy4uuHDbMCgddHQPoYLmfs9v?usp=sharing", "presentations": [], "manuals": [{"title": "Secvență manual – Lucrare practică nr. 2: Arii naturale protejate", "url": "https://drive.google.com/file/d/1vaVDP31JCIuLPF5vq_55ScFRMmU37-93/view?usp=sharing", "fmt": "PDF"}], "plans": [], "extras": []}, {"code": "Evaluare 33", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Zonele naturale și ariile naturale protejate”", "folder": "https://drive.google.com/drive/folders/11han9R2_Eg17qtHSFPonR0HVvW0U9uOW?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}, {"code": "Tema 34", "title": "Republica Moldova în contextul dezvoltării sustenabile", "folder": "https://drive.google.com/drive/folders/1tD7g8WAd9Q0B8V8v1UVtZRDOLMxjfEqb?usp=sharing", "presentations": [{"title": "Prezentare – Republica Moldova în contextul dezvoltării sustenabile", "url": "https://docs.google.com/presentation/d/1DVrzo0_FyPkngivl9AYp0_NJFrNAXSvQOz-Uvwefy7U/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Republica Moldova în contextul dezvoltării sustenabile", "url": "https://drive.google.com/file/d/1bUwBXsH6dJ--w2V6Aqghm5te4I1C3sUU/view?usp=sharing", "fmt": "PDF"}], "plans": [], "extras": []}]}]};
+const STORAGE_KEY = 'geo_clasa8_done_v1';
+
+let activeRole = 'all';
+let activeUnit = 'all';
+let doneSet = new Set();
+
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (Array.isArray(saved)) doneSet = new Set(saved);
+} catch (e) {}
+
+function saveDone() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...doneSet]));
+  } catch (e) {}
+  updateProgress();
+}
+
+function normalize(str) {
+  return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function renderRoot() {
+  const grid = document.getElementById('rootGrid');
+  grid.innerHTML = PORTAL_DATA.root.map(r => {
+    const cls = r.role === 'teacher' ? 'root-card teacher-only' : 'root-card';
+    return `
+      <article class="${cls}" style="--rc:${r.color}; --rs:${r.soft};">
+        <div class="root-stripe"></div>
+        <div class="root-body">
+          <div class="root-top">
+            <div class="root-icon">${r.icon}</div>
+            <span class="root-tag">${escapeHtml(r.tag)}</span>
+          </div>
+          <h3>${escapeHtml(r.title)}</h3>
+          <p>${escapeHtml(r.desc)}</p>
+          <a class="root-cta" href="${r.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.cta)} →</a>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function renderUnitPills() {
+  const bar = document.getElementById('unitPills');
+  const btns = [`<button type="button" class="unit-pill active" data-unit="all">Toate unitățile (4)</button>`];
+  PORTAL_DATA.units.forEach(u => {
+    btns.push(`<button type="button" class="unit-pill" data-unit="${u.id}">${u.roman}. ${escapeHtml(u.short)} (${u.topics.length})</button>`);
+  });
+  bar.innerHTML = btns.join('');
+  bar.querySelectorAll('.unit-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.unit-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeUnit = btn.dataset.unit;
+      applyFilters();
+    });
+  });
+}
+
+function renderLinks(list, emptyMsg) {
+  if (!list || list.length === 0) {
+    return `<div class="res-empty">${escapeHtml(emptyMsg)}</div>`;
+  }
+  return list.map(item => `
+    <a class="res-link" href="${item.url}" target="_blank" rel="noopener noreferrer">
+      <span class="res-link-title">${escapeHtml(item.title)}</span>
+      <span class="fmt-badge">${escapeHtml(item.fmt)}</span>
+    </a>
+  `).join('');
+}
+
+function renderUnits() {
+  const wrap = document.getElementById('unitsContainer');
+  wrap.innerHTML = PORTAL_DATA.units.map((u, uIdx) => {
+    const unitExtrasHtml = (u.unit_extras || []).length
+      ? `<div class="unit-extras-bar">
+          <strong>Resurse utile pentru întreaga unitate:</strong>
+          ${u.unit_extras.map(ex => `<a class="unit-extra-link" href="${ex.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(ex.title)}</a>`).join('')}
+        </div>`
+      : '';
+
+    const topicsHtml = u.topics.map((t, tIdx) => {
+      const key = `${u.id}_${tIdx}`;
+      const isDone = doneSet.has(key);
+      const isOpen = (uIdx === 0 && tIdx === 0);
+      const typeCls = t.type === 'eval' ? 'is-eval' : (t.type === 'practice' ? 'is-practice' : '');
+      const pills = [];
+      if (t.presentations.length) pills.push(`<span class="pill-dot p1">📊 Prezentare${t.presentations.length > 1 ? ' (' + t.presentations.length + ')' : ''}</span>`);
+      if (t.manuals.length) pills.push(`<span class="pill-dot p2">📖 Manual${t.manuals.length > 1 ? ' (' + t.manuals.length + ')' : ''}</span>`);
+      if (t.plans.length) pills.push(`<span class="pill-dot p3 teacher-only">📋 Proiectare${t.plans.length > 1 ? ' (' + t.plans.length + ')' : ''}</span>`);
+
+      const emptyHint = (t.type === 'eval' && !t.presentations.length && !t.manuals.length && !t.plans.length)
+        ? `<div class="res-empty" style="margin-bottom:8px;">Această mapă este rezervată pentru evaluarea sumativă la unitatea de învățare. Accesează direct mapa Google Drive pentru actualizări.</div>`
+        : `<div class="res-grid">
+            <div class="res-col col-pres">
+              <div class="res-col-head">
+                <span class="res-step">1. 📊 Prezentarea lecției</span>
+                <span class="res-audience">Elevi & Prof.</span>
+              </div>
+              ${renderLinks(t.presentations, 'Fără prezentare în această mapă')}
+            </div>
+            <div class="res-col col-man">
+              <div class="res-col-head">
+                <span class="res-step">2. 📖 Secvența din manual</span>
+                <span class="res-audience">Elevi & Prof.</span>
+              </div>
+              ${renderLinks(t.manuals, 'Vezi manualul complet (PDF)')}
+            </div>
+            <div class="res-col col-plan teacher-only">
+              <div class="res-col-head">
+                <span class="res-step">3. 📋 Proiectarea didactică</span>
+                <span class="res-audience">Profesori</span>
+              </div>
+              ${renderLinks(t.plans, 'Fără proiect didactic separat')}
+            </div>
+          </div>`;
+
+      const searchBlob = normalize([
+        u.roman, u.title, t.code, t.title,
+        ...t.presentations.map(x => x.title),
+        ...t.manuals.map(x => x.title),
+        ...t.plans.map(x => x.title)
+      ].join(' '));
+
+      return `
+        <div class="topic-item ${typeCls} ${isOpen ? 'open' : ''} ${isDone ? 'done' : ''}" data-key="${key}" data-search="${escapeHtml(searchBlob)}">
+          <div class="topic-summary" role="button" tabindex="0" aria-expanded="${isOpen}">
+            <div class="topic-left">
+              <span class="check-wrap" title="Marchează tema ca parcursă">
+                <input type="checkbox" class="topic-check" data-key="${key}" ${isDone ? 'checked' : ''}>
+              </span>
+              <span class="topic-code">${escapeHtml(t.code)}</span>
+              <span class="topic-title">${escapeHtml(t.title)}</span>
+            </div>
+            <div class="topic-right">
+              ${pills.join('')}
+              <span class="chevron">▼</span>
+            </div>
+          </div>
+          <div class="topic-body">
+            ${emptyHint}
+            <div class="topic-footer">
+              <span>💡 Sugestie: parcurge mai întâi prezentarea, apoi consolidează noțiunile din secvența de manual.</span>
+              <a class="folder-direct" href="${t.folder}" target="_blank" rel="noopener noreferrer">📁 Deschide mapa temei în Drive ↗</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section class="unit-section" data-unit="${u.id}" style="--ucol:${u.color}; --usoft:${u.soft};">
+        <div class="unit-header">
+          <div class="unit-head-left">
+            <div class="unit-icon">${u.icon}</div>
+            <div>
+              <div class="unit-kicker">Unitatea de învățare ${u.roman} • ${u.topics.length} teme</div>
+              <h2 class="unit-title">${escapeHtml(u.title)}</h2>
+              <p class="unit-desc">${escapeHtml(u.desc)}</p>
+            </div>
+          </div>
+          <div class="unit-head-right">
+            <a class="unit-folder-btn" href="${u.folder}" target="_blank" rel="noopener noreferrer">📂 Mapa unității în Drive ↗</a>
+          </div>
+        </div>
+        ${unitExtrasHtml}
+        <div class="topic-list">${topicsHtml}</div>
+      </section>
+    `;
+  }).join('');
+
+  wrap.querySelectorAll('.topic-summary').forEach(sum => {
+    sum.addEventListener('click', (e) => {
+      if (e.target.closest('.check-wrap')) return;
+      const item = sum.closest('.topic-item');
+      const nowOpen = item.classList.toggle('open');
+      sum.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+    });
+    sum.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (e.target.classList.contains('topic-check')) return;
+        e.preventDefault();
+        sum.click();
+      }
+    });
+  });
+
+  wrap.querySelectorAll('.topic-check').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const k = cb.dataset.key;
+      const item = cb.closest('.topic-item');
+      if (cb.checked) {
+        doneSet.add(k);
+        item.classList.add('done');
+      } else {
+        doneSet.delete(k);
+        item.classList.remove('done');
+      }
+      saveDone();
+    });
+  });
+}
+
+function updateProgress() {
+  const total = 33;
+  const done = doneSet.size;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progressText').textContent = `Parcurse: ${done} / ${total} (${pct}%)`;
+  document.getElementById('progressFill').style.width = `${pct}%`;
+}
+
+function applyFilters() {
+  const q = normalize(document.getElementById('searchInput').value.trim());
+  let visibleTopics = 0;
+
+  document.querySelectorAll('.unit-section').forEach(sec => {
+    const matchUnit = activeUnit === 'all' || sec.dataset.unit === activeUnit;
+    let secVisible = 0;
+
+    sec.querySelectorAll('.topic-item').forEach(item => {
+      const matchQuery = !q || item.dataset.search.includes(q);
+      const show = matchUnit && matchQuery;
+      item.classList.toggle('hidden', !show);
+      if (show) {
+        secVisible++;
+        visibleTopics++;
+        if (q) {
+          item.classList.add('open');
+          item.querySelector('.topic-summary').setAttribute('aria-expanded', 'true');
+        }
+      }
+    });
+
+    sec.classList.toggle('hidden', secVisible === 0);
+  });
+
+  document.getElementById('emptySearch').style.display = visibleTopics === 0 ? 'block' : 'none';
+}
+
+document.querySelectorAll('.role-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeRole = btn.dataset.role;
+    document.body.classList.toggle('mode-student', activeRole === 'student');
+    document.body.classList.toggle('mode-teacher', activeRole === 'teacher');
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+document.getElementById('expandAllBtn').addEventListener('click', () => {
+  document.querySelectorAll('.topic-item:not(.hidden)').forEach(item => {
+    item.classList.add('open');
+    item.querySelector('.topic-summary').setAttribute('aria-expanded', 'true');
+  });
+});
+
+document.getElementById('collapseAllBtn').addEventListener('click', () => {
+  document.querySelectorAll('.topic-item').forEach(item => {
+    item.classList.remove('open');
+    item.querySelector('.topic-summary').setAttribute('aria-expanded', 'false');
+  });
+});
+
+renderRoot();
+renderUnitPills();
+renderUnits();
+updateProgress();
+</script>
+
+</body>
+</html>
