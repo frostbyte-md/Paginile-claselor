@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecții Video – Geografie (Curriculum Republica Moldova) | Pe Clase, Unități și Teme</title>
+<style>
+  :root {
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --ink: #0f172a;
+    --muted: #475569;
+    --border: #e2e8f0;
+    --navy: #0f172a;
+    --accent: #be123c;
+    --edu-bg: #eef2ff;
+    --edu-tx: #3730a3;
+    --edu-bd: #c7d2fe;
+    --radius: 16px;
+    --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #4c0519 52%, #be123c 100%);
+    color: #fff;
+    padding: 40px 20px 56px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 940px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.24);
+    backdrop-filter: blur(6px);
+    padding: 6px 15px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 4.2vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .hero p {
+    margin: 0 auto 22px;
+    max-width: 740px;
+    font-size: clamp(14.5px, 1.9vw, 17px);
+    color: #ffe4e6;
+  }
+  .hero-stats {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .hero-stat {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 7px 14px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #f8fafc;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  a.hero-stat:hover { background: rgba(15, 23, 42, 0.7); }
+
+  /* CONTROLS */
+  .controls-wrap {
+    max-width: 1220px;
+    margin: -26px auto 0;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
+  .controls-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.09);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .class-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .class-tab {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    padding: 8px 13px;
+    border-radius: 11px;
+    font-size: 13.3px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .class-tab:hover { border-color: #94a3b8; color: var(--ink); }
+  .class-tab.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #ffffff;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.18);
+  }
+  .class-tab .tab-cnt {
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.08);
+    color: inherit;
+  }
+  .class-tab.active .tab-cnt { background: rgba(255, 255, 255, 0.2); }
+
+  .search-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .search-input {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 8px 13px;
+    font-size: 14px;
+    color: var(--ink);
+    min-width: 240px;
+    flex: 1 1 300px;
+    max-width: 480px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .search-input:focus { border-color: var(--accent); background: #fff; }
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .mini-btn {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    border-radius: 10px;
+    padding: 8px 11px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .mini-btn:hover { background: #ffe4e6; border-color: #fda4af; color: #9f1239; }
+
+  .progress-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .progress-track {
+    width: 84px;
+    height: 7px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #e11d48, #10b981);
+    transition: width 0.25s ease;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 24px 20px 64px;
+  }
+
+  .info-strip {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-left: 4px solid #be123c;
+    border-radius: 12px;
+    padding: 11px 16px;
+    margin-bottom: 22px;
+    font-size: 13.3px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .info-strip strong { color: var(--navy); }
+
+  /* CLASS BLOCK */
+  .class-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 26px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .class-section.hidden { display: none; }
+
+  .class-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: linear-gradient(90deg, var(--csoft, #f8fafc) 0%, #ffffff 58%);
+    border-left: 6px solid var(--ccol, #be123c);
+  }
+  .class-head-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    flex: 1 1 360px;
+  }
+  .class-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: #ffffff;
+    border: 1px solid rgba(15,23,42,0.08);
+    box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .class-kicker {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ccol, #be123c);
+  }
+  .class-title {
+    margin: 2px 0 2px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .class-sub {
+    margin: 0;
+    font-size: 13.4px;
+    color: var(--muted);
+  }
+
+  /* UNIT ACCORDIONS */
+  .units-list {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    background: #fbfdff;
+  }
+  .unit-item {
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.16s, box-shadow 0.16s;
+  }
+  .unit-item.hidden { display: none; }
+  .unit-item.open {
+    border-color: var(--ccol, #be123c);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  }
+  .unit-summary {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 13px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .unit-summary:hover { background: #f8fafc; }
+  .unit-left {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    flex: 1;
+  }
+  .unit-badge {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--csoft, #ffe4e6);
+    color: var(--ccol, #be123c);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .unit-name {
+    font-size: 15.2px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .unit-right {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+  }
+  .unit-count {
+    font-size: 11.6px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475569;
+    white-space: nowrap;
+  }
+  .chevron {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: transform 0.2s ease, background 0.15s;
+  }
+  .unit-item.open .chevron {
+    transform: rotate(180deg);
+    background: var(--ccol, #be123c);
+    color: #fff;
+  }
+
+  /* TOPICS INSIDE UNIT */
+  .unit-body {
+    display: none;
+    padding: 12px 15px 15px;
+    border-top: 1px solid #eef2f7;
+    background: #fbfdff;
+  }
+  .unit-item.open .unit-body { display: block; }
+
+  .topics-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .topic-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .topic-card.hidden { display: none; }
+  .topic-head {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .topic-code {
+    font-size: 11.5px;
+    font-weight: 800;
+    padding: 2px 9px;
+    border-radius: 7px;
+    background: var(--csoft, #ffe4e6);
+    color: var(--ccol, #be123c);
+    white-space: nowrap;
+  }
+  .topic-title {
+    font-size: 14.4px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+
+  /* VIDEO ROWS INSIDE TOPIC */
+  .video-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .video-list.single {
+    grid-template-columns: 1fr;
+  }
+  .video-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 8px 11px;
+    transition: all 0.15s ease;
+  }
+  .video-row.hidden { display: none; }
+  .video-row.watched {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+  }
+  .video-row:hover {
+    background: #ffffff;
+    border-color: var(--ccol, #be123c);
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+  }
+  .vid-main {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    flex: 1;
+  }
+  .vid-check {
+    width: 17px;
+    height: 17px;
+    accent-color: #10b981;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin: 0;
+  }
+  .vid-text {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .vid-title-link {
+    font-size: 13.3px;
+    font-weight: 700;
+    color: var(--navy);
+    text-decoration: none;
+    line-height: 1.3;
+  }
+  .vid-title-link:hover { color: var(--ccol, #be123c); }
+  .vid-src {
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .vid-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .btn-play {
+    font-size: 11.4px;
+    font-weight: 800;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: var(--ccol, #be123c);
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: filter 0.15s;
+  }
+  .btn-play:hover { filter: brightness(1.1); }
+
+  .btn-edu {
+    font-size: 11.2px;
+    font-weight: 800;
+    padding: 5px 9px;
+    border-radius: 8px;
+    background: var(--edu-bg);
+    color: var(--edu-tx);
+    border: 1px solid var(--edu-bd);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .btn-edu:hover {
+    background: #4f46e5;
+    border-color: #4f46e5;
+    color: #ffffff;
+  }
+
+  .empty-search {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--surface);
+    border: 1px dashed #cbd5e1;
+    border-radius: var(--radius);
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px 20px 36px;
+    color: #64748b;
+    font-size: 13.5px;
+    border-top: 1px solid var(--border);
+    background: #ffffff;
+  }
+  footer strong { color: var(--navy); }
+
+  @media (max-width: 960px) {
+    .video-list { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 34px 16px 48px; }
+    .class-header { padding: 14px 15px; }
+    .unit-count { display: none; }
+    .video-row { flex-direction: column; align-items: stretch; }
+    .vid-actions { justify-content: flex-end; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🎬 Videotecă Aliniată la Curriculum • Republica Moldova</div>
+    <h1>Lecții Video – Geografie</h1>
+    <p>Lecțiile video ordonate strict pe clase, unități de învățare și teme conform proiectărilor didactice de lungă durată (sunt afișate exclusiv temele care au lecții video atribuite).</p>
+    <div class="hero-stats">
+      <div class="hero-stat">🎓 5 clase (VI, VII, X, XI, XII)</div>
+      <div class="hero-stat">📚 25 unități • 🗂️ 132 teme cu video</div>
+      <div class="hero-stat">🎬 302 lecții video</div>
+      <a class="hero-stat" href="https://drive.google.com/drive/folders/14TNzCaefRQ-Bp3UGz_3kQk8D-bff0IBG?usp=sharing" target="_blank" rel="noopener noreferrer">📂 Folder Google Drive ↗</a>
+    </div>
+  </div>
+</header>
+
+<div class="controls-wrap">
+  <div class="controls-card">
+    <div class="class-tabs" id="classTabs" role="tablist" aria-label="Selectează clasa"></div>
+    <div class="search-row">
+      <input type="search" id="searchInput" class="search-input" placeholder="🔍 Caută tema, unitatea sau cuvânt-cheie (ex.: „litosfera”, „Africa”, „urbanizare”)..." aria-label="Caută lecții video">
+      <div class="toolbar-right">
+        <button type="button" class="mini-btn" id="expandAllBtn">▾ Deschide unitățile</button>
+        <button type="button" class="mini-btn" id="collapseAllBtn">▴ Restrânge</button>
+        <div class="progress-pill" title="Bifează lecțiile vizionate; progresul se salvează automat în browser">
+          <span id="progressText">Vizionate: 0 / 302</span>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+  <div class="info-strip">
+    <span><strong>Cum folosești portalul:</strong> apasă <strong>▶ Video</strong> pentru redare directă din Google Drive sau <strong>📝 Eduboom</strong> pentru pagina clasei sursă pe eduboom.ro (teste și exerciții).</span>
+    <span>📌 Temele fără lecții video corespunzătoare sunt omise automat.</span>
+  </div>
+
+  <div id="classesContainer"></div>
+
+  <div class="empty-search" id="emptySearch">
+    🔎 Nu am găsit nicio temă sau lecție video care să corespundă căutării. Încearcă un alt termen.
+  </div>
+</main>
+
+<footer>
+  <strong>Lecții Video – Geografie</strong> • Aliniate la proiectările didactice de lungă durată (clasele VI, VII, X, XI, XII)
+</footer>
+
+<script>
+const PORTAL_DATA = {"rootFolder": "https://drive.google.com/drive/folders/14TNzCaefRQ-Bp3UGz_3kQk8D-bff0IBG?usp=sharing", "classes": [{"id": "md6", "short": "Clasa a VI-a", "title": "Clasa a VI-a", "subtitle": "Continente și bazine oceanice • Africa • America de Sud • Australia și Antarctida", "icon": "🧭", "color": "#7e22ce", "soft": "#f3e8ff", "units": [{"num": 1, "title": "Continente și bazine oceanice", "topics": [{"code": "Temele 1–2", "title": "Originea continentelor și bazinelor oceanice", "videos": [{"title": "Formele majore de relief planetar: continentele și bazinele oceanice", "url": "https://drive.google.com/file/d/1QHEWJrmY3h2UK8bwtepdsEejKYgNoHNR/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Formele majore de relief ale continentelor", "url": "https://drive.google.com/file/d/1a_Q1VGA5EW6CV6C8l39OxPWHTyZkHoR7/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Formele majore de relief ale bazinelor oceanice", "url": "https://drive.google.com/file/d/1cBOjDsVvuQqXivUXItjw4r3i3r0_PAYa/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Continentele Terrei", "url": "https://drive.google.com/file/d/1CStxLpEvCp-6V-ozjjwenuBKea8MdfmL/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}, {"title": "Oceanele Terrei", "url": "https://drive.google.com/file/d/14rkcWc0ridGC691xA07-33l3i4mPRoQK/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}]}, {"code": "Tema 3", "title": "Marile descoperiri geografice (C. Columb, F. Magellan, Vasco da Gama)", "videos": [{"title": "Repere ale cunoașterii Terrei: de la marile descoperiri la explorarea modernă", "url": "https://drive.google.com/file/d/1ptJ4BWpwHZx6bLEy6TamiHZs2YA0KW22/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Temele 4–5", "title": "Harta geografică: elementele hărții geografice, clasificări", "videos": [{"title": "Globul geografic și harta", "url": "https://drive.google.com/file/d/13f4JJ7sMhhgjjLZyLS25au-_3qd35EwJ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Continente și țări – reprezentări cartografice. Harta politică a lumii", "url": "https://drive.google.com/file/d/1w3tay0xt32eY-bmaW6GAFuHyzgsyktf_/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Tema 6", "title": "Scara hărții aplicată în determinarea distanțelor pe hartă (lucrare practică)", "videos": [{"title": "Aplicații practice: aprecierea distanțelor pe suporturi cartografice", "url": "https://drive.google.com/file/d/1pMSvbVZZJQizw_AX4U20mb-yOL8etqDA/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}]}, {"num": 2, "title": "Continentul Africa", "topics": [{"code": "Tema 8", "title": "Africa. Poziția fizico-geografică", "videos": [{"title": "Africa – superlative (Partea I)", "url": "https://drive.google.com/file/d/1_l1cRCmBsA3XkPU2RIZ8u0vVrHXVYxy4/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Africa – superlative (Partea II)", "url": "https://drive.google.com/file/d/16wj8S6QOqCQoGPJTuLySL1clDU0WWEHC/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Poziția geografică. Simetrie latitudinală", "url": "https://drive.google.com/file/d/1NRboK3wMDWoiaTgg_S9HXPjMPwccpmXj/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Poziția geografică. Țărmul", "url": "https://drive.google.com/file/d/1whbcANi-74X5k-mMyVSG_mrKEkPCMLkA/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 9", "title": "Relieful. Factorii interni și externi de modelare a scoarței terestre. Substanțele minerale utile", "videos": [{"title": "Relieful Africii: caracteristici generale (Partea I)", "url": "https://drive.google.com/file/d/1OBQXHWDSGYVQVEZgrFireNPuc_JcURN_/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Relieful Africii: caracteristici generale (Partea II)", "url": "https://drive.google.com/file/d/10eqL0mSo09aIXkLqI7YzMZaUMdJ25IBo/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Riftul African", "url": "https://drive.google.com/file/d/1fiJHKW1SY9VL960U9G-3vN9Ka3s03dhZ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 10", "title": "Clima. Factorii de formare a climei. Zonele climatice", "videos": [{"title": "Clima Africii", "url": "https://drive.google.com/file/d/17SfviSrRwpMauroN6_65Uhbjsko2SRkQ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 11", "title": "Apele de suprafață", "videos": [{"title": "Hidrografia Africii (Partea I)", "url": "https://drive.google.com/file/d/1CP7Q1QAS3198oO64N-NiGXUgDZXq9IDK/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Hidrografia Africii (Partea II)", "url": "https://drive.google.com/file/d/1LFYLcWe98cF2BhFJA-SoxzYsfK-jYjyo/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Temele 12–13", "title": "Zonele naturale", "videos": [{"title": "Particularități biogeografice (Partea I)", "url": "https://drive.google.com/file/d/1ouTxLYpIDpot0qyg9oy2ysVEbPEw2aGt/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Particularități biogeografice (Partea II)", "url": "https://drive.google.com/file/d/1CvQExStNeaXJLAa99M2iZklUftP98D_b/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Sahara", "url": "https://drive.google.com/file/d/14f9R119ZSw2HTWFGePPr63y8TDgA1IsL/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 14", "title": "Populația. Repartiția și densitatea populației. Structura rasială. Popoare, tradiții și obiceiuri", "videos": [{"title": "Specificul demografic (Partea I)", "url": "https://drive.google.com/file/d/1I96hihGa-AP3v0aiW2vzh21xFCOWN4xo/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Specificul demografic (Partea II)", "url": "https://drive.google.com/file/d/1OhQ8kxaofDdjw5KuTaZQTGN7Cq57cV4y/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Marile orașe ale Africii", "url": "https://drive.google.com/file/d/1RnLCAJUUG-RWgV0E3axg-HvwBBY2dHvA/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 15", "title": "Evaluare sumativă – Recapitulare „Continentul Africa”", "videos": [{"title": "Recapitulare: Africa (Partea I)", "url": "https://drive.google.com/file/d/10p9WbV4KOhW7CrXlqDpZu6md5tLskt8c/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Recapitulare: Africa (Partea II)", "url": "https://drive.google.com/file/d/1h5np8jZLCC8-FWvE-kadV5AGw536D7qB/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 16", "title": "Populația. Harta politică a Africii: aspecte generale", "videos": [{"title": "Harta politică a Africii (Partea I)", "url": "https://drive.google.com/file/d/1_X8AlTYiF-STJbtyBAK9Tlc5v8yjg0bg/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Harta politică a Africii (Partea II)", "url": "https://drive.google.com/file/d/1KxDrqkiNrOYEqsbEUjxrr9w6ImQLHZTX/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Caracterizarea geografică a unor state africane (Partea I)", "url": "https://drive.google.com/file/d/1yBeUYxSFZLb2ww8FdPexCxkNwNlQ_EqS/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Caracterizarea geografică a unor state africane (Partea II)", "url": "https://drive.google.com/file/d/1wvw8XyxGwRRET6KnLNZaVqmLlnJHzpOa/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 17", "title": "Procesele și fenomenele geografice de risc: furtuni de nisip/praf, deșertificare, epidemii, malnutriție", "videos": [{"title": "Problemele Africii în lumea contemporană (Partea I)", "url": "https://drive.google.com/file/d/1_fUWkKzVdLCTsW6EElNi7--CiSJoK4gJ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Problemele Africii în lumea contemporană (Partea II)", "url": "https://drive.google.com/file/d/13a21W9vwEseTremIXLF3wd-6jFc-Iib3/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}]}, {"num": 3, "title": "Continentul America de Sud", "topics": [{"code": "Tema 18", "title": "America de Sud. Poziția fizico-geografică", "videos": [{"title": "America de Sud – superlative", "url": "https://drive.google.com/file/d/1E8-4Fx8xvWlbppuWNMhDeWi0OvPax1Pr/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Poziția geografică (Americile)", "url": "https://drive.google.com/file/d/1JpgBHLVCUfDROuMCvUXhZeRHS7ze46r_/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 19", "title": "Relieful. Substanțele minerale utile", "videos": [{"title": "Relieful: caracteristici generale. Sistemul cordiliero-andin (Partea I)", "url": "https://drive.google.com/file/d/1yT3XHen_aiXWjUab50PrhFPlfkRkaBpl/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Relieful: caracteristici generale. Sistemul cordiliero-andin (Partea II)", "url": "https://drive.google.com/file/d/1qi0XPc06KuyX58KuHD_AfN3iMTm50kVD/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 20", "title": "Clima. Factorii de formare a climei. Zonele climatice", "videos": [{"title": "Diferențieri climatice (Americile)", "url": "https://drive.google.com/file/d/1XhELmxQ6NQjLzFz8LjhgrdPChBaRIq4z/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 21", "title": "Apele de suprafață", "videos": [{"title": "Hidrografia: caracteristici generale (Partea I – Americile)", "url": "https://drive.google.com/file/d/1AGw-tMD2CTgzvwrIXOvVUoTc1_dzlVOg/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Hidrografia: caracteristici generale (Partea II – Americile)", "url": "https://drive.google.com/file/d/1Cu3i2MQAw8ezqZot16F7l8IeBA-DghCk/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 22", "title": "Zonele naturale", "videos": [{"title": "Diferențieri biogeografice (Americile)", "url": "https://drive.google.com/file/d/1q-oNzJWlIltNrechDmpK4xvEt_UbTm0m/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 23", "title": "Populația. Repartiția și densitatea populației. Structura rasială. Popoare, tradiții și obiceiuri. Harta politică", "videos": [{"title": "Elemente de diversitate umană (Americile)", "url": "https://drive.google.com/file/d/1nXNhfbc-5BtBh0oTdnepXmtZA4HFYYtx/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Harta politică (Americile)", "url": "https://drive.google.com/file/d/1As46lQmbduvTwI-qfr_zq629oa2Rum90/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Contraste teritoriale între state (Americile)", "url": "https://drive.google.com/file/d/1tzuAb-pZ__niT5-isd8Li0TrCHtfxQiW/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Forme de aglomerare urbană (Americile)", "url": "https://drive.google.com/file/d/1lZ-Ml9CIX6ZJB-mbRlfqrluXeqFkb9Ft/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 25", "title": "Evaluare sumativă – Recapitulare „Continentul America de Sud”", "videos": [{"title": "Recapitulare: America de Nord și America de Sud", "url": "https://drive.google.com/file/d/1zyfiR-e473b9ChyKzOWx8kR4sL_nrgNA/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}]}, {"num": 4, "title": "Continentele Australia și Antarctida", "topics": [{"code": "Tema 26", "title": "Australia. Poziția fizico-geografică (și caracterizare fizico-geografică)", "videos": [{"title": "Australia și Oceania – superlative", "url": "https://drive.google.com/file/d/1gHlqWkNKA-uMk8K6cWffrj1PtgrWTfXb/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Australia – caracterizare fizico-geografică", "url": "https://drive.google.com/file/d/1hDmoxVPExI9VcbdPUc5GIfZiCwovI2gQ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 29", "title": "Zonele naturale (Australia)", "videos": [{"title": "Unicitatea biogeografică australiană", "url": "https://drive.google.com/file/d/11a3LKShL7PlqnTJiFzIROaWBlJfvKT4h/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 30", "title": "Populația. Repartiția și densitatea populației. Structura rasială. Popoare, tradiții și obiceiuri", "videos": [{"title": "Australia – caracterizare socio-economică", "url": "https://drive.google.com/file/d/1Mz_NxU5GzNvmgpCIbHwN01qKLqoG9YnX/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 31", "title": "Antarctida. Poziția fizico-geografică. Relieful", "videos": [{"title": "Antarctica – elemente de identitate geografică", "url": "https://drive.google.com/file/d/1abv27RClW_MlpWeqx1VIgdCWVuK6jwan/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 33", "title": "Evaluare sumativă – Recapitulare „Australia și Antarctida”", "videos": [{"title": "Recapitulare: Australia, Oceania și Antarctica", "url": "https://drive.google.com/file/d/1kEga7foHF7H91dkUawEvXKRjFqUhzkQe/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 34", "title": "Procesele și fenomenele geografice de risc: încălzirea globală a climei, topirea ghețarilor, dispariția speciilor", "videos": [{"title": "Modificări globale ale mediului", "url": "https://drive.google.com/file/d/13wC9mjog1wny2wUgRn3CirHcVfjYVuaU/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}]}]}, {"id": "md7", "short": "Clasa a VII-a", "title": "Clasa a VII-a", "subtitle": "Rețeaua de grade • America de Nord • Eurasia • Oceanul Planetar", "icon": "🌊", "color": "#0284c7", "soft": "#e0f2fe", "units": [{"num": 1, "title": "Rețeaua de grade a hărții", "topics": [{"code": "Temele 3–4", "title": "Coordonatele geografice", "videos": [{"title": "Coordonatele geografice", "url": "https://drive.google.com/file/d/1MhtMFaFMcKPhATwUFxstmvARWX7ffoE7/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Coordonatele geografice (aprofundat)", "url": "https://drive.google.com/file/d/1mCOsouzktCDK-3xeAFaw5hYapSReHfQb/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}]}, {"num": 2, "title": "Continentul America de Nord", "topics": [{"code": "Tema 7", "title": "America de Nord. Poziția fizico-geografică", "videos": [{"title": "America de Nord – superlative", "url": "https://drive.google.com/file/d/14dTD0bxqRBtuVMccbRlwFBS45JfU0gzD/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Poziția geografică (Americile)", "url": "https://drive.google.com/file/d/1JpgBHLVCUfDROuMCvUXhZeRHS7ze46r_/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 8", "title": "Relieful. Substanțele minerale utile", "videos": [{"title": "Relieful: caracteristici generale. Sistemul cordiliero-andin (Partea I)", "url": "https://drive.google.com/file/d/1yT3XHen_aiXWjUab50PrhFPlfkRkaBpl/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Relieful: caracteristici generale. Sistemul cordiliero-andin (Partea II)", "url": "https://drive.google.com/file/d/1qi0XPc06KuyX58KuHD_AfN3iMTm50kVD/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 9", "title": "Clima. Factorii de formare a climei. Zonele climatice", "videos": [{"title": "Diferențieri climatice (Americile)", "url": "https://drive.google.com/file/d/1XhELmxQ6NQjLzFz8LjhgrdPChBaRIq4z/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 10", "title": "Apele de suprafață", "videos": [{"title": "Hidrografia: caracteristici generale (Partea I – Americile)", "url": "https://drive.google.com/file/d/1AGw-tMD2CTgzvwrIXOvVUoTc1_dzlVOg/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Hidrografia: caracteristici generale (Partea II – Americile)", "url": "https://drive.google.com/file/d/1Cu3i2MQAw8ezqZot16F7l8IeBA-DghCk/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 11", "title": "Zonele naturale", "videos": [{"title": "Diferențieri biogeografice (Americile)", "url": "https://drive.google.com/file/d/1q-oNzJWlIltNrechDmpK4xvEt_UbTm0m/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 12", "title": "Populația. Repartiția și densitatea. Structura rasială. Popoare, tradiții. Harta politică a Americii de Nord", "videos": [{"title": "Elemente de diversitate umană (Americile)", "url": "https://drive.google.com/file/d/1nXNhfbc-5BtBh0oTdnepXmtZA4HFYYtx/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Harta politică (Americile)", "url": "https://drive.google.com/file/d/1As46lQmbduvTwI-qfr_zq629oa2Rum90/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Contraste teritoriale între state (Americile)", "url": "https://drive.google.com/file/d/1tzuAb-pZ__niT5-isd8Li0TrCHtfxQiW/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Forme de aglomerare urbană (Americile)", "url": "https://drive.google.com/file/d/1lZ-Ml9CIX6ZJB-mbRlfqrluXeqFkb9Ft/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 14", "title": "Evaluare sumativă – Recapitulare „Continentul America de Nord”", "videos": [{"title": "Recapitulare: America de Nord și America de Sud", "url": "https://drive.google.com/file/d/1zyfiR-e473b9ChyKzOWx8kR4sL_nrgNA/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}]}, {"num": 3, "title": "Continentul Eurasia", "topics": [{"code": "Tema 15", "title": "Eurasia. Poziția fizico-geografică", "videos": [{"title": "Europa: poziția geografică, țărmurile (golfuri, insule, peninsule, strâmtori)", "url": "https://drive.google.com/file/d/1nIM-WUWhhtHfjAyvx4fGgSuDtRgeKvVW/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Asia – continentul superlativelor", "url": "https://drive.google.com/file/d/1D_DRlDTsqNCZvfsfsWdA8FSWMkfZiGnq/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Asia: poziția geografică, limitele, țărmul", "url": "https://drive.google.com/file/d/1fWf9Ux8GWFPqlBzsddd56ZbOqN5ZNhhU/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 16", "title": "Relieful. Substanțele minerale utile", "videos": [{"title": "Europa – caracteristici generale ale reliefului, unități majore", "url": "https://drive.google.com/file/d/1fNCUYyUVhY3Jp_cxOqinJeswOCbeKr4f/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Europa – resursele naturale și valorificarea lor", "url": "https://drive.google.com/file/d/18WjGpDo4iQXRlQCbxKSCoPWgax5kQwba/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Asia – relieful: caracteristici generale, unități majore", "url": "https://drive.google.com/file/d/1FBJGsDr25BptS-qCSMPHmQz9XgCQwSE-/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Munții Himalaya", "url": "https://drive.google.com/file/d/14uEcn4B6nW0fIT6xtM3piQr89dcCWkx2/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Asia – resursele naturale", "url": "https://drive.google.com/file/d/1UQ_sGCP1avuiXm8hS_1JVDYjhBT5HX3V/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 17", "title": "Clima. Factorii de formare a climei", "videos": [{"title": "Musonii", "url": "https://drive.google.com/file/d/10iIhA79lMl-nMxRJNf_MJtjALzc3ssUH/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 18", "title": "Zonele climatice", "videos": [{"title": "Europa – diferențieri climatice și biogeografice", "url": "https://drive.google.com/file/d/1OKPtUyw2PvvDP_nV2qhX77ULD7mkiGHz/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Asia – diferențieri climatice", "url": "https://drive.google.com/file/d/1bakNTp_vavzIH9_ACmJb_SfuG_-KCKrh/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 20", "title": "Apele de suprafață", "videos": [{"title": "Hidrografia Europei", "url": "https://drive.google.com/file/d/1TK8g1oZ4GrxAtj5dX45eez-_MsfimH7w/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Asia – hidrografia: caracteristici generale", "url": "https://drive.google.com/file/d/1wIRyLjuWHKLRhkoWx4IS5yNW8-ObmREd/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Asia – fluvii și lacuri", "url": "https://drive.google.com/file/d/1PI0EoSt8BCjqIqemZOkmw_ShV5xtCKL6/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 21", "title": "Zonele naturale", "videos": [{"title": "Asia – contraste biogeografice", "url": "https://drive.google.com/file/d/1FGGjc4BGAAqtS7CQ-gURrtexquCw4m1O/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Europa – diferențieri climatice și biogeografice", "url": "https://drive.google.com/file/d/1OKPtUyw2PvvDP_nV2qhX77ULD7mkiGHz/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Tema 22", "title": "Populația. Repartiția și densitatea populației. Structura rasială. Popoare, tradiții și obiceiuri", "videos": [{"title": "Europa – răspândirea populației, diversitate umană (I)", "url": "https://drive.google.com/file/d/1WrXw3qYjqZz0XZWNpKFm0lv4SdInU1tm/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Europa – răspândirea populației, diversitate umană (II)", "url": "https://drive.google.com/file/d/1CgAvRe3gpHXApOAJO5khHiDgBEx0b-bl/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Mari orașe europene", "url": "https://drive.google.com/file/d/1CLFqBboGuOPjMYKatPaBn1MMgvR8W32y/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Asia – elemente de diversitate umană", "url": "https://drive.google.com/file/d/1UgVXRMofCC15xeHWXKznh8By4MEfY1-t/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Asia – marile aglomerări umane", "url": "https://drive.google.com/file/d/11PGywl7wW4rUyhfF5PyeXkLALP2banGL/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 23", "title": "Harta politică a Eurasiei: aspecte generale", "videos": [{"title": "Harta politică a Europei: state și regiuni", "url": "https://drive.google.com/file/d/19pVhkMwV7MJfe-tui9EBFmi3_a0kM4yN/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Europa de Vest", "url": "https://drive.google.com/file/d/1QrcAc7nrr5F9thyNj1_I_6QR9lZlX--l/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Europa Centrală", "url": "https://drive.google.com/file/d/1QW090iH_FryfZ5R7H20e4Ebtuh0IKytZ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Europa de Sud", "url": "https://drive.google.com/file/d/1WgYQNqqbfcwBTHIW2buKvS5rsEQhp7aX/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Europa de Est", "url": "https://drive.google.com/file/d/1qIY7OHioIDqStb6lsFE8-2TriEFD6rxH/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Harta politică a Asiei", "url": "https://drive.google.com/file/d/16z7WGBaia7kALsmOT8-brQlbqwOC4JCh/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 25", "title": "Evaluare sumativă – Recapitulare „Continentul Eurasia”", "videos": [{"title": "Recapitulare: Europa – identitate geografică (Partea I)", "url": "https://drive.google.com/file/d/14Cu_0XKlAFEKKYT8LhaU6ZhOYOWgrCwr/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Recapitulare: Europa – identitate geografică (Partea II)", "url": "https://drive.google.com/file/d/1EH2WRlJFM9WytcVyr_ttMRvHp4WSmFts/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Recapitulare: Asia (Partea I)", "url": "https://drive.google.com/file/d/1_D7Va1OeFHRMlEWDPziWlrEzb4pAHSGK/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Recapitulare: Asia (Partea II)", "url": "https://drive.google.com/file/d/1F2BSmfASGiQc-uW6wk56SmL-A3QPjBfv/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}]}, {"num": 4, "title": "Oceanul Planetar", "topics": [{"code": "Tema 26", "title": "Oceanul Planetar: părțile componente", "videos": [{"title": "Oceanul Planetar: componente și localizare", "url": "https://drive.google.com/file/d/1AiJJ2EVSvPldd-jTSsCjdn_bBNimrJZU/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Oceanele Terrei", "url": "https://drive.google.com/file/d/14rkcWc0ridGC691xA07-33l3i4mPRoQK/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}]}, {"code": "Tema 29", "title": "Relieful bazinelor oceanice", "videos": [{"title": "Formele majore de relief ale bazinelor oceanice", "url": "https://drive.google.com/file/d/1cBOjDsVvuQqXivUXItjw4r3i3r0_PAYa/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 30", "title": "Clima și curenții oceanici", "videos": [{"title": "Dinamica apelor oceanice", "url": "https://drive.google.com/file/d/1vh749vKC4euDoPCQMSppPS2Uj9scD11b/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 34", "title": "Importanța Oceanului Planetar. Protecția mediului natural al continentelor și oceanelor", "videos": [{"title": "Resurse de apă potabilă. Măsuri de protecție a apelor (Partea I)", "url": "https://drive.google.com/file/d/1r0um-R3kw0RGOlUo7LdQquXgM8iEntDn/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Resurse de apă potabilă. Măsuri de protecție a apelor (Partea II)", "url": "https://drive.google.com/file/d/1uvKITiNi650R3iZHMO0DXKyP4wkHg3mE/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}]}]}, {"id": "md10", "short": "Clasa a X-a", "title": "Clasa a X-a", "subtitle": "Geografia fizică generală: Pământul în Univers, Litosfera, Atmosfera, Hidrosfera, Biosfera, Solul și Mediile geografice", "icon": "🌋", "color": "#2563eb", "soft": "#dbeafe", "units": [{"num": 1, "title": "Pământul – individualitate în Univers", "topics": [{"code": "Tema 1", "title": "Universul și Sistemul Solar. Soarele și influența sa asupra Pământului", "videos": [{"title": "Universul și Sistemul Solar", "url": "https://drive.google.com/file/d/1SRqDBX3xFjANJCnShJrfBuQgk9TrZHTD/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Evoluția Universului și a Terrei", "url": "https://drive.google.com/file/d/1xYFxYT2Rkl2SLfFI5e6-0PBQ8YOggCPH/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Universul", "url": "https://drive.google.com/file/d/1ILW0DCEh-H6WMnr98b0ZplCMtz7ZQD_O/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Sistemul Solar", "url": "https://drive.google.com/file/d/1h69sDukzB9QXGZjEUL6wI6ZJBdyj-CJA/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Terra – o planetă a Sistemului Solar", "url": "https://drive.google.com/file/d/1Eel8h6P5r8WcDM4pp44LmQvlPOwWrOin/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 2", "title": "Caracteristicile și proprietățile fizice ale Pământului: forma, căldura internă, gravitația terestră", "videos": [{"title": "Caracteristicile Pământului și consecințele lor geografice (Partea I)", "url": "https://drive.google.com/file/d/1NaJkKHQ_uThZWPWMPBfyQPgFXAnVpV90/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Caracteristicile Pământului și consecințele lor geografice (Partea II)", "url": "https://drive.google.com/file/d/1MXVwZYZm8ieKm_CwnY1XPNBTkxgL9Ruu/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Temele 3–4", "title": "Reprezentarea cartografică a spațiului terestru: globul geografic, harta geografică și planul", "videos": [{"title": "Coordonatele geografice", "url": "https://drive.google.com/file/d/1mCOsouzktCDK-3xeAFaw5hYapSReHfQb/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Reprezentări cartografice", "url": "https://drive.google.com/file/d/13PKUdmU6UBNA6FtxQvEH-hs6op76Zeya/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Măsurarea și calcularea distanțelor și suprafețelor pe hărți", "url": "https://drive.google.com/file/d/1TEDVlXlsiHEcUx9wj0vG7jx0EIq14tl9/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Reprezentările cartografice și societatea omenească", "url": "https://drive.google.com/file/d/1ayX_zLT1xBrRif2Y1aRDPX4QtXwNLDu9/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Tema 5", "title": "Mișcarea de rotație a Pământului", "videos": [{"title": "Mișcarea de rotație", "url": "https://drive.google.com/file/d/1qMN-0JjT3vuAaDKoaUJ5VFBp9wGBomQT/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 8", "title": "Mișcarea de revoluție a Pământului", "videos": [{"title": "Mișcarea de revoluție", "url": "https://drive.google.com/file/d/18dlQ-t5QjlBetq6NaRew7D6_xO_HWE0b/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}]}, {"num": 2, "title": "Litosfera", "topics": [{"code": "Tema 10", "title": "Structura internă a Pământului. Compoziția chimică, mineralogică și petrografică a scoarței terestre", "videos": [{"title": "Scoarța terestră ca suport al reliefului: structură și alcătuire petrografică (Partea I)", "url": "https://drive.google.com/file/d/1DdGRUYJIBGFxrz_GvTCB6HBOxRUAxQxI/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Scoarța terestră ca suport al reliefului: structură și alcătuire petrografică (Partea II)", "url": "https://drive.google.com/file/d/1NyDioGKlp02jy4bVufxW8PllZDFH9zdi/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Structura internă a Terrei", "url": "https://drive.google.com/file/d/1qMBgwBZa2fHBhglewRWUQO87ogNFgxOl/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Litosfera – caracteristici generale și importanță", "url": "https://drive.google.com/file/d/1JSgK_KN7wxWkqHZfJX30xRu7hjsjU1oV/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 11", "title": "Dinamica scoarței terestre. Procesele endogene. Mișcările tectonice oscilatorii actuale", "videos": [{"title": "Agenți, procese și forme de relief (Partea I)", "url": "https://drive.google.com/file/d/1oitkzT25gMiX7bBbBn5nEroAUZGEmfyI/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Tema 12", "title": "Vulcanismul. Cutremurele de pământ", "videos": [{"title": "Vulcanii și cutremurele", "url": "https://drive.google.com/file/d/16hXsTDN3HokS3RWvVH_eKbKeIAIy3E6c/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 14", "title": "Relieful: caracteristici generale, clasificarea formelor de relief", "videos": [{"title": "Tipuri și unități de relief", "url": "https://drive.google.com/file/d/1JeT0LiXddWArfCUZE1sGm6eMvUAWnW8y/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Analiza și interpretarea reliefului", "url": "https://drive.google.com/file/d/1Tm46v5IvKtx-1mJSa4CvsPcP75LOaRmt/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Temele 15–16", "title": "Unitățile majore de relief ale uscatului și ale bazinelor oceanice", "videos": [{"title": "Unitățile majore ale reliefului terestru (Partea I)", "url": "https://drive.google.com/file/d/1pH0Ez2m-EFYPauGqTPGqEtNJW5wranUN/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Unitățile majore ale reliefului terestru (Partea II)", "url": "https://drive.google.com/file/d/132ekGA7_BSQHNA4TJPwQKgkJHQ_wSOxg/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Tema 17", "title": "Procesele exogene și tipurile de relief create: gravitațional, torențial, fluvial, carstic", "videos": [{"title": "Agenți, procese și forme de relief (Partea II)", "url": "https://drive.google.com/file/d/1MLuZl1eLRdF0oPGlhG05y96uZzleU3Md/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Tema 18", "title": "Procesele exogene și tipurile de relief create: eolian, glaciar, litoral, biogen, antropic", "videos": [{"title": "Agenți, procese și forme de relief (Partea III)", "url": "https://drive.google.com/file/d/1lNJQDR5mwVWIh177XIA-0BHu_8nOo1FX/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Tema 19", "title": "Procesele și fenomenele geografice de risc. Rolul scoarței terestre în natură și pentru societatea umană", "videos": [{"title": "Relieful și societatea omenească", "url": "https://drive.google.com/file/d/1UT0AxqH3T54xLpirVOpGvEnIvETxDA4n/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Relieful orizontului local", "url": "https://drive.google.com/file/d/14iZg1c2vNXJDOR1zYf-2_Yrd3uuSva6O/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Reguli de comportare și măsuri de protecție la fenomene de risc", "url": "https://drive.google.com/file/d/1hBPj2XfWUGxwFI3YInzMMJz9En8eUL--/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}]}, {"num": 3, "title": "Atmosfera. Elementele climatice", "topics": [{"code": "Tema 21", "title": "Compoziția și structura atmosferei", "videos": [{"title": "Alcătuirea și structura atmosferei", "url": "https://drive.google.com/file/d/1h8mD0fsR-2dAHljKOk2xXXuFJFjVUzjU/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Atmosfera – caracteristici generale și importanță", "url": "https://drive.google.com/file/d/1uOGsI9aT7az0_nmPThUqnwrIHT_Wexq-/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Temele 23–24", "title": "Temperatura aerului. Variația pe verticală. Repartiția geografică", "videos": [{"title": "Temperatura aerului", "url": "https://drive.google.com/file/d/1piLivLa3lxHokjyTW2PTTn6sbZ1evQnw/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Temele 25–26", "title": "Presiunea atmosferică și vânturile: tipuri, repartiție, importanța", "videos": [{"title": "Presiunea atmosferică și vânturile", "url": "https://drive.google.com/file/d/1epQsk0ckIpTYO8owGp8nJz7GPwQkRWLz/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 28", "title": "Precipitațiile atmosferice. Repartiția geografică a precipitațiilor atmosferice", "videos": [{"title": "Precipitațiile atmosferice", "url": "https://drive.google.com/file/d/14hQ0DhEV1KJD0ReWVpALNQRriG7DSCya/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}]}, {"num": 4, "title": "Atmosfera. Vremea și clima", "topics": [{"code": "Tema 31", "title": "Vremea și prevederea ei", "videos": [{"title": "Hărțile climatice și harta sinoptică: analiza și interpretarea datelor", "url": "https://drive.google.com/file/d/1yLUAcXiqd5eTd1scmD0weU5gmm6BTZsf/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Vremea și clima", "url": "https://drive.google.com/file/d/12wJmwWUPxGExzpYGZs0qj1e2g0M-ceaw/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 32", "title": "Clima. Factorii de formare a climei", "videos": [{"title": "Factorii genetici ai climei", "url": "https://drive.google.com/file/d/1aUeqGIExJVc2-XbGeCvgrTp8AVjGHKA_/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Temele 33–34", "title": "Zonele climatice. Tipurile de climă", "videos": [{"title": "Climatele Terrei (Partea I)", "url": "https://drive.google.com/file/d/1sw2iFE2YjgX4svtFRGsQ33H-1kiobIRK/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Climatele Terrei (Partea II)", "url": "https://drive.google.com/file/d/1R4PCekblYya8-UpdPCo_lzUGSqZBaiM2/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Zonele climatice ale Terrei – zona caldă", "url": "https://drive.google.com/file/d/1JqiC6p3EtPHI5rLbvSmul8hInf205n1F/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Zonele climatice ale Terrei – zona temperată și zona rece", "url": "https://drive.google.com/file/d/1LLdPpW3q4QkOo9Erqx_BOFCND4xK-tWV/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 36", "title": "Schimbările climatice globale. Procesele și fenomenele geografice de risc", "videos": [{"title": "Evoluția și tendințele de evoluție ale climei", "url": "https://drive.google.com/file/d/1L-bOOEBRDNoD2VGecoomFqhmmohH9c6q/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Fenomene meteorologice extreme – avertizare și protecție (Partea I)", "url": "https://drive.google.com/file/d/1ATvLjCfHHytzDwp4N09ujG1z6OXxpk7L/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Fenomene meteorologice extreme – avertizare și protecție (Partea II)", "url": "https://drive.google.com/file/d/10KNxwvcpdz3alKXJeCW32qaviDdb1YOf/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 37", "title": "Rolul atmosferei în natură și pentru societatea umană. Protecția aerului atmosferic", "videos": [{"title": "Clima și societatea omenească", "url": "https://drive.google.com/file/d/1Lvr5ztS6n8-tQo8ffMTQES3jQew4vqqj/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Influența climei asupra geosferelor", "url": "https://drive.google.com/file/d/1fmL-xjDtzy1GMuWhFJBrqhA7HE_t0kaH/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}]}, {"num": 5, "title": "Hidrosfera", "topics": [{"code": "Tema 39", "title": "Circulația și repartiția apei pe Glob. Componentele hidrosferei. Oceanul Planetar", "videos": [{"title": "Componentele hidrosferei", "url": "https://drive.google.com/file/d/1TnLzEwEfDgTMvEWHadXa5HogjiJdWe1V/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Apele continentale și oceanice (Partea I)", "url": "https://drive.google.com/file/d/1BBq79yOGpyBqnFpH4jX3wWxm6nEx5sYB/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Apele continentale și oceanice (Partea II)", "url": "https://drive.google.com/file/d/1XeHdKXBfNTG5p3IpHjjowIfsbeTEIPwJ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Hidrosfera – caracteristici generale și importanță", "url": "https://drive.google.com/file/d/1_lm61coCMJGkG7s34T-T7UmbtXTu9SEJ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Oceanul Planetar: componente și localizare", "url": "https://drive.google.com/file/d/1AiJJ2EVSvPldd-jTSsCjdn_bBNimrJZU/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Temele 42–43", "title": "Dinamica apelor în ocean: mișcări ondulatorii, ritmice și de translație marină", "videos": [{"title": "Dinamica apelor oceanice", "url": "https://drive.google.com/file/d/1vh749vKC4euDoPCQMSppPS2Uj9scD11b/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Temele 44–45", "title": "Râurile: elementele râului, surse de alimentare, regimul de scurgere, importanța", "videos": [{"title": "Analiza și interpretarea unor date hidrologice", "url": "https://drive.google.com/file/d/1XKJfkz53hyJgTvlwrH2r4QssVZ_nAk1I/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Apele continentale curgătoare", "url": "https://drive.google.com/file/d/1bTHCcKCO8S1o5DJAZ7fRp5NDypgQTwrN/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 46", "title": "Lacurile: clasificare, caracteristici generale, importanța", "videos": [{"title": "Apele continentale stătătoare", "url": "https://drive.google.com/file/d/17mFeyq4Up9NIRd_CD4mwKYBD2RqoM0ou/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 47", "title": "Apele subterane: caracteristici generale, importanța", "videos": [{"title": "Apele continentale subterane", "url": "https://drive.google.com/file/d/1wu9durSv57S1ekWns1ET0-M2oS68Bk-y/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 48", "title": "Mlaștinile și ghețarii: caracteristici generale, importanța", "videos": [{"title": "Ghețarii", "url": "https://drive.google.com/file/d/1HWq2OmzfUw8aWcJ77LitW2uvS62WnQrq/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 49", "title": "Procesele și fenomenele geografice de risc. Rolul hidrosferei și protecția apelor", "videos": [{"title": "Hidrosfera și societatea omenească", "url": "https://drive.google.com/file/d/19UpgZq5MVx55tJsREAO4ugQTTU8tLrpn/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Hidrografia orizontului local. Aplicații practice", "url": "https://drive.google.com/file/d/1KnTkTnX7cry1AjN6cixtvSwe8BcCDZ78/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Resurse de apă potabilă. Măsuri de protecție a apelor (Partea I)", "url": "https://drive.google.com/file/d/1r0um-R3kw0RGOlUo7LdQquXgM8iEntDn/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Resurse de apă potabilă. Măsuri de protecție a apelor (Partea II)", "url": "https://drive.google.com/file/d/1uvKITiNi650R3iZHMO0DXKyP4wkHg3mE/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Avertizare și măsuri de protecție la fenomene extreme în hidrosferă", "url": "https://drive.google.com/file/d/1qVWq6O2KUJ3HRYO1qvN1QUzGWjgQhb3N/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}]}, {"num": 6, "title": "Biosfera și solul", "topics": [{"code": "Temele 51–52", "title": "Biosfera. Factorii de răspândire a lumii organice", "videos": [{"title": "Biosfera și organizarea ei", "url": "https://drive.google.com/file/d/1N-fz9zQvkFygk9H3EK4p81JjUia9KmBm/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Evoluția vieții pe Terra", "url": "https://drive.google.com/file/d/1aWgCJaUsRRq22FG5qBpStRnWCHxPvsfo/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Biosfera – caracteristici generale și importanță", "url": "https://drive.google.com/file/d/15RNPr47JRmpY-4qqHEjkUthbgyn_s88n/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 54", "title": "Solul. Factorii de pedogeneză", "videos": [{"title": "Pedosfera", "url": "https://drive.google.com/file/d/1dXb_im9ng4Sc48McvAgfCQR3hyKDxufe/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Pedosfera – caracteristici generale și importanță", "url": "https://drive.google.com/file/d/1dyDAHedl2veJHDM-xKxAk4MOZCgxroAx/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 55", "title": "Principalele tipuri de sol pe Terra", "videos": [{"title": "Principalele tipuri de soluri și repartiția lor geografică (Partea I)", "url": "https://drive.google.com/file/d/1QxTmg3UhZzeG9qTmFE9Jamu72vIC4kep/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Principalele tipuri de soluri și repartiția lor geografică (Partea II)", "url": "https://drive.google.com/file/d/1N--gGqnuqgiW63IlCyDl4LWhK-wAZZTY/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 56", "title": "Protecția biodiversității și a solurilor", "videos": [{"title": "Protecția plantelor, a animalelor și conservarea solului", "url": "https://drive.google.com/file/d/1sRa-fWMK4v5ALRHshhOkX96Zf_bmcsEG/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 57", "title": "Rolul biosferei și al solului în natură și pentru societatea umană", "videos": [{"title": "Biosfera, solurile și activitatea omenească", "url": "https://drive.google.com/file/d/1avhxGhqLtMl6KTnpwq17-T9JS3UJjjsa/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}]}, {"num": 7, "title": "Mediile geografice", "topics": [{"code": "Tema 59", "title": "Mediul geografic: caracteristici generale", "videos": [{"title": "Peisajele naturale", "url": "https://drive.google.com/file/d/1sjN5UL4_I4MnPyCigbCYXo2W1IfxDzhs/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Tipurile de medii naturale (Partea I)", "url": "https://drive.google.com/file/d/1vcduPZxc18wrUm4rNxTMKAXJIIMBVXLR/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Tipurile de medii naturale (Partea II)", "url": "https://drive.google.com/file/d/1ZkUmLuIt5vI0AezGXpU5H82KgRtWYBgC/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Tipurile de medii naturale (Partea III)", "url": "https://drive.google.com/file/d/1Dol1CboZ-XpE57sfArPgF1othnu2klbr/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Diversitatea peisajelor terestre naturale", "url": "https://drive.google.com/file/d/10uUCHtqc2DeAyrBFiZb_Dd9yqHlF82Yv/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Temele 60–62", "title": "Mediile zonei calde: ecuatorial, subecuatorial, tropical", "videos": [{"title": "Zonele biopedoclimatice (Partea I)", "url": "https://drive.google.com/file/d/1KGHNKc3HoiZzsE5xjajYp1K5Hqb-1Ria/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Zona biogeografică caldă", "url": "https://drive.google.com/file/d/1Xdu96_KnewoKv8DmpuIb_eWVCPPJuofC/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Temele 64–65", "title": "Mediile temperate", "videos": [{"title": "Zonele biopedoclimatice (Partea II)", "url": "https://drive.google.com/file/d/1Mu0aWpv2UQE69EvcL0ZwS84xjcIQu-v5/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Zona biogeografică temperată", "url": "https://drive.google.com/file/d/16DdHyz-0MEsSAYavSYMiQzltBFIa3hvr/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Temele 66–67", "title": "Mediul subpolar și mediul polar", "videos": [{"title": "Zonele biopedoclimatice (Partea III)", "url": "https://drive.google.com/file/d/18OHS5NCCJNWEyb8R07h1hIHagBISkWAr/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Zona biogeografică rece", "url": "https://drive.google.com/file/d/1iDWMv5rlFFlW6R6zI8o3sY_tOWhGM0UW/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}]}]}, {"id": "md11", "short": "Clasa a XI-a", "title": "Clasa a XI-a", "subtitle": "Geografia umană și economică a lumii: harta politică, resursele, populația, economia mondială și statele lumii", "icon": "🌐", "color": "#0f766e", "soft": "#ccfbf1", "units": [{"num": 1, "title": "Harta politică. Condițiile și resursele naturale", "topics": [{"code": "Tema 1", "title": "Harta politică a lumii: noțiune, etapele de evoluție și modificările principale", "videos": [{"title": "Evoluția în timp a hărții politice (Partea I)", "url": "https://drive.google.com/file/d/1tzV7Ie7TueRYIEwlcqs81NhrR77RfFCX/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Evoluția în timp a hărții politice (Partea II)", "url": "https://drive.google.com/file/d/1L_o8X7q4MpSrAMurJWYvCykLI-Z_Sf_A/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 3", "title": "Probleme actuale: conflictele teritoriale", "videos": [{"title": "Principalele probleme actuale de geografie politică (Partea I)", "url": "https://drive.google.com/file/d/1N89DH6GNMwRNjwWedoMRDawELQI1Xhb0/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Principalele probleme actuale de geografie politică (Partea II)", "url": "https://drive.google.com/file/d/1EUQBd3BiqongVe3DzIJd-iN9314bmsGC/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Temele 4–5", "title": "Tipologia statelor lumii", "videos": [{"title": "Statele și grupările regionale de state (Partea I)", "url": "https://drive.google.com/file/d/1vw2DqByH0T9ol4qH-9662OxHRKEfHc7W/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Statele și grupările regionale de state (Partea II)", "url": "https://drive.google.com/file/d/1WIc5s4OfMXrDzo75GEJ-9CNnOKxaEGg9/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 6", "title": "Condițiile și resursele naturale: noțiuni generale. Clasificarea resurselor naturale", "videos": [{"title": "Resursele naturale și valorificarea acestora", "url": "https://drive.google.com/file/d/1z_STvRWyz8incRb102cj_hR6kRmW5JSy/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Tema 7", "title": "Resursele extraatmosferice și ale atmosferei", "videos": [{"title": "Resursele extraatmosferice și ale atmosferei", "url": "https://drive.google.com/file/d/1e1Sg94ZdUuzXS1sUXsxRigtcSPcWLNcK/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 8", "title": "Resursele hidrosferei", "videos": [{"title": "Resursele hidrosferei", "url": "https://drive.google.com/file/d/1kZ9vnN19b-8VHKgoLB68sgQ0C8QPpbJO/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 9", "title": "Resursele litosferei", "videos": [{"title": "Resursele litosferei (Partea I)", "url": "https://drive.google.com/file/d/1rVDQmEHTcMfq0jAhiFcF-k2QyzOKoVX2/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Resursele litosferei (Partea II)", "url": "https://drive.google.com/file/d/1Z9HIW7gvpEYi1UpcTCX8vgeaprfhWOjk/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 10", "title": "Resursele biosferei. Resursele de sol", "videos": [{"title": "Resursele biosferei", "url": "https://drive.google.com/file/d/1krcAP9GeR41aDy7J6hW1sAtC_pfZbvi7/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}]}, {"num": 2, "title": "Populația Terrei și așezările umane", "topics": [{"code": "Temele 13–14", "title": "Dinamica numerică și mișcarea naturală a populației. Politici demografice", "videos": [{"title": "Dinamica populației", "url": "https://drive.google.com/file/d/1oWDvqMz1tkUcjRZ2_K6PNQCMaXueiiPD/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Bilanțul natural al populației", "url": "https://drive.google.com/file/d/1pxQ8F_41nDsMFTgd6uA-8dHRLauKzt5e/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Bilanțul total al populației", "url": "https://drive.google.com/file/d/1leNX1YWgWnjfIFO0X-x3Bc75Ck2VrNwV/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Evoluția numerică a populației", "url": "https://drive.google.com/file/d/137MoavVWARea-Hd07CyhrRhQ-bujPVY4/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 15", "title": "Mobilitatea teritorială a populației: factori de mobilitate, tipizare, importanță", "videos": [{"title": "Mobilitatea teritorială a populației", "url": "https://drive.google.com/file/d/1wujYulO-ycU0tMc5SxvypYFhJTqbjvUa/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 16", "title": "Repartiția geografică și densitatea populației", "videos": [{"title": "Tipuri de medii de viață (Partea I)", "url": "https://drive.google.com/file/d/1C6ZY3oXD3OL3kl0qtdhze1Jel05023le/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Tipuri de medii de viață (Partea II)", "url": "https://drive.google.com/file/d/1zDJKOxXRnbeZacyQlXpwSZdr9GkDWvRC/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Răspândirea geografică a populației (Partea I)", "url": "https://drive.google.com/file/d/1Ya9KKt0VPXNh39kiOrdQWF7nWagS6eae/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Răspândirea geografică a populației (Partea II)", "url": "https://drive.google.com/file/d/1KiaQXJQ2tPSnycR6NbHkk_wxi14Wme_T/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Populația Terrei: evoluția numerică, răspândirea, diversitatea și mobilitatea", "url": "https://drive.google.com/file/d/1qe0fuIHSQK8KL_pW10YvNREeWGVJMjaq/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Temele 17–19", "title": "Structura populației (rasială, etno-lingvistică, confesională, pe grupe de vârstă și socio-economică)", "videos": [{"title": "Structuri demografice", "url": "https://drive.google.com/file/d/1brqh1B_5tClrwQJHAQipPcMv_nrxi7Et/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 21", "title": "Habitatul uman. Așezările rurale și așezările urbane: caracteristici generale, clasificare", "videos": [{"title": "Habitatul uman: definire și componente", "url": "https://drive.google.com/file/d/1roPFnMIrZrmDTVUhb_WLhyBs2WXNJaVM/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Organizarea spațiului urban și rural (Partea I)", "url": "https://drive.google.com/file/d/1AogsDtrGU1ET8OJj5DVkAsztZ25J_j_N/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Organizarea spațiului urban și rural (Partea II)", "url": "https://drive.google.com/file/d/1CwjWamCA4laiU0FBPExFT3VyREedX_lK/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Funcțiile și structura funcțională a așezărilor omenești", "url": "https://drive.google.com/file/d/1JdgZurijFg5Na8l3OktZuRdGox70d237/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Peisaje rurale", "url": "https://drive.google.com/file/d/1dnZEjMmiWJKiyAczD7qRQUNE0ZF033Sj/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Organizarea spațiului urban și rural. Planul orașului", "url": "https://drive.google.com/file/d/1_5gf1KaTk5Lt1vhTJx1NNcOIrQlDx9iQ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Amenajarea locală și regională", "url": "https://drive.google.com/file/d/19hrPguU8vu7Tirmn2YgeKZxBmxsfrIQs/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Așezările omenești: forme de locuire (Partea I)", "url": "https://drive.google.com/file/d/1klGmn4XCGes5yNkQqBN1M4r1pIXN4KtV/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Așezările omenești: forme de locuire (Partea II)", "url": "https://drive.google.com/file/d/1Z99P_RfTRkoWu65muRL6ResF7juk6hFP/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Tema 22", "title": "Urbanizarea. Formele de aglomerare urbană", "videos": [{"title": "Urbanizarea", "url": "https://drive.google.com/file/d/1X8gYy3zX2qAFnnRnUx44n6DB73TdFGG6/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Dinamica urbană și explozia urbană", "url": "https://drive.google.com/file/d/1SdPKploNpbgb8LQ3oKye51ex9sqEKUBe/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Forme de aglomerare urbană", "url": "https://drive.google.com/file/d/1zKH_ex74KDUd1Yr4YkusUL32TMe62tdM/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Metropole – megalopolisuri", "url": "https://drive.google.com/file/d/1xyl8AMhjvoGpft2KSpH-zDe4oTPWtll-/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}]}, {"num": 3, "title": "Economia mondială. Agricultura și industria", "topics": [{"code": "Tema 25", "title": "Structura economiei mondiale. Diviziunea geografică internațională a muncii", "videos": [{"title": "Domeniile activităților economice pe Terra: agricultura, industria, serviciile", "url": "https://drive.google.com/file/d/181ykSB8e85DX372yu1aS-t2fHCgTM9nw/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Tema 26", "title": "Agricultura mondială: factori și tendințe de dezvoltare, structura pe ramuri", "videos": [{"title": "Evoluția în timp și spațiu a practicilor agricole", "url": "https://drive.google.com/file/d/1EEbfoLTg1hJ-ygawt0frJBwcwJGv8Hx5/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Tipuri și structuri teritoriale agricole", "url": "https://drive.google.com/file/d/1OIjie6UsTCIvp4D2nA3quHfGfrzPkSMH/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Regiuni și peisaje agricole", "url": "https://drive.google.com/file/d/1OS9m2M93a33_JZAMTbkfhfX1PPUKiYZF/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 29", "title": "Industria: factori de amplasare și tendințe de dezvoltare, structura pe ramuri", "videos": [{"title": "Evoluția activităților industriale", "url": "https://drive.google.com/file/d/1oCmrh4yN4RXJQj6GAUnFLE5CRsVPV_Uz/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Regiunile industriale", "url": "https://drive.google.com/file/d/1ZH1RvkaXbvIXNLKA9s6Nk3jtAPJefhgK/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Studiu de caz: analiza a două regiuni industriale", "url": "https://drive.google.com/file/d/1E4JZlzzb1auujZAqhybASWiMnb6eyDYC/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Temele 30–31", "title": "Industria energetică", "videos": [{"title": "Industria energiei electrice", "url": "https://drive.google.com/file/d/1Ix14Cjr0dlSmAY95fz9UrVRMxXaCkabB/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}]}, {"num": 4, "title": "Economia mondială. Sectorul serviciilor și relațiile economice", "topics": [{"code": "Tema 39", "title": "Sectorul serviciilor: rolul în economie, structura pe ramuri", "videos": [{"title": "Serviciile: definire și tipuri", "url": "https://drive.google.com/file/d/15z9ipyxfBChXsOnat5nmtRkwVxfNe2_i/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Temele 40–41", "title": "Transporturile și comunicațiile", "videos": [{"title": "Căi de comunicație și transporturi", "url": "https://drive.google.com/file/d/1pjJlpxM1k4UXnYq1zydzziND_YZ0XNFi/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Temele 42–43", "title": "Turismul: factori de dezvoltare, clasificare. Marile zone turistice ale Globului", "videos": [{"title": "Turismul", "url": "https://drive.google.com/file/d/1ZjgJ49e_WecD9sytliX57UqpKadwbaph/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 45", "title": "Relațiile economice internaționale: formele principale, importanța", "videos": [{"title": "Comerțul", "url": "https://drive.google.com/file/d/1N0eBLPLah3KadvF2is65Mn__6CUhCrWG/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 46", "title": "Principalele organizații de integrare economică (UE, NAFTA, ASEAN, OPEC)", "videos": [{"title": "Marile ansambluri economice și geopolitice ale lumii (Partea I)", "url": "https://drive.google.com/file/d/13uCQRRWJJ6Sxc8mfoXWc7gnRYMpaL9ys/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Marile ansambluri economice și geopolitice ale lumii (Partea II)", "url": "https://drive.google.com/file/d/1Zk_yE8Y34ECujHvSZKi3gJVSHWF7eoE4/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Uniunea Europeană și un ansamblu extraeuropean", "url": "https://drive.google.com/file/d/1udfxpO_MlcT0sILGvwlaeeh54Jl3Uuiz/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "ASEAN", "url": "https://drive.google.com/file/d/1feeBJ_mjhyrGmLP81bgmWIiVCngNcG9K/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Uniunea Europeană", "url": "https://drive.google.com/file/d/1DolLDbyT2xvqTfFB8ktr-uSmgUZF7YAZ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}]}, {"num": 5, "title": "Caracterizarea economico-geografică a statelor Europei", "topics": [{"code": "Tema 51", "title": "Franța", "videos": [{"title": "Franța", "url": "https://drive.google.com/file/d/1SeNtESBf3LIb794wc-aaM_08z3UlH3RY/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Tema 52", "title": "Germania", "videos": [{"title": "Germania", "url": "https://drive.google.com/file/d/1OUMDG0lft0ZUo3VJkmNOsiEpLmHN8m2O/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Tema 53", "title": "România", "videos": [{"title": "Limite și vecini (România)", "url": "https://drive.google.com/file/d/1EdIhib2UtqA0EV5s43V8gXjQIdeNVtIE/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}, {"title": "Locuitorii României", "url": "https://drive.google.com/file/d/1xrKF56fFKR4XQRsQwDXGcskEDz4EE7v6/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}, {"title": "Așezările omenești (România)", "url": "https://drive.google.com/file/d/1ZoBhkWQtDXdlBNqOFm1iUsMZCioJwLfm/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}, {"title": "Resurse și activități industriale (România)", "url": "https://drive.google.com/file/d/1HTy-lYBGFIvBE_tllmwQ66biCll6ZbPP/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}, {"title": "Principalele produse agricole (România)", "url": "https://drive.google.com/file/d/1J8uyx50K-3jlmXJ3LjBfr8R5YqFOFFap/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}, {"title": "Transporturile și căile de comunicație (România)", "url": "https://drive.google.com/file/d/1KBmdAIcoJrdC703cigREW3TW3BaXo4o0/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}, {"title": "Orașul București – caracterizare geografică", "url": "https://drive.google.com/file/d/1VQEz6EycaVEbgg8HpNXcqZkNYKt8a6yw/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/4-clasa", "src": "cl. IV RO"}]}, {"code": "Tema 55", "title": "Rusia", "videos": [{"title": "Federația Rusă", "url": "https://drive.google.com/file/d/1AWe408Rd89VKGT8B_SrGCPazMf4O9PZl/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}]}, {"num": 6, "title": "Caracterizarea economico-geografică a statelor extraeuropene", "topics": [{"code": "Temele 57–60", "title": "Asia: China, Japonia, India", "videos": [{"title": "Studii de caz: particularități geografice ale unor state din Asia (Partea I)", "url": "https://drive.google.com/file/d/1uL_CkPjDtTI_cGxkXY13wYJvOLzB1xK2/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Studii de caz: particularități geografice ale unor state din Asia (Partea II)", "url": "https://drive.google.com/file/d/1Ul4OiYNDxTqD2ov3Kek-7QcyE6R_KU88/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Activitățile economice ale Asiei (Partea I)", "url": "https://drive.google.com/file/d/1hcYnoRGmfDCpaYj5j4wC6jiOSYj-r-B6/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Activitățile economice ale Asiei (Partea II)", "url": "https://drive.google.com/file/d/1gq8j5r55z7MOaJndWBZR9TM89MBujejv/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Contraste economice regionale (Asia)", "url": "https://drive.google.com/file/d/1BS4mm3cRYdOe8i7FOL06RFAAwq0efrrQ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Temele 61–63", "title": "America de Nord și de Sud: SUA, Brazilia", "videos": [{"title": "Particularități geografice ale unor state din Americi (Partea I)", "url": "https://drive.google.com/file/d/1EewMcYg7aB0Zq372jHhx7CmFc_4331Oz/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Particularități geografice ale unor state din Americi (Partea II)", "url": "https://drive.google.com/file/d/1iV1Gh2eQQ8bCXXWO7DbqTK3gmr1LS1eO/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Diferențieri economice regionale (Americile)", "url": "https://drive.google.com/file/d/1s-2q6Gf669NoQMsD8lkqNc6UsWbxNaV2/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Temele 64–65, 67", "title": "Africa: Egipt, Republica Africa de Sud", "videos": [{"title": "Caracterizarea geografică a unor state africane (Partea I)", "url": "https://drive.google.com/file/d/1yBeUYxSFZLb2ww8FdPexCxkNwNlQ_EqS/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Caracterizarea geografică a unor state africane (Partea II)", "url": "https://drive.google.com/file/d/1wvw8XyxGwRRET6KnLNZaVqmLlnJHzpOa/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 68", "title": "Australia și Oceania: Uniunea Australiană", "videos": [{"title": "Australia – caracterizare socio-economică", "url": "https://drive.google.com/file/d/1Mz_NxU5GzNvmgpCIbHwN01qKLqoG9YnX/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}]}]}, {"id": "md12", "short": "Clasa a XII-a", "title": "Clasa a XII-a", "subtitle": "Geografia mediului: mediul geografic, calitatea și protecția mediului, problemele globale și dezvoltarea sustenabilă", "icon": "🌱", "color": "#15803d", "soft": "#dcfce7", "units": [{"num": 1, "title": "Mediul geografic", "topics": [{"code": "Tema 1", "title": "Învelișul geografic: părți structurale, particularități și legități", "videos": [{"title": "Geosferele Terrei", "url": "https://drive.google.com/file/d/1DZfvtYHoGAbi9S6BjaORscIKMnlPiLai/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 2", "title": "Componentele mediului geografic: abiotice, biotice, antropice", "videos": [{"title": "Componentele mediului înconjurător și relațiile dintre acestea", "url": "https://drive.google.com/file/d/11_q9LUHysFCoizRewCaz3_Wago5oWeHf/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Factorii geoecologici naturali", "url": "https://drive.google.com/file/d/1LBdlLIfGfIqXw4h7_GExwDdWLesGXCHC/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Tema 3", "title": "Interacțiunea dintre componentele mediului geografic la nivel local, regional și global", "videos": [{"title": "Interacțiunile dintre elementele naturale ale mediului (Partea I)", "url": "https://drive.google.com/file/d/13t2ZFbO9JqXdxpsbemRxShWLLwnfjsoE/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Interacțiunile dintre elementele naturale ale mediului (Partea II)", "url": "https://drive.google.com/file/d/15TjEr6Mj7-H1PgREQkkcxkhsBocJneMO/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Interacțiunile dintre om și mediul terestru", "url": "https://drive.google.com/file/d/1UxU7NpGAwnEf_xPGdjdggA__aT05Wp5l/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Rolul mediului geografic în evoluția și dezvoltarea societății omenești", "url": "https://drive.google.com/file/d/1WpqfOLOa5SjoVte7vo8Sj-8TB19nG37Z/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}]}, {"num": 2, "title": "Calitatea, valorificarea și protecția mediului în lume și în Republica Moldova", "topics": [{"code": "Tema 6", "title": "Calitatea mediului în lume și în Republica Moldova. Monitoringul mediului", "videos": [{"title": "Efectele activităților umane asupra mediului și calitatea vieții", "url": "https://drive.google.com/file/d/1mXCLRzQhXDRkYxWD5THHEO6UHVxWjvuO/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Degradarea mediului înconjurător – o problemă a lumii contemporane", "url": "https://drive.google.com/file/d/1Cc4IcAoq3aMMAW7cUnl-0dbUiLX58JwI/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 8", "title": "Calitatea, valorificarea și protecția mediului acvatic", "videos": [{"title": "Hidrosfera și societatea omenească", "url": "https://drive.google.com/file/d/19UpgZq5MVx55tJsREAO4ugQTTU8tLrpn/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Resurse de apă potabilă. Măsuri de protecție a apelor (Partea I)", "url": "https://drive.google.com/file/d/1r0um-R3kw0RGOlUo7LdQquXgM8iEntDn/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Resurse de apă potabilă. Măsuri de protecție a apelor (Partea II)", "url": "https://drive.google.com/file/d/1uvKITiNi650R3iZHMO0DXKyP4wkHg3mE/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Temele 9–11", "title": "Calitatea, valorificarea și protecția vegetației naturale, lumii animale și solului", "videos": [{"title": "Biosfera, solurile și activitatea omenească", "url": "https://drive.google.com/file/d/1avhxGhqLtMl6KTnpwq17-T9JS3UJjjsa/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}, {"title": "Protecția plantelor, a animalelor și conservarea solului", "url": "https://drive.google.com/file/d/1sRa-fWMK4v5ALRHshhOkX96Zf_bmcsEG/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}]}, {"num": 3, "title": "Problemele globale ale lumii contemporane", "topics": [{"code": "Tema 17", "title": "Modificările climatice, despădurirea și deșertificarea la nivel global, regional și local", "videos": [{"title": "Modificări globale ale mediului", "url": "https://drive.google.com/file/d/13wC9mjog1wny2wUgRn3CirHcVfjYVuaU/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Evoluția și tendințele de evoluție ale climei", "url": "https://drive.google.com/file/d/1L-bOOEBRDNoD2VGecoomFqhmmohH9c6q/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/9-clasa", "src": "cl. IX RO"}]}, {"code": "Tema 18", "title": "Poluarea mediului sub aspect global și local", "videos": [{"title": "Degradarea mediului înconjurător – o problemă a lumii contemporane", "url": "https://drive.google.com/file/d/1Cc4IcAoq3aMMAW7cUnl-0dbUiLX58JwI/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Efectele activităților umane asupra mediului și calitatea vieții", "url": "https://drive.google.com/file/d/1mXCLRzQhXDRkYxWD5THHEO6UHVxWjvuO/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}]}, {"code": "Tema 19", "title": "Asigurarea societății umane cu resurse naturale la nivel mondial și în Republica Moldova", "videos": [{"title": "Resursele naturale și valorificarea acestora", "url": "https://drive.google.com/file/d/1z_STvRWyz8incRb102cj_hR6kRmW5JSy/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Resursele extraatmosferice și ale atmosferei", "url": "https://drive.google.com/file/d/1e1Sg94ZdUuzXS1sUXsxRigtcSPcWLNcK/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Resursele litosferei (Partea I)", "url": "https://drive.google.com/file/d/1rVDQmEHTcMfq0jAhiFcF-k2QyzOKoVX2/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Resursele litosferei (Partea II)", "url": "https://drive.google.com/file/d/1Z9HIW7gvpEYi1UpcTCX8vgeaprfhWOjk/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 20", "title": "Asigurarea cu apă potabilă la nivel mondial și local", "videos": [{"title": "Resursele hidrosferei", "url": "https://drive.google.com/file/d/1kZ9vnN19b-8VHKgoLB68sgQ0C8QPpbJO/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Resurse de apă potabilă. Măsuri de protecție a apelor (Partea I)", "url": "https://drive.google.com/file/d/1r0um-R3kw0RGOlUo7LdQquXgM8iEntDn/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Resurse de apă potabilă. Măsuri de protecție a apelor (Partea II)", "url": "https://drive.google.com/file/d/1uvKITiNi650R3iZHMO0DXKyP4wkHg3mE/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 21", "title": "Problema demografică și a migrației populației la nivel mondial și în Republica Moldova", "videos": [{"title": "Mobilitatea teritorială a populației", "url": "https://drive.google.com/file/d/1wujYulO-ycU0tMc5SxvypYFhJTqbjvUa/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Evoluția numerică a populației", "url": "https://drive.google.com/file/d/137MoavVWARea-Hd07CyhrRhQ-bujPVY4/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 24", "title": "Hazardurile naturale și antropice la nivel mondial și în Republica Moldova", "videos": [{"title": "Vulcanii și cutremurele", "url": "https://drive.google.com/file/d/16hXsTDN3HokS3RWvVH_eKbKeIAIy3E6c/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Fenomene meteorologice extreme (Partea I)", "url": "https://drive.google.com/file/d/1ATvLjCfHHytzDwp4N09ujG1z6OXxpk7L/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Fenomene meteorologice extreme (Partea II)", "url": "https://drive.google.com/file/d/10KNxwvcpdz3alKXJeCW32qaviDdb1YOf/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}, {"title": "Avertizare și măsuri de protecție la fenomene extreme în hidrosferă", "url": "https://drive.google.com/file/d/1qVWq6O2KUJ3HRYO1qvN1QUzGWjgQhb3N/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/5-clasa", "src": "cl. V RO"}]}, {"code": "Tema 25", "title": "Decalajele social-economice dintre statele înalt dezvoltate și cele în curs de dezvoltare", "videos": [{"title": "Contraste economice regionale (Asia)", "url": "https://drive.google.com/file/d/1BS4mm3cRYdOe8i7FOL06RFAAwq0efrrQ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Diferențieri economice regionale (Americile)", "url": "https://drive.google.com/file/d/1s-2q6Gf669NoQMsD8lkqNc6UsWbxNaV2/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Problemele Africii în lumea contemporană (Partea I)", "url": "https://drive.google.com/file/d/1_fUWkKzVdLCTsW6EElNi7--CiSJoK4gJ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}, {"title": "Problemele Africii în lumea contemporană (Partea II)", "url": "https://drive.google.com/file/d/13a21W9vwEseTremIXLF3wd-6jFc-Iib3/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/7-clasa", "src": "cl. VII RO"}]}, {"code": "Tema 26", "title": "Conflictele geopolitice și pacea pe Terra. Problema terorismului", "videos": [{"title": "Principalele probleme actuale de geografie politică (Partea I)", "url": "https://drive.google.com/file/d/1N89DH6GNMwRNjwWedoMRDawELQI1Xhb0/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}, {"title": "Principalele probleme actuale de geografie politică (Partea II)", "url": "https://drive.google.com/file/d/1EUQBd3BiqongVe3DzIJd-iN9314bmsGC/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}]}, {"num": 4, "title": "Dezvoltarea sustenabilă în lume și în Republica Moldova", "topics": [{"code": "Tema 28", "title": "Dezvoltarea sustenabilă: caracteristici generale", "videos": [{"title": "Populația, protecția mediului înconjurător și dezvoltarea durabilă", "url": "https://drive.google.com/file/d/1Zpau3uUowZsOHSqVLrcAMg87tpaP6fee/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}, {"code": "Tema 30", "title": "Rolul Uniunii Europene în dezvoltarea sustenabilă a lumii contemporane", "videos": [{"title": "Uniunea Europeană", "url": "https://drive.google.com/file/d/1DolLDbyT2xvqTfFB8ktr-uSmgUZF7YAZ/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Valori culturale și umane europene", "url": "https://drive.google.com/file/d/1OAJNibFLJ201tTPpF0qmLuw0WX2G5pVG/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Calitatea vieții în Europa", "url": "https://drive.google.com/file/d/1W3FWlTr1a83MJxjS39z4wrAI6IVGjkIA/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/6-clasa", "src": "cl. VI RO"}, {"title": "Uniunea Europeană și un ansamblu extraeuropean", "url": "https://drive.google.com/file/d/1udfxpO_MlcT0sILGvwlaeeh54Jl3Uuiz/view?usp=sharing", "eduboom": "https://eduboom.ro/lectii-pe-materii/geografie/10-clasa", "src": "cl. X RO"}]}]}]}]};
+const STORAGE_KEY = 'geo_video_md_watched_v1';
+
+let activeClass = 'all';
+let watchedSet = new Set();
+
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (Array.isArray(saved)) watchedSet = new Set(saved);
+} catch (e) {}
+
+function saveWatched() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...watchedSet]));
+  } catch (e) {}
+  updateProgress();
+}
+
+function normalize(str) {
+  return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function countClassVideos(c) {
+  return c.units.reduce((acc, u) => acc + u.topics.reduce((a, t) => a + t.videos.length, 0), 0);
+}
+
+function countClassTopics(c) {
+  return c.units.reduce((acc, u) => acc + u.topics.length, 0);
+}
+
+function renderTabs() {
+  const bar = document.getElementById('classTabs');
+  const totalV = PORTAL_DATA.classes.reduce((acc, c) => acc + countClassVideos(c), 0);
+  const btns = [`<button type="button" class="class-tab active" data-cls="all">📚 Toate clasele <span class="tab-cnt">${totalV}</span></button>`];
+  PORTAL_DATA.classes.forEach(c => {
+    btns.push(`<button type="button" class="class-tab" data-cls="${c.id}">${c.icon} ${escapeHtml(c.short)} <span class="tab-cnt">${countClassVideos(c)}</span></button>`);
+  });
+  bar.innerHTML = btns.join('');
+  bar.querySelectorAll('.class-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.class-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeClass = btn.dataset.cls;
+      applyFilters();
+      if (activeClass !== 'all' && !document.getElementById('searchInput').value.trim()) {
+        const sec = document.querySelector(`.class-section[data-cls="${activeClass}"]`);
+        if (sec) {
+          sec.querySelectorAll('.unit-item').forEach((u, i) => {
+            if (i === 0) {
+              u.classList.add('open');
+              u.querySelector('.unit-summary').setAttribute('aria-expanded', 'true');
+            }
+          });
+        }
+      }
+    });
+  });
+}
+
+function renderClasses() {
+  const wrap = document.getElementById('classesContainer');
+  wrap.innerHTML = PORTAL_DATA.classes.map((c, cIdx) => {
+    const clsTopics = countClassTopics(c);
+    const clsVids = countClassVideos(c);
+
+    const unitsHtml = c.units.map((u, uIdx) => {
+      const uVids = u.topics.reduce((a, t) => a + t.videos.length, 0);
+      const isOpen = (cIdx === 0 && uIdx === 0);
+
+      const topicsHtml = u.topics.map((t, tIdx) => {
+        const vidsHtml = t.videos.map((v, vIdx) => {
+          const key = `${c.id}_u${u.num}_t${tIdx}_v${vIdx}`;
+          const isWatched = watchedSet.has(key);
+          const searchBlob = normalize(`${c.title} unitatea ${u.num} ${u.title} ${t.code} ${t.title} ${v.title} ${v.src}`);
+          return `
+            <div class="video-row ${isWatched ? 'watched' : ''}" data-key="${key}" data-search="${escapeHtml(searchBlob)}">
+              <div class="vid-main">
+                <input type="checkbox" class="vid-check" data-key="${key}" ${isWatched ? 'checked' : ''} title="Marchează ca vizionată">
+                <div class="vid-text">
+                  <a class="vid-title-link" href="${v.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(v.title)}</a>
+                  <span class="vid-src">Sursă: Eduboom (${escapeHtml(v.src)})</span>
+                </div>
+              </div>
+              <div class="vid-actions">
+                <a class="btn-play" href="${v.url}" target="_blank" rel="noopener noreferrer">▶ Video</a>
+                <a class="btn-edu" href="${v.eduboom}" target="_blank" rel="noopener noreferrer" title="Deschide pagina clasei pe eduboom.ro pentru test">📝 Eduboom</a>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="topic-card">
+            <div class="topic-head">
+              <span class="topic-code">${escapeHtml(t.code)}</span>
+              <span class="topic-title">${escapeHtml(t.title)}</span>
+            </div>
+            <div class="video-list ${t.videos.length === 1 ? 'single' : ''}">${vidsHtml}</div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="unit-item ${isOpen ? 'open' : ''}">
+          <button type="button" class="unit-summary" aria-expanded="${isOpen}">
+            <span class="unit-left">
+              <span class="unit-badge">Unitatea ${u.num}</span>
+              <span class="unit-name">${escapeHtml(u.title)}</span>
+            </span>
+            <span class="unit-right">
+              <span class="unit-count">🗂️ ${u.topics.length} ${u.topics.length === 1 ? 'temă' : 'teme'}</span>
+              <span class="unit-count">🎬 ${uVids} video</span>
+              <span class="chevron">▼</span>
+            </span>
+          </button>
+          <div class="unit-body">
+            <div class="topics-stack">${topicsHtml}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section class="class-section" data-cls="${c.id}" style="--ccol:${c.color}; --csoft:${c.soft};">
+        <div class="class-header">
+          <div class="class-head-left">
+            <div class="class-icon">${c.icon}</div>
+            <div>
+              <div class="class-kicker">${c.units.length} unități • ${clsTopics} teme cu video • ${clsVids} lecții video</div>
+              <h2 class="class-title">${escapeHtml(c.title)}</h2>
+              <p class="class-sub">${escapeHtml(c.subtitle)}</p>
+            </div>
+          </div>
+        </div>
+        <div class="units-list">${unitsHtml}</div>
+      </section>
+    `;
+  }).join('');
+
+  wrap.querySelectorAll('.unit-summary').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.unit-item');
+      const nowOpen = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+    });
+  });
+
+  wrap.querySelectorAll('.vid-check').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const k = cb.dataset.key;
+      const row = cb.closest('.video-row');
+      if (cb.checked) {
+        watchedSet.add(k);
+        row.classList.add('watched');
+      } else {
+        watchedSet.delete(k);
+        row.classList.remove('watched');
+      }
+      saveWatched();
+    });
+  });
+}
+
+function updateProgress() {
+  const total = 302;
+  const done = watchedSet.size;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progressText').textContent = `Vizionate: ${done} / ${total} (${pct}%)`;
+  document.getElementById('progressFill').style.width = `${pct}%`;
+}
+
+function applyFilters() {
+  const q = normalize(document.getElementById('searchInput').value.trim());
+  let visibleVideos = 0;
+
+  document.querySelectorAll('.class-section').forEach(sec => {
+    const matchCls = activeClass === 'all' || sec.dataset.cls === activeClass;
+    let secVisible = 0;
+
+    sec.querySelectorAll('.unit-item').forEach(unit => {
+      let unitVisible = 0;
+
+      unit.querySelectorAll('.topic-card').forEach(topic => {
+        let topicVisible = 0;
+        topic.querySelectorAll('.video-row').forEach(row => {
+          const matchQuery = !q || row.dataset.search.includes(q);
+          const show = matchCls && matchQuery;
+          row.classList.toggle('hidden', !show);
+          if (show) {
+            topicVisible++;
+            unitVisible++;
+            secVisible++;
+            visibleVideos++;
+          }
+        });
+        topic.classList.toggle('hidden', topicVisible === 0);
+      });
+
+      unit.classList.toggle('hidden', unitVisible === 0);
+      if (q && unitVisible > 0) {
+        unit.classList.add('open');
+        unit.querySelector('.unit-summary').setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    sec.classList.toggle('hidden', secVisible === 0);
+  });
+
+  document.getElementById('emptySearch').style.display = visibleVideos === 0 ? 'block' : 'none';
+}
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+document.getElementById('expandAllBtn').addEventListener('click', () => {
+  document.querySelectorAll('.class-section:not(.hidden) .unit-item:not(.hidden)').forEach(u => {
+    u.classList.add('open');
+    u.querySelector('.unit-summary').setAttribute('aria-expanded', 'true');
+  });
+});
+
+document.getElementById('collapseAllBtn').addEventListener('click', () => {
+  document.querySelectorAll('.unit-item').forEach(u => {
+    u.classList.remove('open');
+    u.querySelector('.unit-summary').setAttribute('aria-expanded', 'false');
+  });
+});
+
+renderTabs();
+renderClasses();
+updateProgress();
+</script>
+
+</body>
+</html>
