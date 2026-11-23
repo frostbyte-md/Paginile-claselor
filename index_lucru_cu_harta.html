@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucru cu Harta | Atlas & Hărți Contur – Geografie</title>
+<style>
+  :root {
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --ink: #0f172a;
+    --muted: #475569;
+    --border: #e2e8f0;
+    --navy: #0f172a;
+    --accent: #0f766e;
+    --atlas-color: #0284c7;
+    --atlas-soft: #e0f2fe;
+    --atlas-text: #075985;
+    --cont-color: #d97706;
+    --cont-soft: #fef3c7;
+    --cont-text: #92400e;
+    --phys-bg: #dcfce7;
+    --phys-tx: #166534;
+    --pol-bg: #ede9fe;
+    --pol-tx: #5b21b6;
+    --gen-bg: #e0f2fe;
+    --gen-tx: #075985;
+    --radius: 16px;
+    --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #164e63 52%, #0f766e 100%);
+    color: #fff;
+    padding: 42px 20px 58px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 38px 38px;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.24);
+    backdrop-filter: blur(6px);
+    padding: 6px 15px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 4.2vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .hero p {
+    margin: 0 auto 22px;
+    max-width: 720px;
+    font-size: clamp(14.5px, 1.9vw, 17px);
+    color: #cffafe;
+  }
+  .hero-stats {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .hero-stat {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 7px 14px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #f8fafc;
+  }
+
+  /* CONTROLS */
+  .controls-wrap {
+    max-width: 1220px;
+    margin: -26px auto 0;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
+  .controls-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.09);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .mode-switch {
+    display: inline-flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .mode-btn {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 13px;
+    border-radius: 9px;
+    font-size: 13.4px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mode-btn:hover { color: var(--ink); }
+  .mode-btn.active {
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+  }
+  .search-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 280px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .search-input {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 8px 13px;
+    font-size: 14px;
+    color: var(--ink);
+    min-width: 220px;
+    flex: 1 1 240px;
+    max-width: 360px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  .region-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .region-pill {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12.8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .region-pill:hover {
+    border-color: #94a3b8;
+    color: var(--ink);
+  }
+  .region-pill.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 26px 20px 64px;
+  }
+
+  /* LEGEND STRIP */
+  .legend-banner {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-left: 4px solid #0f766e;
+    border-radius: 12px;
+    padding: 11px 16px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 13.3px;
+    color: var(--muted);
+  }
+  .legend-items {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .legend-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12.2px;
+    font-weight: 700;
+  }
+  .legend-chip.c-atlas { background: var(--atlas-soft); color: var(--atlas-text); }
+  .legend-chip.c-cont  { background: var(--cont-soft); color: var(--cont-text); }
+  .legend-chip.c-phys  { background: var(--phys-bg); color: var(--phys-tx); }
+  .legend-chip.c-pol   { background: var(--pol-bg); color: var(--pol-tx); }
+
+  /* GENERAL RESOURCES */
+  .section-label {
+    margin: 0 0 12px;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .root-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .root-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .root-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+  }
+  .root-stripe {
+    height: 5px;
+    background: var(--rc, #0f766e);
+  }
+  .root-body {
+    padding: 15px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .root-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .root-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--rs, #ccfbf1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+  }
+  .root-tag {
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--rs, #ccfbf1);
+    color: var(--rc, #0f766e);
+  }
+  .root-card h3 {
+    margin: 0 0 6px;
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--navy);
+  }
+  .root-card p {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1;
+  }
+  .root-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    background: var(--rc, #0f766e);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13.2px;
+    font-weight: 700;
+    transition: filter 0.15s;
+  }
+  .root-cta:hover { filter: brightness(1.08); }
+
+  /* REGION CARDS */
+  .region-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 22px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .region-section.hidden { display: none; }
+  .region-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: linear-gradient(90deg, var(--rsoft, #f8fafc) 0%, #ffffff 58%);
+    border-left: 6px solid var(--rcol, #0f766e);
+  }
+  .region-head-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    flex: 1 1 360px;
+  }
+  .region-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+    background: #ffffff;
+    border: 1px solid rgba(15,23,42,0.08);
+    box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .region-title {
+    margin: 0 0 2px;
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .region-desc {
+    margin: 0;
+    font-size: 13.3px;
+    color: var(--muted);
+  }
+  .region-counts {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+  .count-pill {
+    font-size: 11.8px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .count-pill.cp-atlas { background: var(--atlas-soft); color: var(--atlas-text); }
+  .count-pill.cp-cont  { background: var(--cont-soft); color: var(--cont-text); }
+
+  /* TWO COLUMNS INSIDE REGION */
+  .cols-wrap {
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    background: #fbfdff;
+  }
+  body.view-atlas .cols-wrap,
+  body.view-contour .cols-wrap {
+    grid-template-columns: 1fr;
+  }
+  body.view-atlas .col-contour { display: none; }
+  body.view-contour .col-atlas { display: none; }
+
+  .map-col {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 13px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .map-col.col-atlas   { border-top: 4px solid var(--atlas-color); }
+  .map-col.col-contour { border-top: 4px solid var(--cont-color); }
+
+  .col-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 2px;
+  }
+  .col-title {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .col-atlas .col-title   { color: var(--atlas-text); }
+  .col-contour .col-title { color: var(--cont-text); }
+
+  .col-sub {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  /* MAP ROW ITEM */
+  .map-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 9px 11px;
+    transition: all 0.15s ease;
+  }
+  .map-row.hidden { display: none; }
+  .col-atlas .map-row:hover   { background: #f0f9ff; border-color: #38bdf8; box-shadow: 0 3px 10px rgba(15,23,42,0.06); }
+  .col-contour .map-row:hover { background: #fffbeb; border-color: #f59e0b; box-shadow: 0 3px 10px rgba(15,23,42,0.06); }
+
+  .map-main {
+    flex: 1;
+    min-width: 0;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .map-name {
+    font-size: 13.8px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--navy);
+  }
+  .map-file {
+    font-size: 11.5px;
+    color: #64748b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .map-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .kind-badge {
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .kind-badge.k-phys { background: var(--phys-bg); color: var(--phys-tx); }
+  .kind-badge.k-pol  { background: var(--pol-bg);  color: var(--pol-tx); }
+  .kind-badge.k-gen  { background: var(--gen-bg);  color: var(--gen-tx); }
+
+  .fmt-badge {
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 3px 7px;
+    border-radius: 6px;
+    background: #e2e8f0;
+    color: #334155;
+    white-space: nowrap;
+  }
+  .col-atlas .fmt-badge   { background: var(--atlas-soft); color: var(--atlas-text); }
+  .col-contour .fmt-badge { background: var(--cont-soft); color: var(--cont-text); }
+
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 800;
+    transition: all 0.15s;
+  }
+  .dl-btn:hover {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #ffffff;
+  }
+
+  .empty-search {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--surface);
+    border: 1px dashed #cbd5e1;
+    border-radius: var(--radius);
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px 20px 36px;
+    color: #64748b;
+    font-size: 13.5px;
+    border-top: 1px solid var(--border);
+    background: #ffffff;
+  }
+  footer strong { color: var(--navy); }
+
+  @media (max-width: 1020px) {
+    .root-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cols-wrap { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 680px) {
+    .root-grid { grid-template-columns: 1fr; }
+    .kind-badge { display: none; }
+    .hero { padding: 34px 16px 48px; }
+    .region-header { padding: 14px 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🧭 Colecție Cartografică • Geografie</div>
+    <h1>Lucru cu Harta</h1>
+    <p>Toate hărțile fizice, politice și de contur grupate pe regiuni geografice, alături de lista completă de obiective geografice — pentru proiecție la tablă, studiu și imprimare rapidă.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">🌍 7 regiuni geografice</div>
+      <div class="hero-stat">🗺️ 10 hărți fizice / politice (PDF)</div>
+      <div class="hero-stat">✏️ 17 hărți contur (PNG / JPG)</div>
+    </div>
+  </div>
+</header>
+
+<div class="controls-wrap">
+  <div class="controls-card">
+    <div class="controls-row">
+      <div class="mode-switch" role="tablist" aria-label="Filtrează tipul de hărți">
+        <button type="button" class="mode-btn active" data-mode="all">🗺️ Toate hărțile (27)</button>
+        <button type="button" class="mode-btn" data-mode="atlas">📖 Fizice / Politice (10)</button>
+        <button type="button" class="mode-btn" data-mode="contour">✏️ Doar Contur (17)</button>
+      </div>
+      <div class="search-actions">
+        <input type="search" id="searchInput" class="search-input" placeholder="🔍 Caută regiunea, „politica”, „relief”, „Moldova”..." aria-label="Caută hărți">
+      </div>
+    </div>
+    <div class="region-pills" id="regionPills"></div>
+  </div>
+</div>
+
+<main class="container">
+
+  <div class="legend-banner">
+    <div class="legend-items">
+      <strong>Legendă rapidă:</strong>
+      <span class="legend-chip c-atlas">📖 Stânga: Hărți PDF (atlas / proiecție)</span>
+      <span class="legend-chip c-cont">✏️ Dreapta: Hărți contur (imprimare / completare)</span>
+      <span class="legend-chip c-phys">RH = Relief & Hidrografie</span>
+      <span class="legend-chip c-pol">HP = Hartă politică</span>
+    </div>
+    <span>💡 Apasă pe titlu pentru vizualizare sau pe <strong>⬇</strong> pentru descărcare directă.</span>
+  </div>
+
+  <h2 class="section-label">📌 Resurse de Bază & Mape Google Drive</h2>
+  <section class="root-grid" id="rootGrid"></section>
+
+  <h2 class="section-label">🌍 Hărți Grupate pe Regiuni Geografice</h2>
+  <div id="regionsContainer"></div>
+
+  <div class="empty-search" id="emptySearch">
+    🔎 Nu am găsit nicio hartă care să corespundă căutării. Încearcă un alt termen (ex.: „Moldova”, „Europa”, „politică”, „relief”, „Africa”).
+  </div>
+
+</main>
+
+<footer>
+  <strong>Lucru cu Harta</strong> • Colecție cartografică organizată pe regiuni • Toate fișierele se deschid direct din Google Drive
+</footer>
+
+<script>
+const MAP_DATA = {"root": [{"tag": "Document de bază", "icon": "📍", "title": "1. Obiective geografice", "desc": "Lista completă de obiective geografice (relief, ape, state, regiuni) pentru studiul și verificarea pe hartă.", "url": "https://docs.google.com/document/d/1hifuzL85cmAJjCKwE-9fuoyjnM8LzCC42Pylz-NhNuY/edit?usp=sharing", "cta": "Deschide lista", "color": "#0f766e", "soft": "#ccfbf1"}, {"tag": "Atlas PDF (10)", "icon": "🗺️", "title": "Folder: Hărți fizice / politice", "desc": "Hărți colorate de înaltă rezoluție în format PDF pentru proiecție la tablă, studiu și orientare.", "url": "https://drive.google.com/drive/folders/1Wmg4mthXEfFy90Nsivk8BynD1HmTMGVz?usp=sharing", "cta": "Deschide mapa PDF", "color": "#0284c7", "soft": "#e0f2fe"}, {"tag": "De completat (17)", "icon": "✏️", "title": "Folder: Hărți contur", "desc": "Hărți mute (relief, hidrografie, politice și administrative) în format PNG/JPG, gata de tipărit sau completat.", "url": "https://drive.google.com/drive/folders/1OugyC0mAEG-904Od0tJZCCnqC2jezEgB?usp=sharing", "cta": "Deschide mapa contur", "color": "#d97706", "soft": "#fef3c7"}, {"tag": "Arhivă completă", "icon": "📂", "title": "Folder: Lucru cu harta", "desc": "Acces direct la mapa principală din Google Drive cu toate hărțile și documentele cartografice.", "url": "https://drive.google.com/drive/folders/1JCVsgBj8Qgqd_hXq1IEuCuhZM7gmupVW?usp=sharing", "cta": "Deschide mapa Drive", "color": "#334155", "soft": "#e2e8f0"}], "regions": [{"id": "r_world", "short": "Lumea", "title": "Harta Lumii (Global)", "desc": "Hărțile fizice, politice și de contur la scară planetară pentru orientare generală și studiul continentelor.", "icon": "🌍", "color": "#2563eb", "soft": "#dbeafe", "atlas": [{"title": "Harta fizică a Lumii", "filename": "Harta fizica a Lumii.pdf", "url": "https://drive.google.com/file/d/1VsT_jnk_86jSB-gCjspmpiXruCXDQyxq/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1VsT_jnk_86jSB-gCjspmpiXruCXDQyxq", "fmt": "PDF", "kind": "phys", "badge": "Fizică"}, {"title": "Harta politică a Lumii", "filename": "Harta Politica a Lumii.pdf", "url": "https://drive.google.com/file/d/119MxPZ-6qR2VjvcUaj6DaA8csTdXQVBs/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=119MxPZ-6qR2VjvcUaj6DaA8csTdXQVBs", "fmt": "PDF", "kind": "pol", "badge": "Politică"}], "contour": [{"title": "Harta Lumii – contur general", "filename": "harta lumii.png", "url": "https://drive.google.com/file/d/1L8n6jbBTQlEodHZq8SuqzlMIPXiosvM5/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1L8n6jbBTQlEodHZq8SuqzlMIPXiosvM5", "fmt": "PNG", "kind": "phys", "badge": "Contur"}, {"title": "Harta politică a Lumii – contur", "filename": "harta politica a lumiib.png", "url": "https://drive.google.com/file/d/1VNAzedUOCdooN8KWayb2N5zFyxJGoF3z/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1VNAzedUOCdooN8KWayb2N5zFyxJGoF3z", "fmt": "PNG", "kind": "pol", "badge": "Politică"}]}, {"id": "r_md", "short": "Republica Moldova", "title": "Republica Moldova și România", "desc": "Hărți fizice, unități de relief, organizarea administrativ-teritorială și harta comună a României și Republicii Moldova.", "icon": "🇲🇩", "color": "#059669", "soft": "#d1fae5", "atlas": [{"title": "Republica Moldova – hartă (varianta 1)", "filename": "1. Moldova.pdf", "url": "https://drive.google.com/file/d/1QmMFHdraDWVNwa1P1oS0YfbQ0ctJdiGq/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1QmMFHdraDWVNwa1P1oS0YfbQ0ctJdiGq", "fmt": "PDF", "kind": "gen", "badge": "Atlas PDF"}, {"title": "Republica Moldova – hartă (varianta 2)", "filename": "1. Moldova2.pdf", "url": "https://drive.google.com/file/d/1tj-aMP-xMT3Ku1jKIg484smVWQVTb9p2/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1tj-aMP-xMT3Ku1jKIg484smVWQVTb9p2", "fmt": "PDF", "kind": "gen", "badge": "Atlas PDF"}], "contour": [{"title": "Republica Moldova – hartă fizică", "filename": "Republica Moldova harta fizică.png", "url": "https://drive.google.com/file/d/1El3A9HcUazN9qYOWLT9mCR2O4sw1VGII/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1El3A9HcUazN9qYOWLT9mCR2O4sw1VGII", "fmt": "PNG", "kind": "phys", "badge": "Fizică"}, {"title": "Republica Moldova – unități de relief", "filename": "Unitati de relief.png", "url": "https://drive.google.com/file/d/1iRHjTG8GhjqivzvBzFRiWtQ53LNmcnkT/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1iRHjTG8GhjqivzvBzFRiWtQ53LNmcnkT", "fmt": "PNG", "kind": "phys", "badge": "Relief"}, {"title": "Republica Moldova – hartă administrativ-teritorială", "filename": "Republica Moldova harta administrativ teritorială.png", "url": "https://drive.google.com/file/d/1bKY5T4pN1d-RgolH54ITsSzVyD5_x_UQ/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1bKY5T4pN1d-RgolH54ITsSzVyD5_x_UQ", "fmt": "PNG", "kind": "pol", "badge": "Administrativă"}, {"title": "România și Republica Moldova – contur", "filename": "romania-si-republica-moldova.jpg", "url": "https://drive.google.com/file/d/1vdGMQgV9-pJ7DY4CoCrnNcMTdI4WLDBx/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1vdGMQgV9-pJ7DY4CoCrnNcMTdI4WLDBx", "fmt": "JPG", "kind": "gen", "badge": "Regională"}]}, {"id": "r_eurasia", "short": "Eurasia (Europa & Asia)", "title": "Eurasia – Europa și Asia", "desc": "Hărțile complete ale Eurasiei (PDF) și hărțile contur separate pentru Europa și Asia (relief, hidrografie și politică).", "icon": "🇪🇺", "color": "#4f46e5", "soft": "#e0e7ff", "atlas": [{"title": "Eurasia – hartă (varianta 1)", "filename": "1. Eurasia.pdf", "url": "https://drive.google.com/file/d/1JNqSqrEbGjzY8Cdt9VW4gGf5kAbqPSuN/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1JNqSqrEbGjzY8Cdt9VW4gGf5kAbqPSuN", "fmt": "PDF", "kind": "gen", "badge": "Atlas PDF"}, {"title": "Eurasia – hartă (varianta 2)", "filename": "1. Eurasia2.pdf", "url": "https://drive.google.com/file/d/1-h3Ly8XL_6hOgEg3S_L1I8uk2NTUCbBc/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1-h3Ly8XL_6hOgEg3S_L1I8uk2NTUCbBc", "fmt": "PDF", "kind": "gen", "badge": "Atlas PDF"}], "contour": [{"title": "Europa – relief și hidrografie (RH)", "filename": "Europa rh.png", "url": "https://drive.google.com/file/d/1eoqIGuwuYti2LDVtu6Welu_slIX1qOU_/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1eoqIGuwuYti2LDVtu6Welu_slIX1qOU_", "fmt": "PNG", "kind": "phys", "badge": "Relief & Hidr."}, {"title": "Europa – hartă politică (HP)", "filename": "Europa hp.png", "url": "https://drive.google.com/file/d/1Qs1YTLAJWmiX5PkHcoTpeY0i2ZG9y35K/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1Qs1YTLAJWmiX5PkHcoTpeY0i2ZG9y35K", "fmt": "PNG", "kind": "pol", "badge": "Politică"}, {"title": "Asia – relief și hidrografie (RH)", "filename": "Asia rh.png", "url": "https://drive.google.com/file/d/1Ql3rnNUc3j1elKva5WCsKor3g70Ih1CP/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1Ql3rnNUc3j1elKva5WCsKor3g70Ih1CP", "fmt": "PNG", "kind": "phys", "badge": "Relief & Hidr."}, {"title": "Asia – hartă politică (HP)", "filename": "Asia hp.png", "url": "https://drive.google.com/file/d/1B_yEe4NhD3xiCeTZNBjrLbdXWnBi57tP/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1B_yEe4NhD3xiCeTZNBjrLbdXWnBi57tP", "fmt": "PNG", "kind": "pol", "badge": "Politică"}]}, {"id": "r_africa", "short": "Africa", "title": "Continentul Africa", "desc": "Harta fizică/politică a Africii și hărțile de contur pentru relief, hidrografie și statele africane.", "icon": "🦁", "color": "#ea580c", "soft": "#ffedd5", "atlas": [{"title": "Africa – hartă", "filename": "1. Africa.pdf", "url": "https://drive.google.com/file/d/1F7E7xXUA49WfgbOtG6iyIN8BD21SCjG1/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1F7E7xXUA49WfgbOtG6iyIN8BD21SCjG1", "fmt": "PDF", "kind": "gen", "badge": "Atlas PDF"}], "contour": [{"title": "Africa – relief și hidrografie (RH)", "filename": "Africa rh.png", "url": "https://drive.google.com/file/d/1DxTWNjasAn59XpVYgs0IPoZSx_O_W-Vp/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1DxTWNjasAn59XpVYgs0IPoZSx_O_W-Vp", "fmt": "PNG", "kind": "phys", "badge": "Relief & Hidr."}, {"title": "Africa – hartă politică (HP)", "filename": "Africa hp.png", "url": "https://drive.google.com/file/d/1WRiKLkVrahGqIi6_Q1DaPjOKD1_c4imn/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1WRiKLkVrahGqIi6_Q1DaPjOKD1_c4imn", "fmt": "PNG", "kind": "pol", "badge": "Politică"}]}, {"id": "r_na", "short": "America de Nord", "title": "Continentul America de Nord", "desc": "Harta completă a Americii de Nord (PDF) și hărțile contur pentru relief, ape și harta politică.", "icon": "🌎", "color": "#0284c7", "soft": "#e0f2fe", "atlas": [{"title": "America de Nord – hartă", "filename": "1. America-nord.pdf", "url": "https://drive.google.com/file/d/1SsqRH2dlY6AfRzfV9fkSoYqxsNfCpi9P/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1SsqRH2dlY6AfRzfV9fkSoYqxsNfCpi9P", "fmt": "PDF", "kind": "gen", "badge": "Atlas PDF"}], "contour": [{"title": "America de Nord – relief și hidrografie (RH)", "filename": "America N rh.png", "url": "https://drive.google.com/file/d/1Ju8V7qVTFNUCvsSL7vLBJsRdP6PO0KgS/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1Ju8V7qVTFNUCvsSL7vLBJsRdP6PO0KgS", "fmt": "PNG", "kind": "phys", "badge": "Relief & Hidr."}, {"title": "America de Nord – hartă politică (HP)", "filename": "America N hp.png", "url": "https://drive.google.com/file/d/1DTKI2ZgMP05QefxS2T2jyCCludvM9sWX/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1DTKI2ZgMP05QefxS2T2jyCCludvM9sWX", "fmt": "PNG", "kind": "pol", "badge": "Politică"}]}, {"id": "r_sa", "short": "America de Sud", "title": "Continentul America de Sud", "desc": "Harta completă a Americii de Sud (PDF) și hărțile contur pentru relief, hidrografie și state.", "icon": "🦜", "color": "#16a34a", "soft": "#dcfce7", "atlas": [{"title": "America de Sud – hartă", "filename": "1. America-de-Sud.pdf", "url": "https://drive.google.com/file/d/1W4BttO4NMUaVRlrsWiTFF55iHAr1PE6_/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1W4BttO4NMUaVRlrsWiTFF55iHAr1PE6_", "fmt": "PDF", "kind": "gen", "badge": "Atlas PDF"}], "contour": [{"title": "America de Sud – relief și hidrografie (RH)", "filename": "America S rh.png", "url": "https://drive.google.com/file/d/1hz7FD_ZYbemnbmmJSSVn2cvtRRUSL1F8/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1hz7FD_ZYbemnbmmJSSVn2cvtRRUSL1F8", "fmt": "PNG", "kind": "phys", "badge": "Relief & Hidr."}, {"title": "America de Sud – hartă politică (HP)", "filename": "America s HP.png", "url": "https://drive.google.com/file/d/1dcJxMpo0wBQydN3L5xLamQRyl5fib_l7/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1dcJxMpo0wBQydN3L5xLamQRyl5fib_l7", "fmt": "PNG", "kind": "pol", "badge": "Politică"}]}, {"id": "r_aus", "short": "Australia & Oceania", "title": "Australia și Oceania", "desc": "Harta Australiei (PDF) și harta contur pentru Australia și Oceania.", "icon": "🦘", "color": "#9333ea", "soft": "#f3e8ff", "atlas": [{"title": "Australia – hartă", "filename": "1. Australia.pdf", "url": "https://drive.google.com/file/d/1Mp6rU5U6GblS2OeP_plMYsdoxAwz170a/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1Mp6rU5U6GblS2OeP_plMYsdoxAwz170a", "fmt": "PDF", "kind": "gen", "badge": "Atlas PDF"}], "contour": [{"title": "Australia și Oceania – hartă contur", "filename": "oceaniablank.png", "url": "https://drive.google.com/file/d/1bBGMUoOpYuSSnsfI3GLLZwVSj_3JLMbW/view?usp=sharing", "download": "https://drive.google.com/uc?export=download&id=1bBGMUoOpYuSSnsfI3GLLZwVSj_3JLMbW", "fmt": "PNG", "kind": "gen", "badge": "Contur"}]}], "folders": {"phys": "https://drive.google.com/drive/folders/1Wmg4mthXEfFy90Nsivk8BynD1HmTMGVz?usp=sharing", "cont": "https://drive.google.com/drive/folders/1OugyC0mAEG-904Od0tJZCCnqC2jezEgB?usp=sharing"}};
+
+let activeMode = 'all';
+let activeRegion = 'all';
+
+function normalize(str) {
+  return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function renderRoot() {
+  const grid = document.getElementById('rootGrid');
+  grid.innerHTML = MAP_DATA.root.map(r => `
+    <article class="root-card" style="--rc:${r.color}; --rs:${r.soft};">
+      <div class="root-stripe"></div>
+      <div class="root-body">
+        <div class="root-top">
+          <div class="root-icon">${r.icon}</div>
+          <span class="root-tag">${escapeHtml(r.tag)}</span>
+        </div>
+        <h3>${escapeHtml(r.title)}</h3>
+        <p>${escapeHtml(r.desc)}</p>
+        <a class="root-cta" href="${r.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.cta)} →</a>
+      </div>
+    </article>
+  `).join('');
+}
+
+function renderRegionPills() {
+  const bar = document.getElementById('regionPills');
+  const btns = [`<button type="button" class="region-pill active" data-region="all">Toate regiunile (7)</button>`];
+  MAP_DATA.regions.forEach(r => {
+    const total = r.atlas.length + r.contour.length;
+    btns.push(`<button type="button" class="region-pill" data-region="${r.id}">${r.icon} ${escapeHtml(r.short)} (${total})</button>`);
+  });
+  bar.innerHTML = btns.join('');
+  bar.querySelectorAll('.region-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.region-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeRegion = btn.dataset.region;
+      applyFilters();
+    });
+  });
+}
+
+function renderMapRow(item, regionTitle, groupLabel) {
+  const kindCls = item.kind === 'phys' ? 'k-phys' : (item.kind === 'pol' ? 'k-pol' : 'k-gen');
+  const searchBlob = normalize(`${regionTitle} ${groupLabel} ${item.title} ${item.filename} ${item.badge} ${item.fmt}`);
+  return `
+    <div class="map-row" data-search="${escapeHtml(searchBlob)}">
+      <a class="map-main" href="${item.url}" target="_blank" rel="noopener noreferrer" title="Deschide în Google Drive">
+        <span class="map-name">${escapeHtml(item.title)}</span>
+        <span class="map-file">${escapeHtml(item.filename)}</span>
+      </a>
+      <div class="map-actions">
+        <span class="kind-badge ${kindCls}">${escapeHtml(item.badge)}</span>
+        <span class="fmt-badge">${escapeHtml(item.fmt)}</span>
+        <a class="dl-btn" href="${item.download}" target="_blank" rel="noopener noreferrer" title="Descarcă fișierul" aria-label="Descarcă ${escapeHtml(item.title)}">⬇</a>
+      </div>
+    </div>
+  `;
+}
+
+function renderRegions() {
+  const wrap = document.getElementById('regionsContainer');
+  wrap.innerHTML = MAP_DATA.regions.map(r => `
+    <section class="region-section" data-region="${r.id}" style="--rcol:${r.color}; --rsoft:${r.soft};">
+      <div class="region-header">
+        <div class="region-head-left">
+          <div class="region-icon">${r.icon}</div>
+          <div>
+            <h3 class="region-title">${escapeHtml(r.title)}</h3>
+            <p class="region-desc">${escapeHtml(r.desc)}</p>
+          </div>
+        </div>
+        <div class="region-counts">
+          <span class="count-pill cp-atlas">📖 ${r.atlas.length} ${r.atlas.length === 1 ? 'hartă PDF' : 'hărți PDF'}</span>
+          <span class="count-pill cp-cont">✏️ ${r.contour.length} ${r.contour.length === 1 ? 'contur' : 'hărți contur'}</span>
+        </div>
+      </div>
+      <div class="cols-wrap">
+        <div class="map-col col-atlas">
+          <div class="col-head">
+            <span class="col-title">📖 Hărți fizice / politice (Atlas)</span>
+            <span class="col-sub">Proiecție & Studiu</span>
+          </div>
+          ${r.atlas.map(item => renderMapRow(item, r.title, 'atlas fizica politica pdf')).join('')}
+        </div>
+        <div class="map-col col-contour">
+          <div class="col-head">
+            <span class="col-title">✏️ Hărți contur (de completat)</span>
+            <span class="col-sub">Imprimare & Exersare</span>
+          </div>
+          ${r.contour.map(item => renderMapRow(item, r.title, 'contur muta relief hidrografie politica')).join('')}
+        </div>
+      </div>
+    </section>
+  `).join('');
+}
+
+function applyFilters() {
+  const q = normalize(document.getElementById('searchInput').value.trim());
+  let visibleRegions = 0;
+
+  document.querySelectorAll('.region-section').forEach(sec => {
+    const matchRegion = activeRegion === 'all' || sec.dataset.region === activeRegion;
+    let visibleRowsInSec = 0;
+
+    sec.querySelectorAll('.map-col').forEach(col => {
+      const isAtlas = col.classList.contains('col-atlas');
+      const colAllowed = activeMode === 'all' || (activeMode === 'atlas' && isAtlas) || (activeMode === 'contour' && !isAtlas);
+
+      col.querySelectorAll('.map-row').forEach(row => {
+        const matchQuery = !q || row.dataset.search.includes(q);
+        const showRow = matchRegion && colAllowed && matchQuery;
+        row.classList.toggle('hidden', !showRow);
+        if (showRow) visibleRowsInSec++;
+      });
+    });
+
+    const showSec = matchRegion && visibleRowsInSec > 0;
+    sec.classList.toggle('hidden', !showSec);
+    if (showSec) visibleRegions++;
+  });
+
+  document.getElementById('emptySearch').style.display = visibleRegions === 0 ? 'block' : 'none';
+}
+
+document.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeMode = btn.dataset.mode;
+    document.body.classList.toggle('view-atlas', activeMode === 'atlas');
+    document.body.classList.toggle('view-contour', activeMode === 'contour');
+    applyFilters();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+renderRoot();
+renderRegionPills();
+renderRegions();
+</script>
+
+</body>
+</html>
