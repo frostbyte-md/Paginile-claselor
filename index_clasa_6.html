@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geografie – Clasa a VI-a | Portal de Resurse Didactice</title>
+<style>
+  :root {
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --ink: #0f172a;
+    --muted: #475569;
+    --border: #e2e8f0;
+    --navy: #0f172a;
+    --accent: #7e22ce;
+    --pres-color: #d97706;
+    --pres-soft: #fef3c7;
+    --pres-text: #92400e;
+    --man-color: #059669;
+    --man-soft: #d1fae5;
+    --man-text: #065f46;
+    --plan-color: #4f46e5;
+    --plan-soft: #e0e7ff;
+    --plan-text: #3730a3;
+    --extra-color: #0284c7;
+    --extra-soft: #e0f2fe;
+    --extra-text: #075985;
+    --radius: 16px;
+    --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #581c87 55%, #7e22ce 100%);
+    color: #fff;
+    padding: 42px 20px 58px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.24);
+    backdrop-filter: blur(6px);
+    padding: 6px 15px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 4.2vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .hero p {
+    margin: 0 auto 22px;
+    max-width: 700px;
+    font-size: clamp(14.5px, 1.9vw, 17px);
+    color: #f3e8ff;
+  }
+  .hero-stats {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .hero-stat {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 7px 14px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #f8fafc;
+  }
+
+  /* CONTROLS */
+  .controls-wrap {
+    max-width: 1220px;
+    margin: -26px auto 0;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
+  .controls-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.09);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .role-switch {
+    display: inline-flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .role-btn {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 13px;
+    border-radius: 9px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .role-btn:hover { color: var(--ink); }
+  .role-btn.active {
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+  }
+  .search-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 280px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .search-input {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 8px 13px;
+    font-size: 14px;
+    color: var(--ink);
+    min-width: 220px;
+    flex: 1 1 240px;
+    max-width: 340px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+  .mini-btn {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    border-radius: 10px;
+    padding: 8px 11px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .mini-btn:hover {
+    background: #f3e8ff;
+    border-color: #d8b4fe;
+    color: #6b21a8;
+  }
+
+  .unit-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .unit-pill {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12.8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .unit-pill:hover {
+    border-color: #94a3b8;
+    color: var(--ink);
+  }
+  .unit-pill.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 26px 20px 64px;
+  }
+
+  /* GUIDE STRIP */
+  .guide-banner {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-left: 4px solid #7e22ce;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .guide-steps {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .step-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+  .step-chip.s1 { background: var(--pres-soft); color: var(--pres-text); }
+  .step-chip.s2 { background: var(--man-soft); color: var(--man-text); }
+  .step-chip.s3 { background: var(--plan-soft); color: var(--plan-text); }
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .progress-track {
+    width: 120px;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #9333ea, #10b981);
+    transition: width 0.25s ease;
+  }
+
+  /* GENERAL RESOURCES */
+  .section-label {
+    margin: 0 0 12px;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .root-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  body.mode-student .root-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .root-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .root-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+  }
+  .root-stripe {
+    height: 5px;
+    background: var(--rc, #7e22ce);
+  }
+  .root-body {
+    padding: 15px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .root-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .root-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--rs, #f3e8ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+  }
+  .root-tag {
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--rs, #f3e8ff);
+    color: var(--rc, #7e22ce);
+  }
+  .root-card h3 {
+    margin: 0 0 6px;
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--navy);
+  }
+  .root-card p {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1;
+  }
+  .root-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    background: var(--rc, #7e22ce);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13.2px;
+    font-weight: 700;
+    transition: filter 0.15s;
+  }
+  .root-cta:hover { filter: brightness(1.08); }
+
+  /* UNITS */
+  .unit-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .unit-section.hidden { display: none; }
+  .unit-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: linear-gradient(90deg, var(--usoft, #f8fafc) 0%, #ffffff 58%);
+    border-left: 6px solid var(--ucol, #7e22ce);
+  }
+  .unit-head-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    flex: 1 1 360px;
+  }
+  .unit-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: #ffffff;
+    border: 1px solid rgba(15,23,42,0.08);
+    box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .unit-kicker {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ucol, #7e22ce);
+  }
+  .unit-title {
+    margin: 2px 0 3px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .unit-desc {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .unit-head-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .unit-folder-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 13px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.15s;
+  }
+  .unit-folder-btn:hover {
+    border-color: var(--ucol, #7e22ce);
+    color: var(--ucol, #7e22ce);
+  }
+  .unit-extras-bar {
+    padding: 10px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .unit-extra-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12.8px;
+    transition: all 0.15s;
+  }
+  .unit-extra-link:hover {
+    border-color: var(--ucol, #7e22ce);
+    color: var(--ucol, #7e22ce);
+  }
+
+  /* TOPIC ACCORDIONS */
+  .topic-list {
+    padding: 12px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .topic-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.16s, box-shadow 0.16s;
+  }
+  .topic-item.hidden { display: none; }
+  .topic-item.open {
+    border-color: var(--ucol, #7e22ce);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  }
+  .topic-item.done {
+    background: #f8fffb;
+  }
+  .topic-summary {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .topic-summary:hover {
+    background: #f8fafc;
+  }
+  .topic-left {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    flex: 1;
+  }
+  .check-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .topic-check {
+    width: 18px;
+    height: 18px;
+    accent-color: #10b981;
+    cursor: pointer;
+    margin: 0;
+  }
+  .topic-code {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--usoft, #f3e8ff);
+    color: var(--ucol, #7e22ce);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .topic-item.is-eval .topic-code {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+  .topic-item.is-practice .topic-code {
+    background: #fef3c7;
+    color: #b45309;
+  }
+  .topic-title {
+    font-size: 14.8px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .topic-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pill-dot {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill-dot.p1 { background: var(--pres-soft); color: var(--pres-text); }
+  .pill-dot.p2 { background: var(--man-soft); color: var(--man-text); }
+  .pill-dot.p3 { background: var(--plan-soft); color: var(--plan-text); }
+  .pill-dot.p4 { background: var(--extra-soft); color: var(--extra-text); }
+  .chevron {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: transform 0.2s ease, background 0.15s;
+    margin-left: 4px;
+  }
+  .topic-item.open .chevron {
+    transform: rotate(180deg);
+    background: var(--ucol, #7e22ce);
+    color: #fff;
+  }
+
+  /* EXPANDED TOPIC BODY */
+  .topic-body {
+    display: none;
+    padding: 14px 16px 16px;
+    border-top: 1px solid #eef2f7;
+    background: #fbfdff;
+  }
+  .topic-item.open .topic-body {
+    display: block;
+  }
+
+  /* ORDERED 3-STEP RESOURCE GRID: 1. Prezentare -> 2. Manual -> 3. Proiectare */
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  body.mode-student .res-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  body.mode-student .teacher-only {
+    display: none !important;
+  }
+
+  .res-col {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .res-col.col-pres { border-top: 4px solid var(--pres-color); }
+  .res-col.col-man  { border-top: 4px solid var(--man-color); }
+  .res-col.col-plan { border-top: 4px solid var(--plan-color); }
+
+  .res-col-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .res-step {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .col-pres .res-step { color: var(--pres-text); }
+  .col-man  .res-step { color: var(--man-text); }
+  .col-plan .res-step { color: var(--plan-text); }
+
+  .res-audience {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  .res-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 11px;
+    border-radius: 9px;
+    text-decoration: none;
+    color: var(--ink);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    font-size: 13.2px;
+    font-weight: 600;
+    transition: all 0.15s ease;
+  }
+  .res-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+  }
+  .col-pres .res-link:hover { background: #fffbeb; border-color: #f59e0b; }
+  .col-man  .res-link:hover { background: #ecfdf5; border-color: #10b981; }
+  .col-plan .res-link:hover { background: #eef2ff; border-color: #6366f1; }
+
+  .res-link-title {
+    line-height: 1.3;
+  }
+  .fmt-badge {
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .col-pres .fmt-badge { background: var(--pres-soft); color: var(--pres-text); }
+  .col-man  .fmt-badge { background: var(--man-soft); color: var(--man-text); }
+  .col-plan .fmt-badge { background: var(--plan-soft); color: var(--plan-text); }
+
+  .res-empty {
+    font-size: 12.5px;
+    color: #94a3b8;
+    font-style: italic;
+    padding: 6px 2px;
+  }
+
+  /* EXTRAS INSIDE TOPIC */
+  .topic-extras {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed #cbd5e1;
+  }
+  .extras-label {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    color: var(--extra-text);
+    margin-bottom: 8px;
+  }
+  .extras-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .extra-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 11px;
+    border-radius: 9px;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    color: #0c4a6e;
+    text-decoration: none;
+    font-size: 12.8px;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .extra-chip:hover {
+    background: #e0f2fe;
+    border-color: #0284c7;
+  }
+  .extra-chip .fmt-badge {
+    background: #ffffff;
+    color: #0369a1;
+  }
+
+  .topic-footer {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .folder-direct {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #7e22ce;
+    font-weight: 700;
+  }
+  .folder-direct:hover { text-decoration: underline; }
+
+  .empty-search {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--surface);
+    border: 1px dashed #cbd5e1;
+    border-radius: var(--radius);
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px 20px 36px;
+    color: #64748b;
+    font-size: 13.5px;
+    border-top: 1px solid var(--border);
+    background: #ffffff;
+  }
+  footer strong { color: var(--navy); }
+
+  @media (max-width: 1020px) {
+    .root-grid, body.mode-student .root-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .res-grid, body.mode-student .res-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 680px) {
+    .root-grid, body.mode-student .root-grid { grid-template-columns: 1fr; }
+    .topic-right .pill-dot { display: none; }
+    .hero { padding: 34px 16px 48px; }
+    .unit-header { padding: 14px 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🧭 Portal Didactic • Continentele și Bazinele Oceanice</div>
+    <h1>Geografie – Clasa a VI-a</h1>
+    <p>Toate unitățile de învățare, prezentările, secvențele din manual, lucrările practice și proiectările didactice într-un singur loc, organizate clar atât pentru elevi, cât și pentru profesori.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">📚 4 unități de învățare</div>
+      <div class="hero-stat">🗂️ 31 teme și evaluări</div>
+      <div class="hero-stat">📊 33 prezentări • 📖 27 secvențe manual • 📋 28 proiectări</div>
+    </div>
+  </div>
+</header>
+
+<div class="controls-wrap">
+  <div class="controls-card">
+    <div class="controls-row">
+      <div class="role-switch" role="tablist" aria-label="Mod de vizualizare">
+        <button type="button" class="role-btn active" data-role="all">👥 Elevi + Profesori</button>
+        <button type="button" class="role-btn" data-role="student">🎓 Mod Elevi</button>
+        <button type="button" class="role-btn" data-role="teacher">👩‍🏫 Mod Profesori</button>
+      </div>
+      <div class="search-actions">
+        <input type="search" id="searchInput" class="search-input" placeholder="🔍 Caută tema, continentul sau cuvânt-cheie..." aria-label="Caută resurse">
+        <button type="button" class="mini-btn" id="expandAllBtn">▾ Deschide toate</button>
+        <button type="button" class="mini-btn" id="collapseAllBtn">▴ Restrânge</button>
+      </div>
+    </div>
+    <div class="unit-pills" id="unitPills"></div>
+  </div>
+</div>
+
+<main class="container">
+
+  <div class="guide-banner">
+    <div class="guide-steps">
+      <strong>Ordinea resurselor în fiecare temă:</strong>
+      <span class="step-chip s1">1. 📊 Prezentare</span>
+      <span>→</span>
+      <span class="step-chip s2">2. 📖 Secvență din manual</span>
+      <span class="teacher-only">→</span>
+      <span class="step-chip s3 teacher-only">3. 📋 Proiectare didactică</span>
+    </div>
+    <div class="progress-wrap" title="Bifează temele parcurse; progresul se salvează automat în browser">
+      <span id="progressText">Parcurse: 0 / 31</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </div>
+
+  <h2 class="section-label">📌 Resurse Generale – Clasa a VI-a</h2>
+  <section class="root-grid" id="rootGrid"></section>
+
+  <div id="unitsContainer"></div>
+
+  <div class="empty-search" id="emptySearch">
+    🔎 Nu am găsit nicio temă care să corespundă căutării. Încearcă un alt termen (ex.: „Africa”, „harta”, „Australia”, „Antarctida”).
+  </div>
+
+</main>
+
+<footer>
+  <strong>Geografie – Clasa a VI-a</strong> • Index orientativ pentru elevi și profesori • Toate fișierele se deschid direct din Google Drive
+</footer>
+
+<script>
+const PORTAL_DATA = {"root": [{"role": "both", "tag": "Manual PDF", "icon": "📘", "title": "Manual școlar – Geografie, clasa a VI-a", "desc": "Manualul oficial complet (a. 2023, limba română), format PDF pentru studiu individual, teme și recapitulare.", "url": "https://drive.google.com/file/d/17RtwzNH77daqlwMIAYAPGVOXTyj8Vupf/view?usp=sharing", "cta": "Deschide manualul", "color": "#059669", "soft": "#d1fae5"}, {"role": "both", "tag": "Resursă interactivă", "icon": "💻", "title": "Manual Digital Interactiv – Clasa a VI-a", "desc": "Ghid și legături către resursele digitale interactive dedicate continentelor sudice și hărții geografice.", "url": "https://docs.google.com/document/d/1ywPq0Bcg7SvAa9veMv1xyD9c4z6mZcSxyUYuh487PaM/edit?usp=sharing", "cta": "Deschide documentul", "color": "#0284c7", "soft": "#e0f2fe"}, {"role": "teacher", "tag": "Pentru profesori", "icon": "📋", "title": "Proiectare de lungă durată", "desc": "Planificarea calendaristică anuală conform curriculumului la Geografie pentru clasa a VI-a.", "url": "https://drive.google.com/file/d/13yJlIBusOeHwsfbisQk692K4KCATXrVl/view?usp=sharing", "cta": "Deschide proiectarea", "color": "#6d28d9", "soft": "#ede9fe"}, {"role": "both", "tag": "Arhivă completă", "icon": "📂", "title": "Folder complet Google Drive", "desc": "Acces direct la toate cele 4 unități de învățare, prezentări, secvențe de manual și documente.", "url": "https://drive.google.com/drive/folders/1oly06XQBOLcxeZYUAerdcA4XTaC000-t?usp=sharing", "cta": "Deschide mapa clasa_6", "color": "#334155", "soft": "#e2e8f0"}], "units": [{"id": "u1", "roman": "I", "short": "Continente & Harta", "title": "Continente și bazine oceanice", "desc": "Originea continentelor și a bazinelor oceanice, marile descoperiri geografice, harta geografică și determinarea distanțelor cu ajutorul scării.", "icon": "🧭", "color": "#7e22ce", "soft": "#f3e8ff", "folder": "https://drive.google.com/drive/folders/1rutDzK9xw9_kp8QPs_hcGvlc0zL-xCFV?usp=sharing", "unit_extras": [], "topics": [{"code": "Lecțiile 1–2", "title": "Originea continentelor și a bazinelor oceanice", "folder": "https://drive.google.com/drive/folders/17beRtk-qbm-xnirILeq92JiDxkg8_tFV?usp=sharing", "presentations": [{"title": "1. Originea continentelor și bazinelor oceanice", "url": "https://docs.google.com/presentation/d/1huQhWbn9ZzzHWIgg3u3A5c5iXmPi_3m4L412hVGlNa8/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "2. Originea continentelor și bazinelor oceanice (continuare)", "url": "https://docs.google.com/presentation/d/16uLmoV_S7K6NFD8T1mWLpG0VWLxd4aCi46c525yi0os/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Originea continentelor și bazinelor oceanice", "url": "https://drive.google.com/file/d/1xUf9gUEWvU69FyaN3C3zqGgF4A9BYF1R/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 1", "url": "https://drive.google.com/file/d/1tg8ooAzFmRg4V5Ts6E2kuUgnCSQtyl0e/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – Tema 2", "url": "https://drive.google.com/file/d/1xC-fvChsRXaaYuNiSRRirsyGMTE_9mlc/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 3", "title": "Marile descoperiri geografice (C. Columb, F. Magellan, Vasco da Gama)", "folder": "https://drive.google.com/drive/folders/1VneZqM0c_3quqKt1OqMYiX4SSwya9ZEH?usp=sharing", "presentations": [{"title": "Marile descoperiri geografice (C. Columb, F. Magellan, Vasco da Gama)", "url": "https://docs.google.com/presentation/d/1ZJe7nfMNRBLc2OpdLGpDaGpBC5ZSsoYFs0xEuk00160/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Marile Descoperiri Geografice", "url": "https://drive.google.com/file/d/16_5mtSKfpgXDMNCCrPhLwaVmeIAYIXx3/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 3", "url": "https://drive.google.com/file/d/10kZTbIn8VLfs0NdafYUYaTT9At2U1VfD/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecțiile 4–5", "title": "Harta geografică: elementele hărții geografice, clasificări", "folder": "https://drive.google.com/drive/folders/13g_MRJfzfTD5dA2-L5-BQpHlVsiJJfhE?usp=sharing", "presentations": [{"title": "Harta geografică: elementele hărții geografice, clasificări", "url": "https://docs.google.com/presentation/d/1Yq6JDHdObzABCYTXgiiavkG_MUdn6f8e-pSMKj7AWaU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Harta geografică: elemente și clasificări", "url": "https://drive.google.com/file/d/1sBWyBFF-7-PLYni6UfQ9rETIQkDQ5zCf/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 4", "url": "https://drive.google.com/file/d/1cvVsCTDNE_fPnOAM_cZTrnI3FXOTBvv0/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 6", "type": "practice", "title": "Lucrare practică nr. 1: Scara hărții aplicată în determinarea distanțelor pe hartă", "folder": "https://drive.google.com/drive/folders/1ZVZhe05uL1X0qXPSv7X1K0NLBJ1n0wVQ?usp=sharing", "presentations": [{"title": "Prezentare – Lucrarea practică nr. 1", "url": "https://docs.google.com/presentation/d/1gJUgSBvRFlIecgpgxW5z74PuhyJ2si_2dSBiZs5wWgI/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență manual – L.P. Scara hărții aplicată în determinarea distanțelor", "url": "https://drive.google.com/file/d/1KR7JfuF8KxXcfm_Pm8sHuTd0iy9LJxbB/view?usp=sharing", "fmt": "PDF"}], "plans": [], "extras": [{"title": "Mapa dedicată – Lucrarea practică nr. 1", "url": "https://drive.google.com/drive/folders/1lhESIebfw6FqELiNoJK7GxANYoktzKFo?usp=sharing", "fmt": "Drive", "role": "both"}]}, {"code": "Evaluare 7", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Continente și bazine oceanice”", "folder": "https://drive.google.com/drive/folders/1tycCOosFnlMYNIZd7u1cksRWwMOr_Rs3?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u2", "roman": "II", "short": "Africa", "title": "Continentul Africa", "desc": "Poziția fizico-geografică, relieful, clima, apele de suprafață, zonele naturale, populația, popoarele, harta politică și hazardurile Africii.", "icon": "🦁", "color": "#ea580c", "soft": "#ffedd5", "folder": "https://drive.google.com/drive/folders/1Dy3vuKubm-uf_gOWZym1lXL3b2KLWTB3?usp=sharing", "unit_extras": [], "topics": [{"code": "Lecția 8", "title": "Africa. Poziția fizico-geografică", "folder": "https://drive.google.com/drive/folders/1pD8Xqzeam99l0IZC1MaR8A1VMYWCgsNu?usp=sharing", "presentations": [{"title": "Africa. Poziția fizico-geografică", "url": "https://docs.google.com/presentation/d/1YOG4Z2qtZu7wJnglMbaUF0KnipwtbWan8L7DC-fQJA4/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Africa: poziția fizico-geografică", "url": "https://drive.google.com/file/d/1eZkjc5HhhvnW82JFG8FExLAHW_aSdppp/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 8", "url": "https://drive.google.com/file/d/1n-TSnoKqsqlSIYFIUIKrgiHcUIUD-H5W/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 9", "title": "Relieful. Factorii interni și externi de modelare a scoarței terestre. Substanțele minerale utile", "folder": "https://drive.google.com/drive/folders/157gtpfq2Kn_-TOoXZsgsPLe8SACxIG7x?usp=sharing", "presentations": [{"title": "Relieful, factorii de modelare și substanțele minerale utile", "url": "https://docs.google.com/presentation/d/1gatRu3a1hp-H6Ld7MI9hUrarDLZ2xU8zl0ywE4ufcoA/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Prezentare alternativă (Lecția 9)", "url": "https://docs.google.com/presentation/d/1OqCmMm8Vy-FolBEqaFzH8cJdh55kjH575VJR1oXwUgI/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Africa: relieful și mineralele", "url": "https://drive.google.com/file/d/1oVyMFFPPrR3kLQH-_q06k2eVXMPGlFCm/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 9", "url": "https://drive.google.com/file/d/1s1X4xMEWMaA-5lJ2fTc4z9DSr5ecW48k/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 10", "title": "Clima. Factorii de formare a climei. Zonele climatice", "folder": "https://drive.google.com/drive/folders/11eEzQ_F59ry5HZYRdkRjQETC85AN4a1f?usp=sharing", "presentations": [{"title": "Clima, factorii de formare și zonele climatice (Africa)", "url": "https://docs.google.com/presentation/d/1I95d26MxP1D4hQ4EXb2zwMIBf9FpA9rdoD0uvWLBmw8/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Africa: clima și factorii de formare", "url": "https://drive.google.com/file/d/1nnoJOhDeh-HBDtdl_-DJaOXBpDZVw9La/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 10 (partea 1)", "url": "https://drive.google.com/file/d/1oUSeD_bGhhFklgVLVOyBaDHRNUH8xEdn/view?usp=sharing", "fmt": "DOCX"}, {"title": "Proiect didactic – Tema 10 (partea 2)", "url": "https://drive.google.com/file/d/1WBf9EzbUAoTAzCKIioiG3gT6ReFqAVQc/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 11", "title": "Apele de suprafață", "folder": "https://drive.google.com/drive/folders/15O6KGt3VnWgdrav7ei5QSkeFPPpUFrys?usp=sharing", "presentations": [{"title": "Apele de suprafață ale Africii", "url": "https://docs.google.com/presentation/d/16F3hJ8Gfqnam-hWyeQ9c_QxVPmszzHtX3t4FK6V7RPY/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Africa: apele de suprafață", "url": "https://drive.google.com/file/d/1WDqFmHCydlgLKd9x6ewvCT-WaEABd4pG/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 11", "url": "https://drive.google.com/file/d/1-puzUVdZU1yrFxA7JRyvEoQG0hKW9eRK/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecțiile 12–13", "title": "Zonele naturale ale Africii", "folder": "https://drive.google.com/drive/folders/1ANo5Ikdei7W3Dv3Mut-0yRPscZxnZZsR?usp=sharing", "presentations": [{"title": "Zonele naturale (Africa)", "url": "https://docs.google.com/presentation/d/1sMs2PSSn1LNQKPj2rZ6mcotP05BTX1hLKYJIIkIn9Ng/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Lecția 13 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1XVD5NishYgnr-ATC6Iw_RRyPkjhLE2GoYYO0Yav9o8U/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Africa: zonele naturale", "url": "https://drive.google.com/file/d/1kTG0lkGW8EUSuzTxoPx4HDKK0T43w9pq/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 12–13", "url": "https://drive.google.com/file/d/1-DYBTe_2YuIh9g3EQ3u_6pqp3RPXlvox/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 14", "title": "Populația. Repartiția și densitatea populației. Structura rasială", "folder": "https://drive.google.com/drive/folders/1wY70NyoS91uhylB9T_tSd6SWDCMJnUQ9?usp=sharing", "presentations": [{"title": "Populația, popoarele și harta politică a Africii", "url": "https://docs.google.com/presentation/d/1Vx_V7K2Hgm0aFM1cABeeR3xAayhGJdsfIi6j3Y58BPA/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Lecția 14 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/1jODyd4_o_gxGH7aj6tdEPZoo93EqxwkmpITPlEbVpak/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Africa: populația și structura rasială", "url": "https://drive.google.com/file/d/13gZLgr_R9sEq2fNovAjMgHWZrYggMkLv/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 14", "url": "https://drive.google.com/file/d/1pEO1GUHqWNz_VjqkZH_GSqfKBLCtIvwI/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 16", "title": "Popoare, tradiții și obiceiuri. Harta politică a Africii", "folder": "https://drive.google.com/drive/folders/1nvMq1_CfVQFfmzwGcgTG171LzK-Rsemw?usp=sharing", "presentations": [{"title": "Prezentare – Popoare, tradiții și harta politică a Africii", "url": "https://docs.google.com/presentation/d/1MX5dvKrKflaIz295GajbplwlS5I9BKaUBrIump-obLw/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Africa: popoare, tradiții și harta politică", "url": "https://drive.google.com/file/d/1WBDJb9fE0veycd-O7cLqXv6ubVJX3ns7/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 16 (corectat)", "url": "https://drive.google.com/file/d/1VX5B0RPVJHVAXHcluaJUH_tcjbAmIs2I/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 17", "title": "Procesele și fenomenele geografice de risc: furtuni de nisip/praf, deșertificare, epidemii, malnutriție", "folder": "https://drive.google.com/drive/folders/1FNcJx0ld4Tf978H_h-R5yHwfBZmQyG4E?usp=sharing", "presentations": [{"title": "Fenomene de risc în Africa: furtuni de nisip, deșertificare, epidemii", "url": "https://docs.google.com/presentation/d/1xlqLvYqbvv69Ikb2bcFTgcm9MxcEo9rs37mCcRg_CtM/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Lecția 17 – Prezentare alternativă", "url": "https://docs.google.com/presentation/d/127_03dLgj8fsv18NHfq21tNHxbS3BVPmeYijwIRswvQ/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Africa: hazarduri naturale și sociale", "url": "https://drive.google.com/file/d/1H3r15-V0wTKFEAhQ0qQYpFwkvlQmXGU0/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 17", "url": "https://drive.google.com/file/d/1PvXeEOUyR7UQpTuuNii3LkaXzXiz5qTT/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 15", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Continentul Africa”", "folder": "https://drive.google.com/drive/folders/14wx-hdK9HuLn-cWuhxIjMyVzoU51k2hO?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u3", "roman": "III", "short": "America de Sud", "title": "Continentul America de Sud", "desc": "Poziția geografică, Anzii și câmpiile sud-americane, clima umedă, Amazonul, selva și pampasul, populația, harta politică și riscurile naturale.", "icon": "🦜", "color": "#059669", "soft": "#d1fae5", "folder": "https://drive.google.com/drive/folders/1ibbr7CEkB4UfDpyeUUKP84PMrn_iG5xL?usp=sharing", "unit_extras": [{"title": "📋 Model / Proiect didactic suplimentar (Unitatea III)", "url": "https://drive.google.com/file/d/1fOVCAyza7wl7rCM8aFtWMlyrbWoRBsiy/view?usp=sharing", "fmt": "DOCX", "role": "teacher"}], "topics": [{"code": "Lecția 18", "title": "America de Sud. Poziția fizico-geografică", "folder": "https://drive.google.com/drive/folders/1nkfYqUd4teNJxGN4Ka0PRy6CAJDchKRD?usp=sharing", "presentations": [{"title": "America de Sud. Poziția fizico-geografică", "url": "https://docs.google.com/presentation/d/1lTvVrzqEfpdZz_lhZdhSbyxVlMXEm-123uCmDPuLuDw/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – America de Sud: poziția fizico-geografică", "url": "https://drive.google.com/file/d/1hNdfAHhAmuLigCnuz0dK__qsh3FP5bSA/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 18", "url": "https://drive.google.com/file/d/1l4PfMWXXcpP09EhKIQhVRXnX3WMLJT1B/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 19", "title": "Relieful. Substanțele minerale utile", "folder": "https://drive.google.com/drive/folders/1WXaj8QwyGhZ0TVIZU7KBKGQTY8XidFZ4?usp=sharing", "presentations": [{"title": "Relieful și substanțele minerale utile (America de Sud)", "url": "https://docs.google.com/presentation/d/1HoUlKIb6T2nHi_8RX41um7_960-MDoIH9qoz-7Y7Ynk/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – America de Sud: relieful și mineralele", "url": "https://drive.google.com/file/d/1oV-gyVPpIEJ1fSaANgHzbtUyU29jqySb/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 19", "url": "https://drive.google.com/file/d/1tR23HqWd5yRNTujJSQYx-w6q5fOl1pgc/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 20", "title": "Clima. Factorii de formare a climei. Zonele climatice", "folder": "https://drive.google.com/drive/folders/1y07AVs70BcIdhZKA4GKSgYSsjbQqu6Zn?usp=sharing", "presentations": [{"title": "Clima, factorii de formare și zonele climatice (America de Sud)", "url": "https://docs.google.com/presentation/d/1Hab0-yBgR9lUl0VfHzHjEhWeuVie_ibLkCHqLcntybc/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – America de Sud: clima și factorii de formare", "url": "https://drive.google.com/file/d/1yMJf5e25Q2YuYMKY8Hl365itWe_mdpqL/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 20", "url": "https://drive.google.com/file/d/1Q9Ivy84Kmulmydxa7QWmxOft_dJAlWUh/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 21", "title": "Apele de suprafață", "folder": "https://drive.google.com/drive/folders/1WswgW8PmuFvTixFRGwpOmYQveaVCqCrP?usp=sharing", "presentations": [{"title": "Apele de suprafață ale Americii de Sud", "url": "https://docs.google.com/presentation/d/16DAmNkwCvkkNYCUj7PpZXxRDEQBmG4RpUSO4gU_AIuU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – America de Sud: apele de suprafață", "url": "https://drive.google.com/file/d/1ViqcnaZKzRn-T51sgyGCw_iq9Q3kv9Hn/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 21", "url": "https://drive.google.com/file/d/1Dps9CAuIYTrLosJ8O301f4e7VcjapoR7/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 22", "title": "Zonele naturale", "folder": "https://drive.google.com/drive/folders/11XlkaizEqr1Tr6Lc_oIjeK6KkBx83eTX?usp=sharing", "presentations": [{"title": "Zonele naturale ale Americii de Sud", "url": "https://docs.google.com/presentation/d/1FeEGHZRJ5XReV_cX-H8o5AVuw81EbwBaRqI-7bdivrI/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – America de Sud: zonele naturale", "url": "https://drive.google.com/file/d/1gHtGeKkS3Dq3NnIBCgJ8rLYQRnzjNFk9/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 22", "url": "https://drive.google.com/file/d/1oYmXMndvCbDsXXl9T4YLJQEEs_5oByaB/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 23", "title": "Populația. Repartiția și densitatea populației. Structura rasială. Popoare, tradiții și obiceiuri. Harta politică", "folder": "https://drive.google.com/drive/folders/1BtzzEggb6z7iJd3ybwa1pkplPtMbdNh4?usp=sharing", "presentations": [{"title": "Populația, popoarele și harta politică a Americii de Sud", "url": "https://docs.google.com/presentation/d/1j_VRMGI2E4YElDW4-lMj5xkohgTdMBP6kO86MMXbb54/edit?usp=sharing", "fmt": "Google Slides"}, {"title": "Prezentare alternativă (Lecția 23)", "url": "https://docs.google.com/presentation/d/1IDuPswgnOXlu6YafiGyV4TH4qzvYUCZaqGh8Fw4Mp6Q/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – America de Sud: populația și structura rasială", "url": "https://drive.google.com/file/d/137R1mimQ1HPSiLW7leEthu4w4-hhU3p-/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 23", "url": "https://drive.google.com/file/d/1H7IZgb8NoNw1bWtvNMXXLXvDvc5xUvrx/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 24", "title": "Procesele și fenomenele geografice de risc: pororoca, despădurirea", "folder": "https://drive.google.com/drive/folders/1MSRT-p4fpOgo2VtcWfQR7U4pl220JJ1K?usp=sharing", "presentations": [{"title": "Fenomene de risc în America de Sud: pororoca, despădurirea", "url": "https://docs.google.com/presentation/d/1q3Rpo407uZmnqrOF4RJLnjTS17Ctgqn8059Beu2f7Lk/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – America de Sud: hazarduri (pororoca, despădurirea)", "url": "https://drive.google.com/file/d/1dmn30iUDjRe1d7hqkaFpr6qf8y5kA9gZ/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 24", "url": "https://drive.google.com/file/d/1EmfiIu6sOztd7W5qRulNTNdxWj0oEVJ4/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 25", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Continentul America de Sud”", "folder": "https://drive.google.com/drive/folders/108_UkahEIluHmqQAzQd7J35nd0osW1S4?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}, {"id": "u4", "roman": "IV", "short": "Australia & Antarctida", "title": "Continentele Australia și Antarctida", "desc": "Australia (poziția, relieful, clima, apele, lumea organică endemică și populația) și Antarctida (relieful, calota glaciară, clima și încălzirea globală).", "icon": "🦘", "color": "#0284c7", "soft": "#e0f2fe", "folder": "https://drive.google.com/drive/folders/1mOfEm1uUyEpAj3ahl8_DXRJNdIfdInLa?usp=sharing", "unit_extras": [], "topics": [{"code": "Lecția 26", "type": "practice", "title": "Australia. Poziția fizico-geografică. Lucrare practică: Compararea poziției fizico-geografice", "folder": "https://drive.google.com/drive/folders/1GxZJUPUd4ShAR5Ny68potpQVl3eH9ptT?usp=sharing", "presentations": [{"title": "Australia. Poziția fizico-geografică", "url": "https://docs.google.com/presentation/d/1In4gt4sohYAWm0VLN0T1enyLtuXZlxQTzvHJel5HfBY/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență manual – Australia: poziția fizico-geografică și L.P. Comparare", "url": "https://drive.google.com/file/d/1XKZiaG_Z9DR9TqD0dhn84SONucudYYs5/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 26 (Lucrare practică)", "url": "https://drive.google.com/file/d/1ab21U-6M7Q_YeuQdEr9yVPPLlJRTrn8k/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 27", "title": "Australia. Relieful și substanțele minerale utile", "folder": "https://drive.google.com/drive/folders/14HWm7eXO3F0SYlMF3m5Q4RMEXcR89ROH?usp=sharing", "presentations": [{"title": "Relieful Australiei", "url": "https://docs.google.com/presentation/d/19HQ0GaJ4Pe5vcT68W7MyP-IuJ39QK6mNYRIS_nK5quk/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Australia: relieful și substanțele minerale", "url": "https://drive.google.com/file/d/1BzDq-APsqQZwE4_hXPLcNJnlI2KV4Yuo/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 27", "url": "https://drive.google.com/file/d/1KOX6E4Jn7GlxA-9JhLKVxkgfUlLArh9P/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 28", "title": "Australia. Clima. Factorii de formare a climei. Zonele climatice. Apele de suprafață", "folder": "https://drive.google.com/drive/folders/16KvQ8t7i8ajrNNuBsF5c7XzrSf5DQnnE?usp=sharing", "presentations": [{"title": "Clima, zonele climatice și apele de suprafață (Australia)", "url": "https://docs.google.com/presentation/d/1tz4Wy2AeAHw9CXtqhsM_Y7AMuGf2DmAIjTcX74p8ojI/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Australia: clima și apele de suprafață", "url": "https://drive.google.com/file/d/1pWMB0ZmwGc-YArA9et5MuCOYZaBo0guO/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 28", "url": "https://drive.google.com/file/d/18aaTuUwBbKr5UXaV1o8yD8BywIK3nsDf/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 29", "title": "Australia. Zonele naturale", "folder": "https://drive.google.com/drive/folders/1JHqcZl-_ikln3qCt-JXmD6chX6N68JTg?usp=sharing", "presentations": [{"title": "Zonele naturale ale Australiei", "url": "https://docs.google.com/presentation/d/1BOgN1YUzjHaVb3u2sDNvewxCeK1rjxZ4Xnh15muURpM/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Australia: zonele naturale", "url": "https://drive.google.com/file/d/1G0o7q7u3vPeQkxNYMsT5q-wHAyXC0Bne/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 29", "url": "https://drive.google.com/file/d/1rbL7H-NB2guLbq92ZjYs6ADphasoWTfx/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 30", "title": "Australia. Populația. Repartiția și densitatea populației. Structura rasială. Popoare, tradiții și obiceiuri", "folder": "https://drive.google.com/drive/folders/18d80HzB8Y4Xk_K3TkH2F0MvR63dAaJoe?usp=sharing", "presentations": [{"title": "Populația, popoarele, tradițiile și obiceiurile (Australia)", "url": "https://docs.google.com/presentation/d/1Wfwf7fTbOFAAZE66s8OjG-BDzrbQnKKpspbZakxBQuU/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Australia: populația și tradițiile", "url": "https://drive.google.com/file/d/1UrihMjxlk6gwBfgRnnMAxFPOqIq-0_6o/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 30", "url": "https://drive.google.com/file/d/1HCjD0iu-RV3x9vemLDxh0KCLx6Jsd3MD/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 31", "title": "Antarctida. Poziția fizico-geografică. Relieful", "folder": "https://drive.google.com/drive/folders/18nFbOuK8UcoTGEY3f6rzLq9FmB8S8G8c?usp=sharing", "presentations": [{"title": "Antarctida. Poziția fizico-geografică. Relieful", "url": "https://docs.google.com/presentation/d/19Dk6lUwF5-8QSPTF51whzCOJJmF5-37KTpdvBAqk7mI/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Antarctida: poziția și relieful", "url": "https://drive.google.com/file/d/16aXflMRJULUBdHMkSgFNhC-vwHizXm7I/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 31", "url": "https://drive.google.com/file/d/1jZ6kGx_DCNrW5RAx8APHyw2lpDjhAP2O/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 32", "title": "Antarctida. Clima. Factorii de formare a climei. Calota glaciară. Lumea organică", "folder": "https://drive.google.com/drive/folders/1BWYgiL0c7_ANujduU30OGV0WkTA8q6qC?usp=sharing", "presentations": [{"title": "Antarctida: clima, calota glaciară și lumea organică", "url": "https://docs.google.com/presentation/d/1ENBZaOu2ERH-6Hfppgcnxm1-hrjRleprIKLowrR1cIA/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Antarctida: clima, calota glaciară, lumea organică", "url": "https://drive.google.com/file/d/1wygzg7XHEoTrW_SSpDCcJHXSp8jdUC8y/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 32", "url": "https://drive.google.com/file/d/10_RuqO5v3Sa_Jr-e81frIgkEhQ1Q558x/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Lecția 34", "title": "Procesele și fenomenele geografice de risc: încălzirea globală a climei, topirea ghețarilor, dispariția speciilor de animale", "folder": "https://drive.google.com/drive/folders/1j82p85ZKNsGNYgpIM3D33lJ6e1h00qtr?usp=sharing", "presentations": [{"title": "Fenomene de risc: încălzirea globală, topirea ghețarilor, dispariția speciilor", "url": "https://docs.google.com/presentation/d/1N_BMObQGc4DjCbEhYg2XPtqIPzXWpRJqf0cNbDm1i74/edit?usp=sharing", "fmt": "Google Slides"}], "manuals": [{"title": "Secvență din manual – Antarctida: hazarduri (încălzirea globală, topirea ghețarilor)", "url": "https://drive.google.com/file/d/13QT_CjPcAfq-ZoG2HuaBG6E5Si7QeXga/view?usp=sharing", "fmt": "PDF"}], "plans": [{"title": "Proiect didactic – Tema 34", "url": "https://drive.google.com/file/d/1blp0IXn41nMOSHFOqxMJAHzaKIGpdj9H/view?usp=sharing", "fmt": "DOCX"}], "extras": []}, {"code": "Evaluare 33", "type": "eval", "title": "Evaluare sumativă la unitatea de învățare „Continentele Australia și Antarctida”", "folder": "https://drive.google.com/drive/folders/1kdYzyve8Hx8gIUsknabaxkPFCDE4mesp?usp=sharing", "presentations": [], "manuals": [], "plans": [], "extras": []}]}]};
+const STORAGE_KEY = 'geo_clasa6_done_v1';
+
+let activeRole = 'all';
+let activeUnit = 'all';
+let doneSet = new Set();
+
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (Array.isArray(saved)) doneSet = new Set(saved);
+} catch (e) {}
+
+function saveDone() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...doneSet]));
+  } catch (e) {}
+  updateProgress();
+}
+
+function normalize(str) {
+  return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function renderRoot() {
+  const grid = document.getElementById('rootGrid');
+  grid.innerHTML = PORTAL_DATA.root.map(r => {
+    const cls = r.role === 'teacher' ? 'root-card teacher-only' : 'root-card';
+    return `
+      <article class="${cls}" style="--rc:${r.color}; --rs:${r.soft};">
+        <div class="root-stripe"></div>
+        <div class="root-body">
+          <div class="root-top">
+            <div class="root-icon">${r.icon}</div>
+            <span class="root-tag">${escapeHtml(r.tag)}</span>
+          </div>
+          <h3>${escapeHtml(r.title)}</h3>
+          <p>${escapeHtml(r.desc)}</p>
+          <a class="root-cta" href="${r.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.cta)} →</a>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function renderUnitPills() {
+  const bar = document.getElementById('unitPills');
+  const btns = [`<button type="button" class="unit-pill active" data-unit="all">Toate unitățile (4)</button>`];
+  PORTAL_DATA.units.forEach(u => {
+    btns.push(`<button type="button" class="unit-pill" data-unit="${u.id}">${u.roman}. ${escapeHtml(u.short)} (${u.topics.length})</button>`);
+  });
+  bar.innerHTML = btns.join('');
+  bar.querySelectorAll('.unit-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.unit-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeUnit = btn.dataset.unit;
+      applyFilters();
+    });
+  });
+}
+
+function renderLinks(list, emptyMsg) {
+  if (!list || list.length === 0) {
+    return `<div class="res-empty">${escapeHtml(emptyMsg)}</div>`;
+  }
+  return list.map(item => `
+    <a class="res-link" href="${item.url}" target="_blank" rel="noopener noreferrer">
+      <span class="res-link-title">${escapeHtml(item.title)}</span>
+      <span class="fmt-badge">${escapeHtml(item.fmt)}</span>
+    </a>
+  `).join('');
+}
+
+function renderUnits() {
+  const wrap = document.getElementById('unitsContainer');
+  wrap.innerHTML = PORTAL_DATA.units.map((u, uIdx) => {
+    const unitExtrasHtml = (u.unit_extras || []).length
+      ? `<div class="unit-extras-bar ${u.unit_extras.every(e => e.role === 'teacher') ? 'teacher-only' : ''}">
+          <strong>Resurse utile pentru întreaga unitate:</strong>
+          ${u.unit_extras.map(ex => `<a class="unit-extra-link ${ex.role === 'teacher' ? 'teacher-only' : ''}" href="${ex.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(ex.title)}</a>`).join('')}
+        </div>`
+      : '';
+
+    const topicsHtml = u.topics.map((t, tIdx) => {
+      const key = `${u.id}_${tIdx}`;
+      const isDone = doneSet.has(key);
+      const isOpen = (uIdx === 0 && tIdx === 0);
+      const typeCls = t.type === 'eval' ? 'is-eval' : (t.type === 'practice' ? 'is-practice' : '');
+      const pills = [];
+      if (t.presentations.length) pills.push(`<span class="pill-dot p1">📊 Prezentare${t.presentations.length > 1 ? ' (' + t.presentations.length + ')' : ''}</span>`);
+      if (t.manuals.length) pills.push(`<span class="pill-dot p2">📖 Manual${t.manuals.length > 1 ? ' (' + t.manuals.length + ')' : ''}</span>`);
+      if (t.plans.length) pills.push(`<span class="pill-dot p3 teacher-only">📋 Proiectare${t.plans.length > 1 ? ' (' + t.plans.length + ')' : ''}</span>`);
+      if (t.extras.length) pills.push(`<span class="pill-dot p4">📎 Extra (${t.extras.length})</span>`);
+
+      const extrasHtml = t.extras.length
+        ? `<div class="topic-extras">
+            <div class="extras-label">📎 Materiale suplimentare</div>
+            <div class="extras-wrap">
+              ${t.extras.map(ex => `
+                <a class="extra-chip ${ex.role === 'teacher' ? 'teacher-only' : ''}" href="${ex.url}" target="_blank" rel="noopener noreferrer">
+                  <span>${escapeHtml(ex.title)}</span>
+                  <span class="fmt-badge">${escapeHtml(ex.fmt)}</span>
+                </a>
+              `).join('')}
+            </div>
+          </div>`
+        : '';
+
+      const emptyHint = (t.type === 'eval' && !t.presentations.length && !t.manuals.length && !t.plans.length)
+        ? `<div class="res-empty" style="margin-bottom:8px;">Această mapă este rezervată pentru evaluarea sumativă la unitatea de învățare. Accesează direct mapa Google Drive pentru actualizări.</div>`
+        : `<div class="res-grid">
+            <div class="res-col col-pres">
+              <div class="res-col-head">
+                <span class="res-step">1. 📊 Prezentarea lecției</span>
+                <span class="res-audience">Elevi & Prof.</span>
+              </div>
+              ${renderLinks(t.presentations, 'Fără prezentare în această mapă')}
+            </div>
+            <div class="res-col col-man">
+              <div class="res-col-head">
+                <span class="res-step">2. 📖 Secvența din manual</span>
+                <span class="res-audience">Elevi & Prof.</span>
+              </div>
+              ${renderLinks(t.manuals, 'Vezi manualul complet (PDF)')}
+            </div>
+            <div class="res-col col-plan teacher-only">
+              <div class="res-col-head">
+                <span class="res-step">3. 📋 Proiectarea didactică</span>
+                <span class="res-audience">Profesori</span>
+              </div>
+              ${renderLinks(t.plans, 'Fără proiect didactic separat')}
+            </div>
+          </div>`;
+
+      const searchBlob = normalize([
+        u.roman, u.title, t.code, t.title,
+        ...t.presentations.map(x => x.title),
+        ...t.manuals.map(x => x.title),
+        ...t.plans.map(x => x.title),
+        ...t.extras.map(x => x.title)
+      ].join(' '));
+
+      return `
+        <div class="topic-item ${typeCls} ${isOpen ? 'open' : ''} ${isDone ? 'done' : ''}" data-key="${key}" data-search="${escapeHtml(searchBlob)}">
+          <div class="topic-summary" role="button" tabindex="0" aria-expanded="${isOpen}">
+            <div class="topic-left">
+              <span class="check-wrap" title="Marchează tema ca parcursă">
+                <input type="checkbox" class="topic-check" data-key="${key}" ${isDone ? 'checked' : ''}>
+              </span>
+              <span class="topic-code">${escapeHtml(t.code)}</span>
+              <span class="topic-title">${escapeHtml(t.title)}</span>
+            </div>
+            <div class="topic-right">
+              ${pills.join('')}
+              <span class="chevron">▼</span>
+            </div>
+          </div>
+          <div class="topic-body">
+            ${emptyHint}
+            ${extrasHtml}
+            <div class="topic-footer">
+              <span>💡 Sugestie: parcurge mai întâi prezentarea, apoi consolidează noțiunile din secvența de manual.</span>
+              <a class="folder-direct" href="${t.folder}" target="_blank" rel="noopener noreferrer">📁 Deschide mapa temei în Drive ↗</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <section class="unit-section" data-unit="${u.id}" style="--ucol:${u.color}; --usoft:${u.soft};">
+        <div class="unit-header">
+          <div class="unit-head-left">
+            <div class="unit-icon">${u.icon}</div>
+            <div>
+              <div class="unit-kicker">Unitatea de învățare ${u.roman} • ${u.topics.length} teme</div>
+              <h2 class="unit-title">${escapeHtml(u.title)}</h2>
+              <p class="unit-desc">${escapeHtml(u.desc)}</p>
+            </div>
+          </div>
+          <div class="unit-head-right">
+            <a class="unit-folder-btn" href="${u.folder}" target="_blank" rel="noopener noreferrer">📂 Mapa unității în Drive ↗</a>
+          </div>
+        </div>
+        ${unitExtrasHtml}
+        <div class="topic-list">${topicsHtml}</div>
+      </section>
+    `;
+  }).join('');
+
+  wrap.querySelectorAll('.topic-summary').forEach(sum => {
+    sum.addEventListener('click', (e) => {
+      if (e.target.closest('.check-wrap')) return;
+      const item = sum.closest('.topic-item');
+      const nowOpen = item.classList.toggle('open');
+      sum.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+    });
+    sum.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (e.target.classList.contains('topic-check')) return;
+        e.preventDefault();
+        sum.click();
+      }
+    });
+  });
+
+  wrap.querySelectorAll('.topic-check').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const k = cb.dataset.key;
+      const item = cb.closest('.topic-item');
+      if (cb.checked) {
+        doneSet.add(k);
+        item.classList.add('done');
+      } else {
+        doneSet.delete(k);
+        item.classList.remove('done');
+      }
+      saveDone();
+    });
+  });
+}
+
+function updateProgress() {
+  const total = 31;
+  const done = doneSet.size;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progressText').textContent = `Parcurse: ${done} / ${total} (${pct}%)`;
+  document.getElementById('progressFill').style.width = `${pct}%`;
+}
+
+function applyFilters() {
+  const q = normalize(document.getElementById('searchInput').value.trim());
+  let visibleTopics = 0;
+
+  document.querySelectorAll('.unit-section').forEach(sec => {
+    const matchUnit = activeUnit === 'all' || sec.dataset.unit === activeUnit;
+    let secVisible = 0;
+
+    sec.querySelectorAll('.topic-item').forEach(item => {
+      const matchQuery = !q || item.dataset.search.includes(q);
+      const show = matchUnit && matchQuery;
+      item.classList.toggle('hidden', !show);
+      if (show) {
+        secVisible++;
+        visibleTopics++;
+        if (q) {
+          item.classList.add('open');
+          item.querySelector('.topic-summary').setAttribute('aria-expanded', 'true');
+        }
+      }
+    });
+
+    sec.classList.toggle('hidden', secVisible === 0);
+  });
+
+  document.getElementById('emptySearch').style.display = visibleTopics === 0 ? 'block' : 'none';
+}
+
+document.querySelectorAll('.role-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeRole = btn.dataset.role;
+    document.body.classList.toggle('mode-student', activeRole === 'student');
+    document.body.classList.toggle('mode-teacher', activeRole === 'teacher');
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+document.getElementById('expandAllBtn').addEventListener('click', () => {
+  document.querySelectorAll('.topic-item:not(.hidden)').forEach(item => {
+    item.classList.add('open');
+    item.querySelector('.topic-summary').setAttribute('aria-expanded', 'true');
+  });
+});
+
+document.getElementById('collapseAllBtn').addEventListener('click', () => {
+  document.querySelectorAll('.topic-item').forEach(item => {
+    item.classList.remove('open');
+    item.querySelector('.topic-summary').setAttribute('aria-expanded', 'false');
+  });
+});
+
+renderRoot();
+renderUnitPills();
+renderUnits();
+updateProgress();
+</script>
+
+</body>
+</html>
